@@ -1,3 +1,8 @@
+$color-primary: #ffdd88;
+$color-secondary: #7d97ff;
+$color-text-dark: rgb(61, 61, 61);
+$color-white: #fff;
+
 *,
 *::before,
 *::after {
@@ -23,22 +28,24 @@ html {
 
 body {
   box-sizing: border-box;
-  color: rgb(61, 61, 61);
+  color: $color-text-dark;
   font-family: "Regular", sans-serif;
 }
 
 #root {
   width: 100vw;
   height: 100vh;
-  background-image: url("./Resources/patternpad-1.svg");
+  background-image: url("./Resources/patternpad-2 rotated.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .Heading-head-name {
   font-size: 2.8rem;
   /* display: inline-block;    */
-  background-color: rgba(240, 248, 255, 0.5);
+  background-color: rgba($color-white, 0.6);
   backdrop-filter: blur(30px);
-  padding: 1rem 2rem;
+  padding:1.5rem 2rem;
   font-family: "Heavy", sans-serif;
 }
 
@@ -57,10 +64,11 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 45rem;
-    background-color: rgba(255, 255, 255, 0.6);
-    border: 0.1rem solid rgba(255, 255, 255, 0.542);
+    background-color: rgba($color-white, 0.7);
+    border: 0.1rem solid rgba($color-white, 0.542);
     backdrop-filter: blur(30px);
     border-radius: 3rem;
+    box-shadow: 0px 0px 40px 15px rgba(0,0,0,0.1);
   }
   &-container-inner {
     padding: 2rem;
@@ -69,7 +77,7 @@ body {
   &-Heading {
     font-size: 3.5rem;
     letter-spacing: 0.5px;
-    color: #fff;
+    color: $color-text-dark;
     padding: 3rem 0rem 1rem 0rem;
     font-family: "Heavy", sans-serif;
   }
@@ -98,9 +106,25 @@ body {
       font-family: "Heavy", sans-serif;
       letter-spacing: 0.5px;
       border-radius: 1rem;
-      background: linear-gradient(135deg, #7d97ff 0%, #ffdd88 100%);
-      color: rgb(255, 255, 255);
+      // background-color: $color-secondary;
+      background: linear-gradient(155deg, #adbaef 0%, #2f50d5  100%);
+      color: rgb($color-white, 1);
       font-size: 1.9rem;
+
+      // &::before{
+      //   opacity: 0;
+      //   background: linear-gradient(155deg, #2f50d5 0%, #adbaef  100%);
+      //   transition: opacity 0.5s linear;
+      // }
+
+      // &:hover::before{
+      //   opacity: 1;
+      // }
+
+      &:hover{
+        background: linear-gradient(155deg, #2f50d5 0%, #adbaef  100%);
+        transition: all 0.5s linear;
+      }
     }
   }
 }
@@ -113,7 +137,7 @@ body {
   font-family: "Regular", sans-serif;
 }
 #dropdown {
-  width: 15rem;
+  width: 18rem;
   height: 3rem;
   outline: none;
   border: none;
