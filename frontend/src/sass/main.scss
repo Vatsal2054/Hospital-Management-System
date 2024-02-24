@@ -1,0 +1,127 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+@font-face {
+  font-family: "Regular";
+  src: url("ObjectSans/Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: "Heavy";
+  src: url("ObjectSans/Heavy.otf") format("opentype");
+}
+
+html {
+  font-size: 62.5%;
+  margin: none;
+  padding: none;
+}
+
+body {
+  box-sizing: border-box;
+  color: rgb(61, 61, 61);
+  font-family: "Regular", sans-serif;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./Resources/patternpad-1.svg");
+}
+
+.Heading-head-name {
+  font-size: 2.8rem;
+  /* display: inline-block;    */
+  background-color: rgba(240, 248, 255, 0.5);
+  backdrop-filter: blur(30px);
+  padding: 1rem 2rem;
+  font-family: "Heavy", sans-serif;
+}
+
+/* .Header-links{
+    display: inline-block;
+}
+
+.Header-link-list li{
+    padding: 0px 20px;
+} */
+
+.Login {
+  &-container-outer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 45rem;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 0.1rem solid rgba(255, 255, 255, 0.542);
+    backdrop-filter: blur(30px);
+    border-radius: 3rem;
+  }
+  &-container-inner {
+    padding: 2rem;
+    text-align: center;
+  }
+  &-Heading {
+    font-size: 3.5rem;
+    letter-spacing: 0.5px;
+    color: #fff;
+    padding: 3rem 0rem 1rem 0rem;
+    font-family: "Heavy", sans-serif;
+  }
+  &-form {
+    margin: 2rem 0rem;
+
+    &-input {
+      width: 36rem;
+      height: 5rem;
+      padding: 0rem 2rem;
+      font-size: 1.4rem;
+      color: #000;
+      border: 2px solid rgb(154, 154, 226);
+      border-radius: 1rem;
+      outline: none;
+    }
+
+    &-dropdown {
+      width: 100%;
+    }
+
+    &-button {
+      width: 36rem;
+      height: 5rem;
+      border: none;
+      font-family: "Heavy", sans-serif;
+      letter-spacing: 0.5px;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, #7d97ff 0%, #ffdd88 100%);
+      color: rgb(255, 255, 255);
+      font-size: 1.9rem;
+    }
+  }
+}
+
+.item-margin {
+  margin: 1.2rem 0rem;
+}
+
+::placeholder {
+  font-family: "Regular", sans-serif;
+}
+#dropdown {
+  width: 15rem;
+  height: 3rem;
+  outline: none;
+  border: none;
+  padding: 0rem 0.5rem;
+  border-radius: 1rem;
+
+  option {
+    width: 100%;
+    height: 1rem;
+  }
+}
