@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import Heading from './Heading';
-import '../sass/main.scss';
+import Heading from "./Heading";
+import "../sass/main.scss";
+import axios from "axios";
 
 function Login() {
-
   const [credentials, setCredentials] = useState({
     username: "",
-    password:"",
-    designation:"",
+    password: "",
+    designation: "",
   });
 
-  function handleInput(e){
-    const {name, value} = e.target;
+  function handleInput(e) {
+    const { name, value } = e.target;
     setCredentials((preValue) => {
       return {
         ...preValue,
@@ -20,7 +20,7 @@ function Login() {
     });
   }
 
-  function handleDropdown(e){
+  function handleDropdown(e) {
     const post = e.target.value;
     setCredentials((preValue) => {
       return {
@@ -30,20 +30,34 @@ function Login() {
     });
   }
 
-  function passToServer(){
-    console.log(credentials);
+  async function passToServer() {
+    if (
+      credentials.username !== "" &&
+      credentials.password !== "" &&
+      credentials.designation !== ""
+    ) {
+      console.log("Sending data to server...");
+      await axios
+        .post("http://localhost:3001/login", credentials)
+        .then((response) => {
+          console.log(response.status);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
-  function preventSubmit(e){
+  function preventSubmit(e) {
     e.preventDefault();
   }
 
   return (
     <div className="Login">
-      <Heading content="Hospital Management System" class="Heading-head-name"/>
+      <Heading content="Hospital Management System" class="Heading-head-name" />
       <div className="Login-container-outer">
         <div className="Login-container-inner">
-            <Heading content="Login to HMS" class="Login-Heading"/>
+          <Heading content="Login to HMS" class="Login-Heading" />
           <form className="Login-form" onSubmit={preventSubmit}>
             <input
               className="Login-form-input item-margin"
@@ -51,7 +65,8 @@ function Login() {
               name="username"
               placeholder="Username"
               onChange={handleInput}
-              value = {credentials.username}
+              value={credentials.username}
+              required
             />
             <br />
             <input
@@ -60,22 +75,29 @@ function Login() {
               name="password"
               placeholder="Password"
               onChange={handleInput}
-              value = {credentials.password}
+              value={credentials.password}
+              required
             />
             <div className="Login-form-dropdown item-margin">
-              <select onChange={handleDropdown} name="designation" id="dropdown" required>
-                <option value="" disabled selected>Select Designation</option>
-                <option name="designation" value="Nurse">Nurse</option>
-                <option name="designation" value="Receptionist">Receptionist</option>
-                <option name="designation" value="Doctor">Doctor</option>
+              <select onChange={handleDropdown} id="dropdown" required>
+                <option value="" disabled selected>
+                  Select Designation
+                </option>
+                <option value="Nurse">Nurse</option>
+                <option value="Receptionist">Receptionist</option>
+                <option value="Doctor">Doctor</option>
               </select>
             </div>
-            <button onClick={passToServer} className="Login-form-button item-margin" type="submit">
+            <button
+              onClick={passToServer}
+              className="Login-form-button item-margin"
+              type="submit"
+            >
               Login
             </button>
           </form>
         </div>
-     </div>
+      </div>
     </div>
   );
 }

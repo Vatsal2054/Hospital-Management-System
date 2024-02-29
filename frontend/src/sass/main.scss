@@ -1,7 +1,10 @@
 $color-primary: #ffdd88;
 $color-secondary: #7d97ff;
 $color-text-dark: rgb(61, 61, 61);
+$color-text-light: #ffffff;
 $color-white: #fff;
+$color-button-light: #adbaef;
+$color-button-dark: #2f50d5;
 
 *,
 *::before,
@@ -28,14 +31,15 @@ html {
 
 body {
   box-sizing: border-box;
-  color: $color-text-dark;
+  color: $color-text-light;
   font-family: "Regular", sans-serif;
 }
 
 #root {
   width: 100vw;
   height: 100vh;
-  background-image: url("./Resources/patternpad-2 rotated.svg");
+  // background-image: url("./Resources/patternpad-2 rotated.svg"); 
+  background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -64,7 +68,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 45rem;
-    background-color: rgba($color-white, 0.7);
+    background-color: rgba($color-white, 0.4);
     border: 0.1rem solid rgba($color-white, 0.542);
     backdrop-filter: blur(30px);
     border-radius: 3rem;
@@ -77,7 +81,7 @@ body {
   &-Heading {
     font-size: 3.5rem;
     letter-spacing: 0.5px;
-    color: $color-text-dark;
+    color: $color-text-light;
     padding: 3rem 0rem 1rem 0rem;
     font-family: "Heavy", sans-serif;
   }
@@ -90,7 +94,8 @@ body {
       padding: 0rem 2rem;
       font-size: 1.4rem;
       color: #000;
-      border: 2px solid rgb(154, 154, 226);
+      // border: 2px solid $color-secondary;
+      border: none;
       border-radius: 1rem;
       outline: none;
     }
@@ -107,22 +112,12 @@ body {
       letter-spacing: 0.5px;
       border-radius: 1rem;
       // background-color: $color-secondary;
-      background: linear-gradient(155deg, #adbaef 0%, #2f50d5  100%);
+      background: linear-gradient(155deg, $color-button-light 0%, $color-button-dark  100%);
       color: rgb($color-white, 1);
       font-size: 1.9rem;
 
-      // &::before{
-      //   opacity: 0;
-      //   background: linear-gradient(155deg, #2f50d5 0%, #adbaef  100%);
-      //   transition: opacity 0.5s linear;
-      // }
-
-      // &:hover::before{
-      //   opacity: 1;
-      // }
-
       &:hover{
-        background: linear-gradient(155deg, #2f50d5 0%, #adbaef  100%);
+        background: linear-gradient(155deg, $color-button-dark 0%, $color-button-light  100%);
         transition: all 0.5s linear;
       }
     }
