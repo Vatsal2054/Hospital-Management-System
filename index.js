@@ -14,23 +14,26 @@ const db = new pg.Client({
     database: "Hospital_Management_System",
     password: "Vatsal@2004",
     port: 5432,
-  });
-  
-  db.connect();
-
-const data = [
-    { id: 1, name: 'Vatsal' },
-    { id: 2, name: 'Shardul' }
-]
-
-app.get('/data', (req, res) => {
-    res.json(data);
 });
+  
+db.connect();
+
+var employee_data;
+
 
 app.post('/login', (req, res) => {
-    const data = req.body;
-    console.log(data);
-    res.sendStatus(202);
+  const data = req.body;
+  console.log(data);
+  db.query("SELECT * FROM employee", (err, res) => {
+      if (err) {
+        console.error("Error executing query", err.stack);
+      } else {
+        employee_data = res.rows;
+      }
+      console.log(employee_data);
+      return employee_data;
+  });
+    res.send(employee_data);
 });
 
 app.listen(port, () => {

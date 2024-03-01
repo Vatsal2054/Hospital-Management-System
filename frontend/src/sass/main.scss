@@ -5,6 +5,7 @@ $color-text-light: #ffffff;
 $color-white: #fff;
 $color-button-light: #adbaef;
 $color-button-dark: #2f50d5;
+$color-input: #e8f0fe;
 
 *,
 *::before,
@@ -68,7 +69,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 45rem;
-    background-color: rgba($color-white, 0.4);
+    background-color: rgba($color-white, 1);
     border: 0.1rem solid rgba($color-white, 0.542);
     backdrop-filter: blur(30px);
     border-radius: 3rem;
@@ -81,7 +82,7 @@ body {
   &-Heading {
     font-size: 3.5rem;
     letter-spacing: 0.5px;
-    color: $color-text-light;
+    color: $color-text-dark;
     padding: 3rem 0rem 1rem 0rem;
     font-family: "Heavy", sans-serif;
   }
@@ -98,6 +99,7 @@ body {
       border: none;
       border-radius: 1rem;
       outline: none;
+      background-color: $color-input;
     }
 
     &-dropdown {
@@ -138,6 +140,7 @@ body {
   border: none;
   padding: 0rem 0.5rem;
   border-radius: 1rem;
+  background-color: $color-input;
 
   option {
     width: 100%;

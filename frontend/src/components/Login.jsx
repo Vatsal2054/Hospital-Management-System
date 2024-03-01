@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Heading from "./Heading";
 import "../sass/main.scss";
 import axios from "axios";
+import { redirect } from "react-router-dom";
 
 function Login() {
+  const [isLoggedIn, setLoginStatus] = useState(false);
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -40,12 +42,21 @@ function Login() {
       await axios
         .post("http://localhost:3001/login", credentials)
         .then((response) => {
-          console.log(response.status);
+          console.log(response);
+          if(response.data !== null){
+            setLoginStatus(true);
+            console.log("Redirecting...");
+            return redirect("/nurse");
+          } else {
+            setLoginStatus(false);
+            redirect("/Login");
+          }
         })
         .catch((err) => {
           console.log(err);
         });
-    }
+      }
+      // return <Redirect to="/Nurse-menu" />;
   }
 
   function preventSubmit(e) {

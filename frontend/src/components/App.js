@@ -2,7 +2,7 @@ import React from 'react';
 import Login from './Login';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import About from './About';
-
+import Nurse_menu from './Nurse_menu';
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
+            <Route path="/nurse" element={<Nurse_menu />} />
           </Routes>
         </div>
       </Router>
