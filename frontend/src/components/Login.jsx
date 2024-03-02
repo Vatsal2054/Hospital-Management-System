@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import Heading from "./Heading";
 import "../sass/main.scss";
 import axios from "axios";
-import { redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+
+const options = ["Nurse", "Receptionist", "Doctor", "Admin"];
 
 function Login() {
   const [isLoggedIn, setLoginStatus] = useState(false);
@@ -43,74 +45,92 @@ function Login() {
         .post("http://localhost:3001/login", credentials)
         .then((response) => {
           console.log(response);
-          if(response.data !== null){
-            setLoginStatus(true);
+          if (response.data !== null) {
+
             console.log("Redirecting...");
-            return redirect("/nurse");
+            setLoginStatus(true);
+
           } else {
+
             setLoginStatus(false);
-            redirect("/Login");
+            setCredentials({
+              username: "",
+              password: "",
+              designation: "",
+            });
+
           }
         })
         .catch((err) => {
           console.log(err);
         });
-      }
-      // return <Redirect to="/Nurse-menu" />;
+    }
+    // return <Redirect to="/Nurse-menu" />;
   }
 
   function preventSubmit(e) {
     e.preventDefault();
   }
 
-  return (
-    <div className="Login">
-      <Heading content="Hospital Management System" class="Heading-head-name" />
-      <div className="Login-container-outer">
-        <div className="Login-container-inner">
-          <Heading content="Login to HMS" class="Login-Heading" />
-          <form className="Login-form" onSubmit={preventSubmit}>
-            <input
-              className="Login-form-input item-margin"
-              type="text"
-              name="username"
-              placeholder="Username"
-              onChange={handleInput}
-              value={credentials.username}
-              required
-            />
-            <br />
-            <input
-              className="Login-form-input item-margin"
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={handleInput}
-              value={credentials.password}
-              required
-            />
-            <div className="Login-form-dropdown item-margin">
-              <select onChange={handleDropdown} id="dropdown" required>
-                <option value="" disabled selected>
-                  Select Designation
-                </option>
-                <option value="Nurse">Nurse</option>
-                <option value="Receptionist">Receptionist</option>
-                <option value="Doctor">Doctor</option>
-              </select>
-            </div>
-            <button
-              onClick={passToServer}
-              className="Login-form-button item-margin"
-              type="submit"
-            >
-              Login
-            </button>
-          </form>
+  if (isLoggedIn) {
+
+    var destination = "/" + credentials.designation + "Menu";
+    return <Navigate to={destination} />;
+
+  } else {
+    
+    return (
+      <div className="Login">
+        <Heading
+          content="Hospital Management System"
+          class="Heading-head-name"
+        />
+        <div className="Login-container-outer">
+          <div className="Login-container-inner">
+            <Heading content="Login to HMS" class="Login-Heading" />
+            <form className="Login-form" onSubmit={preventSubmit}>
+              <input
+                className="Login-form-input item-margin"
+                type="text"
+                name="username"
+                placeholder="Username"
+                onChange={handleInput}
+                value={credentials.username}
+                required
+              />
+              <br />
+              <input
+                className="Login-form-input item-margin"
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleInput}
+                value={credentials.password}
+                required
+              />
+              <div className="Login-form-dropdown item-margin">
+                <select onChange={handleDropdown} id="dropdown" required>
+                  <option value="" disabled selected>
+                    Select Designation
+                  </option>
+                  {options.map((Value) => {
+                    return <option value={Value}>{Value}</option>;
+                  })}
+                </select>
+              </div>
+              <button
+                onClick={passToServer}
+                className="Login-form-button item-margin"
+                type="submit"
+              >
+                Login
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Login;
