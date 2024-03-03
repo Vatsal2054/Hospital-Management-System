@@ -3,15 +3,16 @@ import Heading from "./Heading";
 import "../sass/main.scss";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
-
-const options = ["Nurse", "Receptionist", "Doctor", "Admin"];
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
+
+  const [destination, setDestination] = useState("");
   const [isLoggedIn, setLoginStatus] = useState(false);
   const [credentials, setCredentials] = useState({
-    username: "",
+    employee_id: "",
     password: "",
-    designation: "",
   });
 
   function handleInput(e) {
@@ -24,48 +25,53 @@ function Login() {
     });
   }
 
-  function handleDropdown(e) {
-    const post = e.target.value;
-    setCredentials((preValue) => {
-      return {
-        ...preValue,
-        designation: post,
-      };
-    });
-  }
+  // function handleDropdown(e) {
+  //   const post = e.target.value;
+  //   setCredentials((preValue) => {
+  //     return {
+  //       ...preValue,
+  //       designation: post,
+  //     };
+  //   });
+  // }
 
   async function passToServer() {
+    console.log("pressed");
+    
     if (
-      credentials.username !== "" &&
-      credentials.password !== "" &&
-      credentials.designation !== ""
+      credentials.employee_id !== "" &&
+      credentials.password !== ""
     ) {
       console.log("Sending data to server...");
-      await axios
-        .post("http://localhost:3001/login", credentials)
+      await axios.post("http://localhost:3001/login", credentials)
+
         .then((response) => {
-          console.log(response);
-          if (response.data !== null) {
+            let responseData = response.data;
+            console.log(responseData);
+            
+            if( responseData.auth_status === 200){
 
-            console.log("Redirecting...");
-            setLoginStatus(true);
+              console.log("Redirecting...");
+              setLoginStatus(true);
+              setDestination(responseData.destination);
+              toast.success("Authentication Successful!", {
+                position: "top-center"
+              });
 
-          } else {
-
-            setLoginStatus(false);
-            setCredentials({
-              username: "",
-              password: "",
-              designation: "",
-            });
-
+            }
+            else {
+              console.log("Incorrect Credentials");
+              setLoginStatus(false);
+              toast.error("Incorrect Credentials!", {
+                position: "top-center"
+              });         
           }
         })
+
         .catch((err) => {
           console.log(err);
         });
     }
-    // return <Redirect to="/Nurse-menu" />;
   }
 
   function preventSubmit(e) {
@@ -74,13 +80,14 @@ function Login() {
 
   if (isLoggedIn) {
 
-    var destination = "/" + credentials.designation + "Menu";
-    return <Navigate to={destination} />;
+    var userDestination = "/" + destination + "Menu";
+    console.log(userDestination);
+    return <Navigate to={userDestination} />;
 
   } else {
-    
     return (
       <div className="Login">
+        <ToastContainer />
         <Heading
           content="Hospital Management System"
           class="Heading-head-name"
@@ -92,10 +99,10 @@ function Login() {
               <input
                 className="Login-form-input item-margin"
                 type="text"
-                name="username"
+                name="employee_id"
                 placeholder="Username"
                 onChange={handleInput}
-                value={credentials.username}
+                value={credentials.employee_id}
                 required
               />
               <br />
@@ -108,20 +115,10 @@ function Login() {
                 value={credentials.password}
                 required
               />
-              <div className="Login-form-dropdown item-margin">
-                <select onChange={handleDropdown} id="dropdown" required>
-                  <option value="" disabled selected>
-                    Select Designation
-                  </option>
-                  {options.map((Value) => {
-                    return <option value={Value}>{Value}</option>;
-                  })}
-                </select>
-              </div>
               <button
                 onClick={passToServer}
                 className="Login-form-button item-margin"
-                type="submit"
+                type="button"
               >
                 Login
               </button>

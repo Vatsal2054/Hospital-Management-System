@@ -2,7 +2,12 @@ import React from "react";
 
 function AdminMenu(){
     return (
-        <h1>Welcome to admin Menu</h1>
+        <header className="admin-header">
+            <h1>Admin Menu</h1>
+            <div className="admin-nav">
+                
+            </div>
+        </header>
     )
 }
 
