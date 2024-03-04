@@ -79,7 +79,7 @@ app.get('/emp_data', (req, res) => {
     if(result.rows.length > 0) {
       emp_data = result.rows;
       console.log(emp_data);
-      res.send(emp_data)
+      res.send(emp_data);
     }
   })
 })

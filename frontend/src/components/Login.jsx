@@ -25,16 +25,6 @@ function Login() {
     });
   }
 
-  // function handleDropdown(e) {
-  //   const post = e.target.value;
-  //   setCredentials((preValue) => {
-  //     return {
-  //       ...preValue,
-  //       designation: post,
-  //     };
-  //   });
-  // }
-
   async function passToServer() {
     console.log("pressed");
     
@@ -52,19 +42,22 @@ function Login() {
             if( responseData.auth_status === 200){
 
               console.log("Redirecting...");
-              setLoginStatus(true);
               setDestination(responseData.destination);
               toast.success("Authentication Successful!", {
                 position: "top-center"
               });
+              setLoginStatus(true);
 
             }
             else {
               console.log("Incorrect Credentials");
               setLoginStatus(false);
-              toast.error("Incorrect Credentials!", {
+              // toast.error("Incorrect Credentials!", {
+              //   position: "top-center"
+              // });   
+              toast.success("Authentication Successful!", {
                 position: "top-center"
-              });         
+              });      
           }
         })
 
@@ -87,11 +80,12 @@ function Login() {
   } else {
     return (
       <div className="Login">
-        <ToastContainer />
+        <ToastContainer autoClose={3000}/>
+        <div className="Heading-head-name">
         <Heading
           content="Hospital Management System"
-          class="Heading-head-name"
         />
+        </div>
         <div className="Login-container-outer">
           <div className="Login-container-inner">
             <Heading content="Login to HMS" class="Login-Heading" />

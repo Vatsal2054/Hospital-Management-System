@@ -1,66 +1,27 @@
-$color-primary: #ffdd88;
-$color-secondary: #7d97ff;
-$color-text-dark: rgb(61, 61, 61);
-$color-text-light: #ffffff;
-$color-white: #fff;
-$color-button-light: #adbaef;
-$color-button-dark: #2f50d5;
-$color-input: #e8f0fe;
+@import "./abstracts/variables";
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
+@import "./base/base";
+@import "./base/typography";
 
-@font-face {
-  font-family: "Regular";
-  src: url("ObjectSans/Regular.otf") format("opentype");
-}
-@font-face {
-  font-family: "Heavy";
-  src: url("ObjectSans/Heavy.otf") format("opentype");
-}
+@import "./components/menuButton";
 
-html {
-  font-size: 62.5%;
-  margin: none;
-  padding: none;
-}
+@import "./layout/header";
+@import "./pages/admin";
 
-body {
-  box-sizing: border-box;
-  color: $color-text-light;
-  font-family: "Regular", sans-serif;
-}
-
-#root {
+.Login {
   width: 100vw;
   height: 100vh;
-  // background-image: url("./Resources/patternpad-2 rotated.svg"); 
-}
-
-h1 {
-  color: #000;
-}
-
-.Login{
-  width: 100vw;
-  height: 100vh;
-  background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
+  background-image: linear-gradient(135deg, #abdcff 10%, #0396ff 100%);
   background-repeat: no-repeat;
   background-size: cover;
 }
+.Toastify__toast-body {
+  font-family: "Regular", sans-serif;
+  font-size: 1.6rem;
+}
 
-.Heading-head-name {
-  font-size: 2.8rem;
-  /* display: inline-block;    */
-  background-color: rgba($color-white, 0.6);
-  backdrop-filter: blur(30px);
-  padding:1.5rem 2rem;
-  font-family: "Heavy", sans-serif;
+.Toastify__toast-icon {
+  margin: 0 0 .2rem 0;
 }
 
 /* .Header-links{
@@ -82,7 +43,7 @@ h1 {
     border: 0.1rem solid rgba($color-white, 0.542);
     backdrop-filter: blur(30px);
     border-radius: 3rem;
-    box-shadow: 0px 0px 40px 15px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 40px 15px rgba(0, 0, 0, 0.1);
   }
   &-container-inner {
     padding: 2rem;
@@ -123,12 +84,20 @@ h1 {
       letter-spacing: 0.5px;
       border-radius: 1rem;
       // background-color: $color-secondary;
-      background: linear-gradient(155deg, $color-button-light 0%, $color-button-dark  100%);
+      background: linear-gradient(
+        155deg,
+        $color-button-light 0%,
+        $color-button-dark 100%
+      );
       color: rgb($color-white, 1);
       font-size: 1.9rem;
 
-      &:hover{
-        background: linear-gradient(155deg, $color-button-dark 0%, $color-button-light  100%);
+      &:hover {
+        background: linear-gradient(
+          155deg,
+          $color-button-dark 0%,
+          $color-button-light 100%
+        );
         transition: all 0.5s linear;
       }
     }
