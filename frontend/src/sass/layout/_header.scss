@@ -1,0 +1,40 @@
+h1 {
+	font-family: "Heavy", sans-serif;
+	font-size: 2.8rem;
+  color: #000;
+}
+
+.Heading-head-name {
+  font-size: 2.8rem;
+  /* display: inline-block;    */
+  background-color: rgba($color-white, 0.6);
+  backdrop-filter: blur(30px);
+  font-family: "Heavy", sans-serif;
+  padding: 1.5rem 2rem;
+}
+
+.admin-header{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+  background-color: rgba($color-white, 0.8);
+  backdrop-filter: blur(30px);
+	padding: 2rem 6rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 100;
+}
+
+.navigation button {
+	font-size: 1.6rem;
+	background: none;
+	border: none;
+	padding: 1rem 2rem;
+	border-radius: 1.2rem;
+	margin-left: 2.2rem;
+	&:hover{
+		background: $color-input;
+	}
+}

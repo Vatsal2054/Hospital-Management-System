@@ -1,0 +1,23 @@
+.menu-button{
+    // width: 10rem;
+    height: 4rem;
+    padding: .8rem 2rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: $color-button-light;
+    font-size: 1.8rem;
+    margin-left: 1rem;
+    vertical-align: middle;
+
+    &-wide{
+        
+    }
+}
+
+.react-icons {
+    // text-align: center;
+    vertical-align: middle;
+    font-size: 1.8rem;
+    margin: 0rem .4rem .3rem 0rem;
+    padding: 0;
+}

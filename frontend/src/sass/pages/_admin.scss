@@ -1,0 +1,55 @@
+.admin{
+    &-container{
+        background: #333;
+    }
+    &-head{
+    width: 100%;
+}}
+
+.info{
+    position: absolute;
+    top: 8rem;
+    left: 0;
+    width: calc(100% - 8rem);
+    margin: 4rem;
+
+    &-container{
+        border-radius: 2rem 2rem 0rem 0rem;
+        // background-color: #333;
+        background-color: $color-white;
+        
+        &-header{
+            // border-radius: 2rem 2rem 0rem 0rem;
+            height: 8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0rem 2rem;
+            background-color: transparent;
+        }
+
+        &-data{
+
+            button{
+                display: block;
+                width: 100%;
+                padding: 1rem 2rem;
+                font-size: 1.5rem;
+                border: none;
+            }
+        }
+    }
+}
+
+// .dataChild{
+//     font-size: 1.5rem;
+//     padding: 1rem 2rem;
+
+//     &:hover{
+//         background-color: #aaa;
+//     }
+
+//     &-heading{
+//         font-family: "Heavy", sans-serif;
+//     }
+// }
