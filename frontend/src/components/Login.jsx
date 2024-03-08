@@ -52,12 +52,12 @@ function Login() {
             else {
               console.log("Incorrect Credentials");
               setLoginStatus(false);
-              // toast.error("Incorrect Credentials!", {
-              //   position: "top-center"
-              // });   
-              toast.success("Authentication Successful!", {
+              toast.error("Incorrect Credentials!", {
                 position: "top-center"
-              });      
+              });   
+              // toast.success("Authentication Successful!", {
+              //   position: "top-center"
+              // });      
           }
         })
 

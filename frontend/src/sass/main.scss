@@ -111,17 +111,3 @@
 ::placeholder {
   font-family: "Regular", sans-serif;
 }
-#dropdown {
-  width: 18rem;
-  height: 3rem;
-  outline: none;
-  border: none;
-  padding: 0rem 0.5rem;
-  border-radius: 1rem;
-  background-color: $color-input;
-
-  option {
-    width: 100%;
-    height: 1rem;
-  }
-}

@@ -16,11 +16,12 @@ body {
   box-sizing: border-box;
   color: $color-text-dark;
   font-family: "Regular", sans-serif;
+  background: $admin-back;
 }
 
 #root {
   width: 100vw;
   height: 100vh;
-  background: #E1F5FF;
+  // background: linear-gradient(to right,$color-button-light 0%, $color-button-dark 100%);
   // background-image: url("./Resources/patternpad-2 rotated.svg"); 
 }

@@ -67,7 +67,9 @@ app.post('/login', (req, res) => {
 var emp_data;
 
 app.get('/emp_data', (req, res) => {
-  db.query("SELECT * from employee", (err, result) => {
+  console.log(req.query.employee);
+  const job_type = req.query.employee;
+  db.query("SELECT * from employee where job_type = $1",[job_type], (err, result) => {
     if (err) {
 
       console.error("Error executing query", err.stack);
