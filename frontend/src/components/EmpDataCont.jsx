@@ -1,14 +1,13 @@
 import React, { useMemo } from "react";
-import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel } from "@tanstack/react-table";
+import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel, getFilteredRowModel } from "@tanstack/react-table";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 
 function EmpDataCont(props) {
 	const empData = props.empData;
 	empData.forEach((emp, index) => { emp.serial = index + 1; });
-
+	
 	const data = empData;
-	/** @type import('@tanstack/react-table').ColumnDef<any> */
 	const columns = useMemo(() => [
 		{
 			header: 'Sr',
@@ -35,11 +34,16 @@ function EmpDataCont(props) {
 			accessorKey: 'Address',
 		}
 	], []);
-
+	
 	const table = useReactTable({
 		data, columns,
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
+		getFilteredRowModel: getFilteredRowModel(),
+		state: {
+			globalFilter: props.filterInput,
+		},
+		onGlobalFilterChange: props.setFilterInput
 	});
 
 	return (

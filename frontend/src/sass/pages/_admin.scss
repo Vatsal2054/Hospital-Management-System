@@ -1,27 +1,28 @@
-.admin{
-    &-container{
+.admin {
+    &-container {
         background: #333;
     }
-    &-head{
-    width: 100%;
-}}
+    &-head {
+        width: 100%;
+    }
+}
 
-.info{
+.info {
     position: absolute;
     top: 8rem;
     left: 0;
     width: calc(100% - 16rem);
     margin: 3rem 8rem;
 
-    &-container{
+    &-container {
         border-radius: 2rem;
         // background-color: #333;
         // background-color: $color-white;
         background-color: #ffffff9f;
         backdrop-filter: blur(1rem);
         // height: 80vh;
-        
-        &-header{
+
+        &-header {
             border-radius: 2rem 2rem 0rem 0rem;
             height: 8rem;
             display: flex;
@@ -48,7 +49,7 @@
     }
 }
 
-.admin-table{
+.admin-table {
     width: 100%;
     padding: 0rem 2rem;
     font-size: 1.5rem;
@@ -56,14 +57,14 @@
     border-collapse: collapse;
     text-align: left;
 
-    &-head{
+    &-head {
         font-size: 2rem;
     }
 
-    &-row{
+    &-row {
         background-color: $color-white;
 
-        th{
+        th {
             // background-color: $color-secondary;
             background-color: #6d7ae0;
             color: $color-text-light;
@@ -71,26 +72,25 @@
         }
     }
 
-    &-data-row{
-
-        &:hover{
+    &-data-row {
+        &:hover {
             background: #d2d4e8;
         }
 
-        td{
+        td {
             border-bottom: 1px solid rgb(225, 225, 225);
             padding: 1rem 4rem;
             margin: none;
         }
     }
 
-    &-br{
+    &-br {
         width: 80%;
-        height: .2rem;
+        height: 0.2rem;
     }
 }
 
-.aeWindow{
+.aeWindow {
     position: fixed;
     top: 0;
     left: 0;
@@ -100,40 +100,105 @@
     z-index: 100;
 }
 
-.aeCont{
+.aeCont {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60vw;
+    width: 50vw;
     background-color: $color-white;
 
     &-inner {
         width: calc(100% - 4rem);
         margin: 2rem;
 
-        &-head{
+        &-head {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            button{
+            button {
                 outline: none;
                 border: none;
                 background: transparent;
-                transition: .3s ease;
-                border-radius: .2rem;
+                transition: 0.3s ease;
+                border-radius: 0.2rem;
 
-                &:hover{
+                &:hover {
                     background-color: #b0b0b0;
-                    transition: .3s ease;
+                    transition: 0.3s ease;
                 }
             }
         }
 
-        h1{
+        h1 {
             text-align: center;
             font-size: 3rem;
+        }
+    }
+
+    &-outer {
+        // position: relative;
+        width: 100%;
+    }
+
+    &-inputs {
+        &-block {
+            width: auto;
+            display: inline-block;
+            position: relative;
+
+            label{
+                position: absolute;
+                top: 1.3rem;
+                left: 2.2rem;
+                cursor: text;
+                font-size: 1.2rem;
+            }
+            
+            
+            input {
+                width: 24rem;
+                border: 2px solid #eee;
+                padding: 1rem 1.5rem;
+                margin: 0rem 2rem;
+                margin-top: 3rem;
+                border-radius: .5rem;
+                background-color: #eee;
+                font-size: 1.4rem;
+                
+                // &:focus~label,
+                // &:valid~label {
+                //     // position: absolute;
+                //     top: 1.4rem;
+                //     left: 3.8rem;
+                //     outline: none;
+                //     pointer-events: none;
+                // }
+                
+                &:focus{
+                    border: 2px solid $color-button-light;
+                }
+            }
+
+            &-buttons {
+                float: right;
+            }
+
+            button {
+                font-size: 1.8rem;
+                padding: 1rem 2rem;
+                margin: 1rem 2rem;
+                border-radius: 1rem;
+                border: none;
+                outline: none;
+                background-color: $color-secondary;
+
+                .form-icon {
+                    margin: 0rem 0.5rem 0.3rem 0rem;
+                    font-size: 2.4rem;
+                }
+            }
         }
     }
 }

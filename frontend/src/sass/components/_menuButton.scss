@@ -1,7 +1,7 @@
-.menu-button{
+.menu-button {
     width: auto;
     height: 4rem;
-    padding: .8rem 2rem;
+    padding: 0.8rem 2rem;
     border: none;
     border-radius: 1rem;
     // background-color: $color-button-light;
@@ -9,11 +9,11 @@
     font-size: 1.8rem;
     margin-left: 1rem;
     vertical-align: middle;
-    
-    &-back{
+
+    &-back {
         text-align: center;
         height: 4rem;
-        padding: .8rem 1rem .8rem 1.6rem;
+        padding: 0.8rem 1rem 0.8rem 1.6rem;
         border: none;
         border-radius: 1rem;
         // background-color: $color-button-light;
@@ -29,35 +29,45 @@
     // text-align: center;
     vertical-align: middle;
     font-size: 1.8rem;
-    margin: 0rem .8rem .3rem 0rem;
+    margin: 0rem 0.8rem 0.3rem 0rem;
     padding: 0;
 
-    &-close{
-        margin: .5rem;
+    &-close {
+        margin: 0.5rem;
         font-size: 2.4rem;
     }
 
-    &-arrows{
+    &-arrows {
         // margin: 0rem .2rem .4rem 0rem;
-        
-        &-left{
+
+        &-left {
             font-size: 2.2rem;
-            margin: 0rem .3rem .4rem 0rem;
+            margin: -.1rem 0.3rem 0.4rem 0rem;
         }
-        &-right{
+        &-right {
             font-size: 2.2rem;
-            margin: 0rem .15rem .4rem .15rem;
+            margin: -.1rem 0.15rem 0.6rem 0.15rem;
         }
     }
 }
 
-.table-buttons{
-    padding: 1.5rem 2rem;
-
-    button {
-        // width: 10rem;
+.table {
+    &-input{
+        width: 24rem;
+        font-size: 1.6rem;
+        background-color: rgb(211, 233, 251);
         border: none;
         outline: none;
-        padding: 1rem 2rem;
+    }
+
+    &-buttons {
+        padding: 1.5rem 2rem;
+
+        button {
+            // width: 10rem;
+            border: none;
+            outline: none;
+            padding: 1rem 2rem;
+        }
     }
 }
