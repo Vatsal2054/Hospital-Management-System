@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 
 export const docInputFields = [
     ["d_id", "text", "Doctor ID"],
@@ -7,10 +7,10 @@ export const docInputFields = [
     ["dtype", "text", "Doctor type"],
     ["department", "text", "Department"],
     ["study_year", "number", "Year of degree"],
-    ["contact", "number", "Contact"],
+    ["contact", "tel", "Contact"],
     ["job_type", "text", "Job type"],
     ["hiredate", "date", "Hire date"],
-    ["password", "password", "Password"],
+    ["password", "text", "Password"],
     ["salary", "number", "Salary"],
     ["Gender", "text", "Gender"],
     ["Address", "text", "Address"]  

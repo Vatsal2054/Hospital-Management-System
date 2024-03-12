@@ -46,8 +46,15 @@ function EmpDataCont(props) {
 		onGlobalFilterChange: props.setFilterInput
 	});
 
+	function showDetails(id){
+		console.log("Row clicked");
+		
+		console.log(id);
+	}
+
 	return (
 		<div className="info-container-data">
+			
 			<table className="admin-table">
 				{table.getHeaderGroups().map(headerGroup => (
 					<tr key = {headerGroup.id} className="admin-table-row">
@@ -61,7 +68,7 @@ function EmpDataCont(props) {
 				))}
 				<tbody>
 					{table.getRowModel().rows.map(row => (
-						<tr key = {row.id} className="admin-table-data-row">
+						<tr key = {row.id} className="admin-table-data-row" onClick={() => {showDetails(row.id)}}>
 							{row.getVisibleCells().map(cell => (
 								<td key={cell.id}>
 									{flexRender(cell.column.columnDef.cell,

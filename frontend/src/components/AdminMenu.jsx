@@ -7,6 +7,9 @@ import EmpDataCont from "./EmpDataCont";
 import AdminMenuHeader from "./AdminMenuHeader";
 import AdminEmpButtons from "./AdminEmpButtons";
 import AddEditEmp from "./AddEditEmp";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ViewEmp from "./ViewEmp";
 
 function AdminMenu() {
     const [showOptions, setShowOptions] = useState(false);
@@ -14,6 +17,7 @@ function AdminMenu() {
     const [adminHeader, setAdminHeader] = useState("Welcome!");
     const [addWindow, setAddWindow] = useState(false);
     const [filterInput, setFilterInput] = useState("");
+    const [viewWindow, setViewWindow] = useState(false);
 
     async function fetchEmployeeData(props) {
         setEmpData([]);
@@ -40,16 +44,35 @@ function AdminMenu() {
         setAdminHeader("Welcome!");
     }
 
-    function addEmployee(employee) {
+    function addEmployee() {
         console.log("Add clicked!");
-
         setAddWindow(true);
+    }
+
+    function showToast(type){
+        if(type === 200){
+            setAddWindow(false);
+            toast.success("Doctor Registered!", {
+                position: "top-center"
+            });
+        }
+        if(type === 201){
+            toast.error("Employee already exists!", {
+                position: "top-center",
+            });
+        }
+        if(type === 400){
+            toast.error("Error occured!", {
+                position: "top-center",
+            });
+        }
     }
 
     return (
         <IconContext.Provider value={{ className: 'react-icons' }}>
-            {addWindow ? <AddEditEmp contHeader={adminHeader} setAddWindow={setAddWindow} /> : null}
+            {addWindow ? <AddEditEmp contHeader={adminHeader} setAddWindow={setAddWindow} showToast={showToast}/> : null}
             <div className="admin-container">
+            <ToastContainer autoClose={3000}/>
                 <AdminHeader />
                 <div className="info">
                     <div className="info-container">

@@ -31,7 +31,7 @@
             padding: 0rem 2rem;
             // background-color: $color-white;
             background-color: #fff;
-            border-bottom: 2px solid #eeeeee;
+            // border-bottom: 2px solid #eeeeee;
         }
 
         // &-data{
@@ -106,7 +106,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 88rem;
-    border-radius: 4rem;
+    border-radius: 3.5rem;
     background-color: $color-white;
 
     &-inner {
@@ -151,24 +151,30 @@
             display: inline-block;
             position: relative;
 
-            label{
+            label {
                 position: absolute;
                 top: 1.3rem;
                 left: 2.2rem;
                 cursor: text;
                 font-size: 1.2rem;
             }
-            
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
             input {
                 width: 24rem;
-                border: 2px solid #eee;
+                border: 2px solid #eeeeee;
                 padding: 1rem 1.5rem;
-                margin: .5rem 2rem;
+                margin: 0.5rem 2rem;
                 margin-top: 3rem;
-                border-radius: .5rem;
+                border-radius: 0.5rem;
                 background-color: #eee;
+                font-family: "Regular", sans-serif;
                 font-size: 1.4rem;
-                
+
                 // &:focus~label,
                 // &:valid~label {
                 //     // position: absolute;
@@ -177,32 +183,38 @@
                 //     outline: none;
                 //     pointer-events: none;
                 // }
-                
-                &:focus{
-                    border: 2px solid $color-button-light;
+
+                &:focus {
+                    outline: none;
+                    border: 2px solid $color-secondary;
                 }
             }
-
         }
         &-buttons {
             // float: right;
             // margin: 1.5rem 0rem 0rem 0rem;
             padding: 2rem 0rem 1rem 0rem;
         }
-    
+
         &-button {
             // float: right;
             font-size: 1.8rem;
             padding: 1rem 2rem;
-            margin: 0rem 2rem;
+            margin-left: 2rem;
             border-radius: 1rem;
             border: none;
             outline: none;
             background-color: $color-secondary;
-    
+
             .form-icon {
                 margin: 0rem 0.5rem 0.3rem 0rem;
                 font-size: 2.4rem;
+
+                &-small {
+                    // padding: 1.2rem 2rem;
+                    margin: 0.3rem 0.5rem 0.4rem 0rem;
+                    font-size: 2rem;
+                }
             }
         }
     }
