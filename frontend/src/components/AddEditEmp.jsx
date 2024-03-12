@@ -23,6 +23,19 @@ export default function AddEditEmp(props) {
         Address: "",
     });
 
+    function handleAEChange(event){
+        const {name, value} = event.target;
+        console.log([name] + ": " + value);
+        
+        setDocDetails((prevValues) => {
+            return {
+                ...prevValues,
+                [name]: value,
+            }
+        })
+        console.log(docDetails);
+    }
+
     return (
         <div className="aeWindow">
             <div className="aeCont">
@@ -37,15 +50,15 @@ export default function AddEditEmp(props) {
                             docInputFields.map((field) => {
                                 return (
                                     <div className="aeCont-inputs-block">
-                                    <input type={field[1]} />
-                                    <label className="input-placeholder">{field[0]}</label>
+                                    <input type={field[1]} name={field[0]} onChange={handleAEChange} value={docDetails[field[0]] ?? ''}/>
+                                    <label className="input-placeholder">{field[2]}</label>
                                     </div>
                                 );
                             })
                         }
                         <div className="aeCont-inputs-buttons">
                         <button className="aeCont-inputs-button"><IoMdSave className="form-icon"/>Save</button>
-
+                        <button className="aeCont-inputs-button"><IoMdSave className="form-icon"/>Reset</button>
                         </div>
                     </div>
                     </div>
