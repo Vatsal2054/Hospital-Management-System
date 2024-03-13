@@ -18,6 +18,9 @@ function AdminMenu() {
     const [addWindow, setAddWindow] = useState(false);
     const [filterInput, setFilterInput] = useState("");
     const [viewWindow, setViewWindow] = useState(false);
+    const [viewEmp , setViewEmp] = useState(false);
+    const [viewEmpData, setViewEmpData] = useState({});
+
 
     async function fetchEmployeeData(props) {
         setEmpData([]);
@@ -71,6 +74,7 @@ function AdminMenu() {
     return (
         <IconContext.Provider value={{ className: 'react-icons' }}>
             {addWindow ? <AddEditEmp contHeader={adminHeader} setAddWindow={setAddWindow} showToast={showToast}/> : null}
+			{viewEmp ? <ViewEmp empData={viewEmpData} setViewEmp={setViewEmp}/> : null}
             <div className="admin-container">
             <ToastContainer autoClose={3000}/>
                 <AdminHeader />
@@ -92,7 +96,7 @@ function AdminMenu() {
                                     />
                             }
                         </div>
-                        {empData.length === 0 ? null : <EmpDataCont empData={empData} filterInput={filterInput} setFilterInput={setFilterInput} />}
+                        {empData.length === 0 ? null : <EmpDataCont setViewEmpData={setViewEmpData} setViewEmp={setViewEmp} empData={empData} filterInput={filterInput} setFilterInput={setFilterInput} />}
                     </div>
                 </div>
             </div>

@@ -133,6 +133,26 @@ app.get('/emp_data', (req, res) => {
   })
 })
 
+app.get('/employee', (req, res) => {
+  console.log(req.query.employee);
+  const job_type = req.query.employee;
+  db.query("SELECT * from employee where employee_id = $1", [job_type], (err, result) => {
+    if (err) {
+
+      console.error("Error executing query", err.stack);
+      res.status(500).json({ auth_status: 500, message: "Internal server error" });
+      return;
+
+    }
+
+    if (result.rows.length > 0) {
+      emp_data = result.rows;
+      console.log(emp_data);
+      res.send(emp_data);
+    }
+  })
+})
+
 app.listen(port, () => {
   console.log(`Server running on: http://localhost:${port}`);
 })

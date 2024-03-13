@@ -1,13 +1,15 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel, getFilteredRowModel } from "@tanstack/react-table";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-
+import ViewEmp from "./ViewEmp";
 
 function EmpDataCont(props) {
 	const empData = props.empData;
 	empData.forEach((emp, index) => { emp.serial = index + 1; });
 	
 	const data = empData;
+	// console.log(empData);
+	
 	const columns = useMemo(() => [
 		{
 			header: 'Sr',
@@ -48,13 +50,13 @@ function EmpDataCont(props) {
 
 	function showDetails(id){
 		console.log("Row clicked");
-		
+		props.setViewEmpData(empData[id]);
+		props.setViewEmp(true);
 		console.log(id);
 	}
 
 	return (
 		<div className="info-container-data">
-			
 			<table className="admin-table">
 				{table.getHeaderGroups().map(headerGroup => (
 					<tr key = {headerGroup.id} className="admin-table-row">
