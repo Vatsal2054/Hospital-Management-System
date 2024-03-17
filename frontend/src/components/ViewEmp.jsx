@@ -26,6 +26,15 @@ export default function ViewEmp(props) {
             'Study Year': empData.study_year,
         }
     }
+
+    var docArrInfo = Object.entries(docInfo);
+    console.log(docArrInfo);
+    
+    
+
+    // var docArrInfo = Object.keys(docInfo).map((key) => [key. docInfo[key]]);
+    // console.log(docArrInfo);
+    
     
     // [['General', 'Name', 'Gender', 'Contact', 'Address'],
     // ['Job Info', 'Job Type', 'Employee ID', 'Hiredate', 'Salary', 'Doctor ID', 'Doctor Type', 'Department', 'Study year'], 
@@ -40,7 +49,7 @@ export default function ViewEmp(props) {
                         <button onClick={() => { props.setViewEmp(false) }}><IoClose className="react-icons-close"/></button>
                     </div>
                     <div className="data-cont">
-                        {empData.job_type === 'Doctor' && <ViewEmpInfo empData={empData} docInfo={docInfo}/>}
+                        {empData.job_type === 'Doctor' && <ViewEmpInfo empData={empData} docInfo={docInfo} docArrInfo = {docArrInfo} />}
                     </div>
                 </div>
             </div>

@@ -94,7 +94,7 @@ function Login() {
                 className="Login-form-input item-margin"
                 type="text"
                 name="employee_id"
-                placeholder="Username"
+                placeholder="Employee ID"
                 onChange={handleInput}
                 value={credentials.employee_id}
                 required

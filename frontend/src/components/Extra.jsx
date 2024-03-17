@@ -35,3 +35,16 @@
 // };
 
 // import { Link } from 'react-router-dom';
+
+{/* {props.docArrInfo.map((item) => {
+                return (
+                    <div className="data">
+                        <h2>{item[0]}</h2>
+                        {Object.entries(item[1]).map(([key, value], i) => (
+                            <div key={i}>
+                                <span>{key}: {String(value)}</span>
+                            </div>
+                        ))}
+                    </div>
+                );
+            })} */}
