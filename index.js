@@ -130,7 +130,7 @@ app.get('/emp_data', (req, res) => {
       console.log(emp_data);
       res.send(emp_data);
     }
-  })
+  });
 })
 
 app.get('/employee', (req, res) => {
