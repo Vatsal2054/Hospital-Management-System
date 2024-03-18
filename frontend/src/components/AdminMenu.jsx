@@ -96,7 +96,7 @@ function AdminMenu() {
                                     />
                             }
                         </div>
-                        {empData.length === 0 ? null : <EmpDataCont setViewEmpData={setViewEmpData} setViewEmp={setViewEmp} empData={empData} filterInput={filterInput} setFilterInput={setFilterInput} />}
+                        {empData.length === 0 ? null : <EmpDataCont setViewEmpData={setViewEmpData} setViewEmp={setViewEmp} Data={empData} filterInput={filterInput} setFilterInput={setFilterInput} caller="Admin" />}
                     </div>
                 </div>
             </div>

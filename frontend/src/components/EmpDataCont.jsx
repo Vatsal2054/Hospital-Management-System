@@ -2,40 +2,14 @@ import React, { useMemo, useState } from "react";
 import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel, getFilteredRowModel } from "@tanstack/react-table";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import ViewEmp from "./ViewEmp";
+import {columns} from "./TableContents";
 
 function EmpDataCont(props) {
-	const empData = props.empData;
-	empData.forEach((emp, index) => { emp.serial = index + 1; });
+	const receivedData = props.Data;
+	receivedData.forEach((cell, index) => { cell.serial = index + 1; });
 	
-	const data = empData;
+	const data = receivedData;
 	// console.log(empData);
-	
-	const columns = useMemo(() => [
-		{
-			header: 'Sr',
-			accessorKey: 'serial',
-		},
-		{
-			header: 'Employee ID',
-			accessorKey: 'employee_id',
-		},
-		{
-			header: 'Name',
-			accessorKey: 'name',
-		},
-		{
-			header: 'Gender',
-			accessorKey: 'Gender',
-		},
-		{
-			header: 'Contact',
-			accessorKey: 'contact',
-		},
-		{
-			header: 'Address',
-			accessorKey: 'Address',
-		}
-	], []);
 	
 	const table = useReactTable({
 		data, columns,
@@ -50,7 +24,7 @@ function EmpDataCont(props) {
 
 	function showDetails(id){
 		console.log("Row clicked");
-		props.setViewEmpData(empData[id]);
+		props.setViewEmpData(receivedData[id]);
 		props.setViewEmp(true);
 		console.log(id);
 	}
