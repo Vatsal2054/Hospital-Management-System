@@ -8,7 +8,7 @@ function EmpDataCont(props) {
 	empData.forEach((emp, index) => { emp.serial = index + 1; });
 	
 	const data = empData;
-	// console.log(empData);
+	console.log(empData);
 	
 	const columns = useMemo(() => [
 		{
