@@ -225,19 +225,19 @@
 
     &-head{
         font-size: 2rem;
-        padding: 1rem 0rem;
+        padding: .8rem 0rem;
         border-bottom: 2px solid #eee;
         margin-bottom: .8rem;
+        font-family: "Heavy",sans-serif;    
     }
 
     &-cell{
         font-size: 1.6rem;
-        padding: .6rem 0rem;
+        padding: .4rem 0rem;
 
         &-key{
             width: 15rem;
             display: inline-block;
-            // font-family: "Heavy",sans-serif;    
         }
         &-value{
             display: inline-block;
