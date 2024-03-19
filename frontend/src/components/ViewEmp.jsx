@@ -24,6 +24,10 @@ export default function ViewEmp(props) {
             'Doctor Type': empData.dtype,
             'Department': empData.department,
             'Study Year': empData.study_year,
+        },
+        'Other': {
+            'Username': empData.employee_id,
+            'Password': empData.password,
         }
     }
 
