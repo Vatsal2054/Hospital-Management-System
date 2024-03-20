@@ -8,7 +8,6 @@ export const docInputFields = [
     ["department", "text", "Department"],
     ["study_year", "number", "Year of degree"],
     ["contact", "tel", "Contact"],
-    ["job_type", "text", "Job type"],
     ["hiredate", "date", "Hire date"],
     ["password", "text", "Password"],
     ["salary", "number", "Salary"],

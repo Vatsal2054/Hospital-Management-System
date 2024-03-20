@@ -3,7 +3,7 @@ import "../sass/main.scss";
 import axios from "axios";
 import { IconContext } from "react-icons";
 import AdminHeader from "./AdminHeader";
-import EmpDataCont from "./EmpDataCont";
+import EmpDataCont from "./DataCont";
 import AdminMenuHeader from "./AdminMenuHeader";
 import AdminEmpButtons from "./AdminEmpButtons";
 import AddEditEmp from "./AddEditEmp";
@@ -23,7 +23,7 @@ function AdminMenu() {
     const [viewEmp , setViewEmp] = useState(false);
     const [viewEmpData, setViewEmpData] = useState({});
 
-
+    //fetch data of specific employee type
     async function fetchEmployeeData(props) {
         setEmpData([]);
         console.log(props);
@@ -43,26 +43,29 @@ function AdminMenu() {
             })
     }
 
+    //reset data and collapse table
     function resetMenu() {
         setEmpData([]);
         setShowOptions(false);
         setAdminHeader("Welcome!");
     }
 
+    //displays add window
     function addEmployee() {
         console.log("Add clicked!");
         setAddWindow(true);
     }
 
+    //Handling pop-up messages
     function showToast(type){
         if(type === 200){
             setAddWindow(false);
-            toast.success("Doctor Registered!", {
+            toast.success( {adminHeader} + " Registered!", {
                 position: "top-center"
             });
         }
         if(type === 201){
-            toast.error("Employee already exists!", {
+            toast.error( {adminHeader} + " already exists!", {
                 position: "top-center",
             });
         }
