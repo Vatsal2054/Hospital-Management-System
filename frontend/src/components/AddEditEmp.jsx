@@ -22,7 +22,6 @@ export default function AddEditEmp(props) {
         Gender: "",
         Address: "",
     });
-
     function resetState(){
         setDocDetails({
             d_id: "",
