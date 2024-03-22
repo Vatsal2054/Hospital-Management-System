@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import Heading from "./Heading";
 import "../sass/main.scss";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
 
+  const navigate = useNavigate();
   const [destination, setDestination] = useState("");
   const [isLoggedIn, setLoginStatus] = useState(false);
+  const [empData, setEmpData] = useState({});
   const [credentials, setCredentials] = useState({
     employee_id: "",
     password: "",
@@ -41,6 +43,7 @@ function Login() {
             
             if( responseData.auth_status === 200){
 
+              setEmpData(responseData);
               console.log("Redirecting...");
               setDestination(responseData.destination);
               toast.success("Authentication Successful!", {
@@ -75,7 +78,10 @@ function Login() {
 
     var userDestination = "/" + destination + "Menu";
     console.log(userDestination);
-    return <Navigate to={userDestination} />;
+    // return <Navigate to={userDestination} {empData = }/>;
+    console.log("Data before sending: ",empData);
+    
+    navigate(userDestination, { state: {empData1: empData}});
 
   } else {
     return (

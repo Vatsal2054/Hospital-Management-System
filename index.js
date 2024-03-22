@@ -28,8 +28,7 @@ app.post('/login', (req, res) => {
   const { employee_id, password } = req.body;
   console.log(req.body);
 
-  db.query("SELECT employee_id, password, job_type FROM employee WHERE employee_id = $1", [employee_id], (err, result) => {
-    if (err) {
+  db.query("SELECT * FROM employee WHERE employee_id = $1", [employee_id], (err, result) => {    if (err) {
 
       console.error("Error executing query", err.stack);
       res.status(500).json({ auth_status: 500, message: "Internal server error" });
@@ -46,13 +45,16 @@ app.post('/login', (req, res) => {
 
     }
     const user = result.rows[0];
+    console.log(user);
+
 
     if (password === user.password) {
 
       console.log("User authenticated");
       Login_status.auth_status = 200;
       Login_status.destination = user.job_type;
-      res.send(Login_status);
+      console.log({...user, ...Login_status});
+      res.send({...user, ...Login_status});
 
     } else {
 

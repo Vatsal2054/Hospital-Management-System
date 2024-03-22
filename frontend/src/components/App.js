@@ -6,11 +6,8 @@ import NurseMenu from './NurseMenu';
 import AdminMenu from './AdminMenu';
 import DoctorMenu from './DoctorMenu';
 import ReceptionistMenu from './ReceptionistMenu';
-// import { redirect } from "react-router-dom";
-
 
 function App() {
-
   return (
     <div className="root-child">
     {/* <Header /> */}

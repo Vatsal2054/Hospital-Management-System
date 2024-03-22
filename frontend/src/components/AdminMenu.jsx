@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../sass/main.scss";
 import axios from "axios";
 import { IconContext } from "react-icons";
-import AdminHeader from "./AdminHeader";
+import AdminHeader from "./PageHeader";
 import EmpDataCont from "./DataCont";
 import AdminMenuHeader from "./AdminMenuHeader";
 import AdminEmpButtons from "./AdminEmpButtons";
@@ -11,6 +11,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ViewEmp from "./ViewEmp";
 import {columns} from "./TableContents";
+import { useLocation } from "react-router-dom";
 
 
 function AdminMenu() {
@@ -19,9 +20,13 @@ function AdminMenu() {
     const [adminHeader, setAdminHeader] = useState("Welcome!");
     const [addWindow, setAddWindow] = useState(false);
     const [filterInput, setFilterInput] = useState("");
-    const [viewWindow, setViewWindow] = useState(false);
+    // const [viewWindow, setViewWindow] = useState(false);
     const [viewEmp , setViewEmp] = useState(false);
     const [viewEmpData, setViewEmpData] = useState({});
+
+    const location = useLocation();
+    const { empData1 } = location.state || {};
+    console.log( "Received Data: ", empData1);
 
     //fetch data of specific employee type
     async function fetchEmployeeData(props) {
@@ -82,7 +87,7 @@ function AdminMenu() {
 			{viewEmp ? <ViewEmp empData={viewEmpData} setViewEmp={setViewEmp}/> : null}
             <div className="admin-container">
             <ToastContainer autoClose={3000}/>
-                <AdminHeader />
+                <AdminHeader heading = {empData1.job_type}/>
                 <div className="info">
                     <div className="info-container">
                         <div className="info-container-header">
