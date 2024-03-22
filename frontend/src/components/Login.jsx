@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Heading from "./Heading";
 import "../sass/main.scss";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -16,6 +16,7 @@ function Login() {
     employee_id: "",
     password: "",
   });
+
 
   function handleInput(e) {
     const { name, value } = e.target;
@@ -42,8 +43,8 @@ function Login() {
             console.log(responseData);
             
             if( responseData.auth_status === 200){
-
               setEmpData(responseData);
+
               console.log("Redirecting...");
               setDestination(responseData.destination);
               toast.success("Authentication Successful!", {

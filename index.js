@@ -28,7 +28,8 @@ app.post('/login', (req, res) => {
   const { employee_id, password } = req.body;
   console.log(req.body);
 
-  db.query("SELECT * FROM employee WHERE employee_id = $1", [employee_id], (err, result) => {    if (err) {
+  db.query("SELECT * FROM employee WHERE employee_id = $1", [employee_id], (err, result) => {
+    if (err) {
 
       console.error("Error executing query", err.stack);
       res.status(500).json({ auth_status: 500, message: "Internal server error" });
@@ -46,7 +47,6 @@ app.post('/login', (req, res) => {
     }
     const user = result.rows[0];
     console.log(user);
-
 
     if (password === user.password) {
 
@@ -68,25 +68,12 @@ app.post('/login', (req, res) => {
 
 app.post('/newDoc', (req, res) => {
   console.log(req.body);
-  const {
-    d_id,
-    employee_id,
-    name,
-    dtype,
-    department,
-    study_year,
-    contact,
-    job_type,
-    hiredate,
-    password,
-    salary,
-    Gender,
-    Address,
-  } = req.body;
+  const recData = req.body;
+  console.log(recData);
 
-  db.query("SELECT employee_id from employee where employee_id = $1", [employee_id], (err, result) => {
+  db.query("SELECT employee_id from employee where employee_id = $1", [recData.employee_id], (err, result) => {
     if (err) {
-      res.send(400);
+      res.send(400);recData.
       console.log(err.message);
     }
     else if (result.rows.length !== 0) {
@@ -94,21 +81,38 @@ app.post('/newDoc', (req, res) => {
     }
   });
 
-  db.query("INSERT INTO employee values ($1, $2, $3, 'Doctor', $4, $5, $6, $7, $8)", [employee_id, name, contact, hiredate, password, salary, Gender, Address], (err, result) => {
+  db.query("INSERT INTO employee values ($1, $2, $3, $4, $5, $6, $7, $8, $9)", [recData.employee_id, recData.name, recData.contact, recData.job_type, recData.hiredate, recData.password, recData.salary, recData.Gender, recData.Address], (err, result) => {
     if (err) {
       console.log(err.message);
-      res.send(400);
+      res.sendStatus(400);
     }
     else {
       console.log("Data Inserted!!");
-      db.query("INSERT INTO doctor values ($1, $2, $3, $4, $5, $6)", [d_id, employee_id, name, dtype, department, study_year], (err, result) => {
-        if (err) {
-          console.log(err.message);
-        }
-        else {
-          res.sendStatus(200);
-        }
-      });
+      if(recData.job_type === "Doctor"){
+        db.query("INSERT INTO doctor values ($1, $2, $3, $4, $5, $6)", [recData.d_id, recData.employee_id, recData.name, recData.dtype, recData.department, recData.study_year], (err, result) => {
+          if (err) {
+            console.log(err.message);
+          }
+          else {
+            console.log("Doctor Inserted!!");
+            console.log(result);
+            res.sendStatus(200);
+          }
+        });
+      }
+      else if (recData.job_type === "Nurse"){
+        db.query("INSERT INTO nurse values ($1, $2, $3, $4)", [recData.employee_id, recData.nurse_id, recData.name, recData.department], (err, result) => {
+          if (err) {
+            console.log(err.message);
+          }
+          else {
+            res.sendStatus(200);
+          }
+        });
+      }
+      else if (recData.job_type === "Receptionist"){
+        res.sendStatus(200);
+      }
     }
   });
 });
@@ -129,7 +133,7 @@ app.get('/emp_data', (req, res) => {
 
     if (result.rows.length > 0) {
       emp_data = result.rows;
-      console.log(emp_data);
+      // console.log(emp_data);
       res.send(emp_data);
     }
   });

@@ -1,76 +1,59 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
-// import PhoneInput from "react-phone-number-input";
-import { docInputFields } from "./InputInfo";
 import { FaArrowRotateLeft } from "react-icons/fa6";
 import { IoMdSave } from "react-icons/io";
 import axios from "axios";
+import { docDetails, recDetails, nurseDetails, docInputFields, recInputFields, nurseInputFields } from "./AdminAEData";
+
 export default function AddEditEmp(props) {
 
-    const [docDetails, setDocDetails] = useState({
-        d_id: "",
-        employee_id: "",
-        name: "",
-        dtype: "",
-        department: "",
-        study_year: null,
-        contact: null,
-        job_type: "",
-        hiredate: "",
-        password: "",
-        salary: null,
-        Gender: "",
-        Address: "",
-    });
-    function resetState(){
-        setDocDetails({
-            d_id: "",
-            employee_id: "",
-            name: "",
-            dtype: "",
-            department: "",
-            study_year: null,
-            contact: null,
-            job_type: "",
-            hiredate: "",
-            password: "",
-            salary: null,
-            Gender: "",
-            Address: "",
-        });
+    var detailContent;
+    props.contHeader === "Doctor" && (detailContent = docDetails);
+    props.contHeader === "Nurse" && (detailContent = nurseDetails);
+    props.contHeader === "Receptionist" && (detailContent = recDetails);
+
+    var infoContent;
+    props.contHeader === "Doctor" && (infoContent = docInputFields);
+    props.contHeader === "Nurse" && (infoContent = nurseInputFields);
+    props.contHeader === "Receptionist" && (infoContent = recInputFields);
+
+    const [details, setDetails] = useState({job_type: String(props.contHeader)});
+
+    function resetState() {
+        setDetails({job_type: String(props.contHeader)});
     }
 
-    function handleAEChange(event){
-        const {name, value} = event.target;
+    function handleAEChange(event) {
+        const { name, value } = event.target;
         console.log([name] + ": " + value);
-        
-        setDocDetails((prevValues) => {
+
+        setDetails((prevValues) => {
             return {
                 ...prevValues,
                 [name]: value,
             }
         })
-        console.log(docDetails);
+        console.log(details);
     }
 
-    async function newDoctor() {
-        await axios.post("http://localhost:3001/newDoc", docDetails)
+    async function newEmp(e) {
+        e.preventDefault();
+        await axios.post("http://localhost:3001/newDoc", details)
             .then(response => {
                 let responseData = response;
                 console.log(responseData);
-                if(responseData.status === 200){
+                if (responseData.status === 200) {
                     console.log("Employee Registered");
                     props.showToast(200);
                 }
-                if(responseData.status === 201){
+                else if (responseData.status === 201) {
                     props.showToast(201);
                 }
-
-                else {
+                else if(responseData.status === 400) {
                     props.showToast(400);
                 }
             })
-            
+
             .catch((err) => {
                 props.showToast(400);
                 console.log(err);
@@ -86,22 +69,22 @@ export default function AddEditEmp(props) {
                         <button onClick={() => { props.setAddWindow(false) }} className="aeCont-close"><IoClose className="react-icons-close" /></button>
                     </div>
                     <div className="aeCont-outer">
-                    <div className="aeCont-inputs">
-                        {
-                            docInputFields.map((field) => {
-                                return (
-                                    <div className="aeCont-inputs-block">
-                                    <input type={field[1]} name={field[0]} onChange={handleAEChange} value={docDetails[field[0]] ?? ''}  required/>
-                                    <label className="input-placeholder">{field[2]}</label>
-                                    </div>
-                                );
-                            })
-                        }
-                        <div className="aeCont-inputs-buttons">
-                        <button className="aeCont-inputs-button" onClick={newDoctor}><IoMdSave className="form-icon"/>Save</button>
-                        <button className="aeCont-inputs-button" onClick={resetState}><FaArrowRotateLeft className="react-icons form-icon-small"/>Reset</button>
-                        </div>
-                    </div>
+                        <form className="aeCont-inputs">
+                            {
+                                infoContent.map((field) => {
+                                    return (
+                                        <div className="aeCont-inputs-block">
+                                            <input type={field[1]} name={field[0]} onChange={handleAEChange} value={details[field[0]] ?? ''} required />
+                                            <label className="input-placeholder">{field[2]}</label>
+                                        </div>
+                                    );
+                                })
+                            }
+                            <div className="aeCont-inputs-buttons">
+                                <button type="submit" className="aeCont-inputs-button" onClick={newEmp}><IoMdSave className="form-icon" />Save</button>
+                                <button className="aeCont-inputs-button" onClick={resetState}><FaArrowRotateLeft className="react-icons form-icon-small" />Reset</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

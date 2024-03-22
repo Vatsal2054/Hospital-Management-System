@@ -65,12 +65,12 @@ function AdminMenu() {
     function showToast(type){
         if(type === 200){
             setAddWindow(false);
-            toast.success( {adminHeader} + " Registered!", {
+            toast.success( adminHeader + " Registered!", {
                 position: "top-center"
             });
         }
         if(type === 201){
-            toast.error( {adminHeader} + " already exists!", {
+            toast.error( adminHeader + " already exists!", {
                 position: "top-center",
             });
         }
