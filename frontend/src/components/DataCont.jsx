@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { TableOptions, flexRender, getCoreRowModel, useReactTable, getPaginationRowModel, getFilteredRowModel } from "@tanstack/react-table";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import ViewEmp from "./ViewEmp";
-import {columns} from "./TableContents";
+import {empColumns, patientColumns} from "./TableContents";
 
 
 function EmpDataCont(props) {
@@ -10,7 +10,10 @@ function EmpDataCont(props) {
 	receivedData.forEach((cell, index) => { cell.serial = index + 1; });
 
 	const data = receivedData;
-	
+	console.log(data);
+
+	const columns = props.type === "employee" ? empColumns : patientColumns;
+
 	const table = useReactTable({
 		data, columns,
 		getCoreRowModel: getCoreRowModel(),

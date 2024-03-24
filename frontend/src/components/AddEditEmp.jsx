@@ -38,7 +38,7 @@ export default function AddEditEmp(props) {
 
     async function newEmp(e) {
         e.preventDefault();
-        await axios.post("http://localhost:3001/newDoc", details)
+        await axios.post("http://localhost:3001/newEmp", details)
             .then(response => {
                 let responseData = response;
                 console.log(responseData);

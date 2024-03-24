@@ -1,6 +1,6 @@
 import React from "react";
 
-export const columns = [
+export const empColumns = [
     {
         header: 'Sr',
         accessorKey: 'serial',
@@ -24,5 +24,32 @@ export const columns = [
     {
         header: 'Address',
         accessorKey: 'Address',
+    }
+];
+
+export const patientColumns = [
+    {
+        header: 'Patient ID',
+        accessorKey: 'patient_id',
+    },
+    {
+        header: 'Name',
+        accessorKey: 'name',
+    },
+    {
+        header: 'Admit Date',
+        accessorKey: 'admit_date',
+    },
+    {
+        header: 'Gender',
+        accessorKey: 'gender',
+    },
+    {
+        header: 'Blood group',
+        accessorKey: 'blood_group',
+    },
+    {
+        header: 'Age',
+        accessorKey: 'age',
     }
 ];

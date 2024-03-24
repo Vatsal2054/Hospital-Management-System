@@ -10,7 +10,7 @@ import AddEditEmp from "./AddEditEmp";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ViewEmp from "./ViewEmp";
-import {columns} from "./TableContents";
+// import {columns} from "./TableContents";
 import { useLocation } from "react-router-dom";
 
 
@@ -106,7 +106,7 @@ function AdminMenu() {
                                     />
                             }
                         </div>
-                        {empData.length === 0 ? null : <EmpDataCont columns = {columns} type={"employee"} setViewEmpData={setViewEmpData} setViewEmp={setViewEmp} Data={empData} filterInput={filterInput} setFilterInput={setFilterInput} caller="Admin" />}
+                        {empData.length === 0 ? null : <EmpDataCont type={"employee"} setViewEmpData={setViewEmpData} setViewEmp={setViewEmp} Data={empData} filterInput={filterInput} setFilterInput={setFilterInput} caller="Admin" />}
                     </div>
                 </div>
             </div>

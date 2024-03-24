@@ -5,11 +5,12 @@
     border: none;
     border-radius: 1rem;
     // background-color: $color-button-light;
-    background-color: $color-secondary;
+    background-color: $admin-s;
+    color: $color-text-light;
     font-size: 1.8rem;
     margin-left: 1rem;
     vertical-align: middle;
-
+    
     &-back {
         text-align: center;
         height: 4rem;
@@ -17,7 +18,8 @@
         border: none;
         border-radius: 1rem;
         // background-color: $color-button-light;
-        background-color: $color-secondary;
+        background-color: $admin-s;
+        color: $color-text-light;
         font-size: 1.8rem;
         margin-left: 1rem;
         vertical-align: middle;
@@ -55,7 +57,8 @@
     &-input{
         width: 24rem;
         font-size: 1.6rem;
-        background-color: rgb(211, 233, 251);
+        background-color: $admin-q;
+        color: $color-text-dark !important;
         border: none;
         outline: none;
     }
