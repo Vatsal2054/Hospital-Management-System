@@ -84,7 +84,7 @@ function AdminMenu() {
     return (
         <IconContext.Provider value={{ className: 'react-icons' }}>
             {addWindow ? <AddEditEmp contHeader={adminHeader} setAddWindow={setAddWindow} showToast={showToast}/> : null}
-			{viewEmp ? <ViewEmp empData={viewEmpData} setViewEmp={setViewEmp}/> : null}
+			{viewEmp ? <ViewEmp Data={viewEmpData} setView={setViewEmp}/> : null}
             <div className="admin-container">
             <ToastContainer autoClose={3000}/>
                 <AdminHeader heading = {empData1.job_type}/>
@@ -106,7 +106,15 @@ function AdminMenu() {
                                     />
                             }
                         </div>
-                        {empData.length === 0 ? null : <EmpDataCont type={"employee"} setViewEmpData={setViewEmpData} setViewEmp={setViewEmp} Data={empData} filterInput={filterInput} setFilterInput={setFilterInput} caller="Admin" />}
+                        {empData.length === 0 ? null : <EmpDataCont 
+                            type={"employee"} 
+                            setViewData={setViewEmpData} 
+                            setView={setViewEmp} 
+                            Data={empData} 
+                            filterInput={filterInput} 
+                            setFilterInput={setFilterInput} 
+                            caller="Admin" 
+                        />}
                     </div>
                 </div>
             </div>

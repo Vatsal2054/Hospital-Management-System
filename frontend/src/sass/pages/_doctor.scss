@@ -1,0 +1,36 @@
+.info-container{
+
+    &-header{
+        padding: 2rem;
+
+        &-left{
+            height: auto;
+        }
+        &-mbtn{
+            display: inline-block;
+            border: none;
+            // padding: 1rem;
+            // font-size: 2rem;
+            padding: .6rem 1rem;
+            margin: auto;
+            background-color: inherit;
+            border-radius: .5rem;
+            transition: .3s ease;
+            
+            &:hover{
+                background-color: $admin-q;
+                transition: .3s ease;
+            }
+
+            .mbtn-svg{
+                margin: 0rem 0rem -.2rem 0rem;
+                font-size: 2.4rem;
+            }
+        }
+        
+        &-head{
+            display: inline-block;
+            padding: 0rem 1rem;
+        }
+    }
+}

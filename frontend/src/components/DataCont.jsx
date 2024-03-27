@@ -5,7 +5,7 @@ import ViewEmp from "./ViewEmp";
 import {empColumns, patientColumns} from "./TableContents";
 
 
-function EmpDataCont(props) {
+function DataCont(props) {
 	const receivedData = props.Data;
 	receivedData.forEach((cell, index) => { cell.serial = index + 1; });
 
@@ -26,10 +26,10 @@ function EmpDataCont(props) {
 	});
 
 	function showDetails(id) {
-		console.log("Row clicked");
-		props.setViewEmpData(receivedData[id]);
-		props.setViewEmp(true);
-		console.log(id);
+		console.log("Row ", id," clicked");
+		// console.log(id);
+		props.setViewData(receivedData[id]);
+		props.setView(true);
 	}
 
 	return (
@@ -69,4 +69,4 @@ function EmpDataCont(props) {
 	);
 }
 
-export default EmpDataCont;
+export default DataCont;

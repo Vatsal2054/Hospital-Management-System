@@ -5,44 +5,97 @@ import axios from "axios";
 
 export default function ViewEmp(props) {
 
+    const Data = props.Data;
+    console.log("Data received: " + Data);
     
-    
-    const empData = props.empData;
+
     const docInfo = {
         'General': {
-            'Name': empData.name,
-            'Gender': empData.Gender,
-            'Contact': empData.contact,
-            'Address': empData.Address,
+            'Name': Data.name,
+            'Gender': Data.Gender,
+            'Contact': Data.contact,
+            'Address': Data.Address,
         },
         'Job Info': {
-            'Job Type': empData.JobType,
-            'Employee ID': empData.employee_id,
-            'Hiring Date': empData.hiredate,
-            'Salary': empData.salary,
-            'Doctor ID': empData.d_id,
-            'Doctor Type': empData.dtype,
-            'Department': empData.department,
-            'Study Year': empData.study_year,
+            'Job Type': Data.job_type,
+            'Employee ID': Data.employee_id,
+            'Hiring Date': Data.hiredate,
+            'Salary': Data.salary,
+            'Doctor ID': Data.d_id,
+            'Doctor Type': Data.dtype,
+            'Department': Data.department,
+            'Study Year': Data.study_year,
         },
         'Other': {
-            'Username': empData.employee_id,
-            'Password': empData.password,
+            'Username': Data.employee_id,
+            'Password': Data.password,
+        }
+    }
+    const nurseInfo = {
+        'General': {
+            'Name': Data.name,
+            'Gender': Data.Gender,
+            'Contact': Data.contact,
+            'Address': Data.Address,
+        },
+        'Job Info': {
+            'Job Type': Data.job_type,
+            'Employee ID': Data.employee_id,
+            'Hiring Date': Data.hiredate,
+            'Salary': Data.salary,
+            'Nurse ID': Data.nurse_id,
+            'Department': Data.department,
+        },
+        'Other': {
+            'Username': Data.employee_id,
+            'Password': Data.password,
+        }
+    }
+    const recInfo = {
+        'General': {
+            'Name': Data.name,
+            'Gender': Data.Gender,
+            'Contact': Data.contact,
+            'Address': Data.Address,
+        },
+        'Job Info': {
+            'Job Type': Data.job_type,
+            'Employee ID': Data.employee_id,
+            'Hiring Date': Data.hiredate,
+            'Salary': Data.salary,
+        },
+        'Other': {
+            'Username': Data.employee_id,
+            'Password': Data.password,
+        }
+    }
+    const pInfo = {
+        'General': {
+            'Name': Data.name,
+            'Gender': Data.gender,
+            'Contact': Data.contact,
+        },
+        'Body Info': {
+            'Patient ID': Data.patient_id,
+            'Age': Data.age + ' years',
+            'Height': Data.height,
+            'Weight': Data.weight + ' Kg',
+            'Blood Group': Data.blood_group,
+        },
+        'Other': {
+            'Room ID': Data.room_id,
+            'Department': Data.department,
+            'Unit': Data.unit,
         }
     }
 
-    var docArrInfo = Object.entries(docInfo);
-    console.log(docArrInfo);
-    
-    
 
-    // var docArrInfo = Object.keys(docInfo).map((key) => [key. docInfo[key]]);
-    // console.log(docArrInfo);
-    
-    
-    // [['General', 'Name', 'Gender', 'Contact', 'Address'],
-    // ['Job Info', 'Job Type', 'Employee ID', 'Hiredate', 'Salary', 'Doctor ID', 'Doctor Type', 'Department', 'Study year'], 
-    // ['Credentials', 'Username', 'Password']];
+    var ArrInfo;
+    ArrInfo = Data.job_type === "Doctor" && Object.entries(docInfo);
+    ArrInfo = Data.job_type === "Nurse" && Object.entries(nurseInfo);
+    ArrInfo = Data.job_type === "Receptionist" && Object.entries(recInfo);
+    ArrInfo = props.caller === "Doctor" && Object.entries(pInfo);
+    console.log(ArrInfo);
 
     return (
         <div className="aeWindow">
@@ -50,10 +103,13 @@ export default function ViewEmp(props) {
                 <div className="aeCont-inner">
                     <div className="aeCont-inner-head">
                         <h1>Employee Information</h1>
-                        <button onClick={() => { props.setViewEmp(false) }}><IoClose className="react-icons-close"/></button>
+                        <button onClick={() => { props.setView(false) }}><IoClose className="react-icons-close"/></button>
                     </div>
                     <div className="data-cont">
-                        {empData.job_type === 'Doctor' && <ViewEmpInfo empData={empData} docInfo={docInfo} docArrInfo = {docArrInfo} />}
+                        {Data.job_type === 'Doctor' && <ViewEmpInfo Data={Data} Info={docInfo} ArrInfo = {ArrInfo} />}
+                        {Data.job_type === 'Nurse' && <ViewEmpInfo Data={Data} Info={nurseInfo} ArrInfo = {ArrInfo} />}
+                        {Data.job_type === 'Receptionist' && <ViewEmpInfo Data={Data} Info={recInfo} ArrInfo = {ArrInfo} />}
+                        {props.caller === 'Doctor' && <ViewEmpInfo Data={Data} Info={pInfo} ArrInfo = {ArrInfo} />}
                     </div>
                 </div>
             </div>

@@ -1,30 +1,10 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export default function ViewEmpInfo(props) {
-    const[emp, setEmp] = useState({});
-
-    const empID = props.empData;
-    useEffect(() => {
-        async function getEmployee(id) {
-            try {
-                const response = await axios.get("http://localhost:3001/employee", {
-                    params: { employee_id: id },
-                });
-                console.log(response.data);
-                setEmp(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        getEmployee(props.empData);
-    }, [props.empData]);
-
-    const docInfo = props.docInfo;
+    const Info = props.Info;
     return (
         <div className="data">
-            {Object.entries(docInfo).map(([category, info]) => (
+            {Object.entries(Info).map(([category, info]) => (
                 <div key={category}>
                     <h3 className="data-head">{category}</h3>
                         {Object.entries(Object(info)).map(([key,value1]) => (

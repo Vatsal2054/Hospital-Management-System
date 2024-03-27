@@ -139,31 +139,70 @@ app.post('/newEmp', (req, res) => {
 
 var emp_data;
 
-app.get('/emp_data', (req, res) => {
+app.get('/emp_data',async (req, res) => {
     console.log(req.query.employee);
     const job_type = req.query.employee;
-    db.query("SELECT employee_id, name, contact, job_type,TO_CHAR(hiredate, 'DD-MM-YYYY') as hiredate, password, salary, \"Gender\", \"Address\" FROM employee where job_type = $1", [job_type], (err, result) => {
-        if (err) {
+    if(job_type === "Doctor"){
+        await db.query("SELECT e.employee_id, e.name, e.contact, e.job_type, TO_CHAR(e.hiredate, 'DD-MM-YYYY') as hiredate, e.password, e.salary, \"Gender\", \"Address\", d.d_id, d.dtype, d.department, d.study_year FROM employee e LEFT JOIN doctor d ON e.employee_id = d.employee_id where e.job_type = $1", [job_type], (err, result) => {
+            if (err) {
+    
+                console.error("Error executing query", err.stack);
+                res.status(500).json({ auth_status: 500, message: "Internal server error" });
+                return;
+    
+            }
+    
+            if (result.rows.length > 0) {
+                emp_data = result.rows;
+                // console.log(emp_data);
+                res.send(emp_data);
+            }
+        });
+    }
+    else if(job_type === "Nurse"){
+        await db.query("SELECT e.employee_id, e.name, e.contact, e.job_type, TO_CHAR(e.hiredate, 'DD-MM-YYYY') as hiredate, e.password, e.salary, \"Gender\", \"Address\", n.nurse_id, n.departMent FROM employee e LEFT JOIN nurse n ON e.employee_id = n.employee_id where job_type = $1", [job_type], (err, result) => {
+            if (err) {
+    
+                console.error("Error executing query", err.stack);
+                res.status(500).json({ auth_status: 500, message: "Internal server error" });
+                return;
+    
+            }
+    
+            if (result.rows.length > 0) {
+                emp_data = result.rows;
+                // console.log(emp_data);
+                res.send(emp_data);
+            }
+        });
+    }
 
-            console.error("Error executing query", err.stack);
-            res.status(500).json({ auth_status: 500, message: "Internal server error" });
-            return;
-
-        }
-
-        if (result.rows.length > 0) {
-            emp_data = result.rows;
-            // console.log(emp_data);
-            res.send(emp_data);
-        }
-    });
+    else if (job_type === "Receptionist"){
+        await db.query("SELECT employee_id, name, contact, job_type, TO_CHAR(hiredate, 'DD-MM-YYYY') as hiredate, password, salary, \"Gender\", \"Address\" FROM employee where job_type = $1", [job_type], (err, result) => {
+            if (err) {
+    
+                console.error("Error executing query", err.stack);
+                res.status(500).json({ auth_status: 500, message: "Internal server error" });
+                return;
+    
+            }
+    
+            if (result.rows.length > 0) {
+                emp_data = result.rows;
+                // console.log(emp_data);
+                res.send(emp_data);
+            }
+        });
+    }
 })
 
 app.get('/patients', (req, res) => {
-    console.log(req.query.department);
+    // console.log(req.query.department);
     const department = req.query.department;
 
-    db.query("select * from patient where patient_id in (select patient_id from pinfo where department = $1)", [department], (err, result) => {
+    db.query("SELECT a.patient_id, a.name, a.gender, a.age, a.height, a.weight, a.blood_group, a.admit_date, a.discharge_date, a.contact, b.room_id, b.department, b.unit FROM patient a INNER JOIN pinfo b ON a.patient_id = b.patient_id where a.patient_id in (select patient_id from pinfo where department = $1)", 
+    [department], 
+    (err, result) => {
         if (err) {
             console.log(err);
             res.sendStatus(400);
