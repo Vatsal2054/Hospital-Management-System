@@ -1,81 +1,103 @@
-.info-container{
+@import "../abstracts/variables";
 
-    &-body{
+.emp-menu{
+    height: 100vh !important;
+}
+
+.info-container {
+    &-body {
         display: flex;
-
-        .child{
-            flex: 5;
-        }
+        height: 100vh;
+        width: 100%;
+        margin: 0;
     }
 
-    &-header{
+    &-header {
         padding: 2rem;
 
-        &-left{
+        &-left {
             height: auto;
         }
-        &-mbtn{
+        &-mbtn {
             display: inline-block;
             border: none;
             // padding: 1rem;
             // font-size: 2rem;
-            padding: .6rem 1rem;
+            padding: 0.6rem 1rem;
             margin: auto;
             background-color: inherit;
-            border-radius: .5rem;
-            transition: .3s ease;
-            
-            &:hover{
+            border-radius: 0.5rem;
+            transition: 0.3s ease;
+
+            &:hover {
                 background-color: $admin-q;
-                transition: .3s ease;
+                transition: 0.3s ease;
             }
-            
-            .mbtn-svg{
-                margin: 0rem 0rem -.2rem 0rem;
+
+            .mbtn-svg {
+                margin: 0rem 0rem -0.2rem 0rem;
                 font-size: 2.4rem;
             }
         }
-        
-        &-head{
+
+        &-head {
             display: inline-block;
             padding: 0rem 1rem;
         }
     }
 }
 
+.admin-table {
+
+    &-row{
+        border-radius: 2rem;
+    }
+}
+
+.emp-menu {
+    height: 100vw;
+}
+
+.header {
+    background-color: $admin-s;
+    h1 {
+        margin: 2rem 2rem;
+    }
+}
+
 .side-menu {
     background-color: $sidebar;
-    border-radius: 0rem 0rem 0rem 2rem;
-    animation: widen .5s ease;
+    // border-radius: 0rem 0rem 0rem 2rem;
+    animation: widen 0.5s ease;
     color: $admin-t;
     // transition: .5s ease;
 
     &-show {
         font-size: 2.4rem;
-        padding: .5rem 1rem 0rem 1rem ;
-        margin: 1.3rem 1.8rem 1rem 1.8rem;
+        padding: 0.5rem 1rem 0rem 1rem;
+        margin: 2rem 1.8rem 2rem 2rem;
         border: none;
         outline: none;
         background: transparent;
-        border-radius: .4rem;
+        border-radius: 0.4rem;
         color: inherit;
 
         &:hover {
             background-color: #333;
             // color: $sidebar;
-            transition: .3s ease;
+            transition: 0.3s ease;
         }
     }
-    
-    .wide-buttons{
+
+    .wide-buttons {
         button {
             color: $admin-t;
             font-size: 1.6rem;
             width: 20rem;
             text-align: left;
-            
-            .button-icons{
-                margin: 0rem 1rem -.4rem 0rem !important;
+
+            .button-icons {
+                margin: 0rem 1rem -0.4rem 0rem !important;
             }
         }
     }
@@ -83,21 +105,21 @@
         width: auto;
         margin: 3rem 2rem;
         text-align: left;
-        
+
         button {
             color: $admin-t;
-            margin: 1rem 0rem;
+            margin: 2rem 0rem;
             padding: 1rem 1rem;
             background: transparent;
             border: none;
             outline: none;
             border-radius: 1rem;
 
-            .button-icons{
+            .button-icons {
                 font-size: 2rem;
-                margin: 0rem 0rem -.4rem 0rem;
+                margin: 0rem 0rem -0.4rem 0rem;
             }
-            
+
             &:hover {
                 background-color: #333;
             }
@@ -105,7 +127,16 @@
     }
 }
 
-.wide{
+.wide {
     width: 25rem;
+}
 
+.cont {
+    width: 100%;
+    background-color: $admin-t;
+
+    &-info{
+        margin: 2rem;
+        border-radius: 2rem;
+    }
 }

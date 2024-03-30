@@ -102,7 +102,7 @@ export default function ViewEmp(props) {
             <div className="aeCont">
                 <div className="aeCont-inner">
                     <div className="aeCont-inner-head">
-                        <h1>Employee Information</h1>
+                        <h1>{props.header} Information</h1>
                         <button onClick={() => { props.setView(false) }}><IoClose className="react-icons-close"/></button>
                     </div>
                     <div className="data-cont">

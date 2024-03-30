@@ -40,13 +40,14 @@
     border: none;
     border-collapse: collapse;
     text-align: left;
-
+    
     &-head {
         font-size: 2rem;
     }
-
+    
     &-row {
-        background-color: $color-white;
+        border-radius: 2rem;
+        // background-color: $color-white;
 
         th {
             background-color: $admin-p;
@@ -57,8 +58,8 @@
 
     &-data-row {
         &:hover {
-            background: $admin-s;
-            color: $color-text-light;
+            background: $admin-q;
+            color: $color-text-dark;
         }
 
         td {
