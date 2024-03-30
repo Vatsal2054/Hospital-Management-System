@@ -33,7 +33,7 @@ function DataCont(props) {
 	}
 
 	return (
-		<div className="info-container-data">
+		<div className="info-container-data child">
 			<table className="admin-table">
 				{table.getHeaderGroups().map(headerGroup => (
 					<tr key={headerGroup.id} className="admin-table-row">

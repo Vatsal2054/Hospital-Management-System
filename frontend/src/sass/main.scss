@@ -2,8 +2,10 @@
 
 @import "./base/base";
 @import "./base/typography";
+@import "./base/animations";
 
 @import "./components/menuButton";
+@import "./components/blockTypes";
 
 @import "./layout/header";
 @import "./pages/admin";

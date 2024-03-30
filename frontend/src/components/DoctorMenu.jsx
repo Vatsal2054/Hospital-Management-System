@@ -5,8 +5,11 @@ import HeaderButtons from "./DocComponents/HeaderButtons";
 import axios from "axios";
 import DataCont from "./DataCont";
 import ViewEmp from "./ViewEmp";
-import { FaBars } from "react-icons/fa6";
-import { FaArrowLeft } from "react-icons/fa6";
+import { FaBars, FaR } from "react-icons/fa6";
+import { FaArrowLeft, FaClipboardCheck, FaRegUser } from "react-icons/fa6";
+import "animate.css";
+import { LuClipboardSignature, LuUsers, LuSettings } from "react-icons/lu";
+
 // import '../sass/pages/_doctor.scss';
 
 function DoctorMenu(){
@@ -33,7 +36,7 @@ function DoctorMenu(){
             .then((response) => {
                 console.log("Logging data!");
                 console.log(response.data);
-                setShowPatients(true);
+                // setShowPatients(true);
                 setData(response.data);
             })
             .catch((error) => {
@@ -47,26 +50,11 @@ function DoctorMenu(){
         <div className="emp-menu">
             {viewP ? <ViewEmp Data = {viewPData} setView={setViewP} caller="Doctor" />: null}
             <PageHeader heading = {empData1.job_type}/>
-
             <div className="info">
                 <div className="info-container">
-                    {showMenu ? 
-                    <div className="info-container-part">
-                        <div className="head">
-                            <button className="info-container-header-mbtn" onClick={() => {setShowMenu(false)}}><FaArrowLeft className="mbtn-svg"/></button>
-                            <h2>Side-menu</h2>
-                        </div>
-                        <div className="navigation-buttons">
-                            <button>button1</button>
-                            <button>button2</button>
-                            <button>button3</button>
-                        </div>
-                    </div>
-                    : null}
                     <div className="info-container-header">
                         <div className="info-container-header-left">
-                        <button className="info-container-header-mbtn" onClick={() => {setShowMenu(true)}}><FaBars className="mbtn-svg"/></button>
-                        <h1 className="info-container-header-head">Welcome</h1>
+                            <h1 className="info-container-header-head">Welcome</h1>
                         </div>
                         {
                             headerButtons ?
@@ -74,7 +62,25 @@ function DoctorMenu(){
                             <HeaderButtons setData={setData} setHeaderButtons={setHeaderButtons} setViewData={setShowPatients}/>
                         }
                     </div>
-                    <DataCont 
+                    <div className="info-container-body">
+                        <div className="side-menu">
+                            <div className="head">
+                                {showMenu ? 
+                                <button className="side-menu-show blk" onClick={() => {setShowMenu(false)}}><FaArrowLeft className="mbtn-svg"/></button>
+                                :
+                                <button className="side-menu-show blk" onClick={() => {setShowMenu(true)}}><FaBars className="mbtn-svg"/></button>
+                                }
+                                {/* <h1 className="il-blk side-menu-head">Side-menu</h1> */}
+                            </div>
+                            <div className={showMenu ? "navigation-buttons wide-buttons": "navigation-buttons "}>
+                                <button className="blk"><LuClipboardSignature className="button-icons"/>{showMenu ? "Assign Medicines" : null}</button>
+                                <button className="blk" onClick={() => {setShowPatients(true)}}><LuUsers className="button-icons"/>{showMenu ? "Show Patients" : null}</button>
+                                <button className="blk"><LuSettings className="button-icons"/>{showMenu ? "Settings" : null}</button>
+                            </div>
+                        </div>
+                    {
+                        showPatients &&
+                        <DataCont 
                         type = {"patient"} 
                         setViewData = {setViewPData} 
                         setView={setViewP} 
@@ -82,7 +88,8 @@ function DoctorMenu(){
                         filterInput = {filterInput} 
                         setFilterInput={setFilterInput}
                         caller = "Doctor"
-                    />
+                    />}
+                    </div>
                 </div>
             </div>
         </div>

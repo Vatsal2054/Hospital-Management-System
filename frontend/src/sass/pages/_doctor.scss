@@ -1,5 +1,13 @@
 .info-container{
 
+    &-body{
+        display: flex;
+
+        .child{
+            flex: 5;
+        }
+    }
+
     &-header{
         padding: 2rem;
 
@@ -21,7 +29,7 @@
                 background-color: $admin-q;
                 transition: .3s ease;
             }
-
+            
             .mbtn-svg{
                 margin: 0rem 0rem -.2rem 0rem;
                 font-size: 2.4rem;
@@ -33,4 +41,71 @@
             padding: 0rem 1rem;
         }
     }
+}
+
+.side-menu {
+    background-color: $sidebar;
+    border-radius: 0rem 0rem 0rem 2rem;
+    animation: widen .5s ease;
+    color: $admin-t;
+    // transition: .5s ease;
+
+    &-show {
+        font-size: 2.4rem;
+        padding: .5rem 1rem 0rem 1rem ;
+        margin: 1.3rem 1.8rem 1rem 1.8rem;
+        border: none;
+        outline: none;
+        background: transparent;
+        border-radius: .4rem;
+        color: inherit;
+
+        &:hover {
+            background-color: #333;
+            // color: $sidebar;
+            transition: .3s ease;
+        }
+    }
+    
+    .wide-buttons{
+        button {
+            color: $admin-t;
+            font-size: 1.6rem;
+            width: 20rem;
+            text-align: left;
+            
+            .button-icons{
+                margin: 0rem 1rem -.4rem 0rem !important;
+            }
+        }
+    }
+    .navigation-buttons {
+        width: auto;
+        margin: 3rem 2rem;
+        text-align: left;
+        
+        button {
+            color: $admin-t;
+            margin: 1rem 0rem;
+            padding: 1rem 1rem;
+            background: transparent;
+            border: none;
+            outline: none;
+            border-radius: 1rem;
+
+            .button-icons{
+                font-size: 2rem;
+                margin: 0rem 0rem -.4rem 0rem;
+            }
+            
+            &:hover {
+                background-color: #333;
+            }
+        }
+    }
+}
+
+.wide{
+    width: 25rem;
+
 }

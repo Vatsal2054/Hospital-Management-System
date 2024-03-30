@@ -6,6 +6,7 @@ import NurseMenu from './NurseMenu';
 import AdminMenu from './AdminMenu';
 import DoctorMenu from './DoctorMenu';
 import ReceptionistMenu from './ReceptionistMenu';
+import "animate.css";
 
 function App() {
   return (
