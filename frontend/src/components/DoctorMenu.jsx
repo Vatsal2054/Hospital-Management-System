@@ -13,16 +13,26 @@ import "../sass/pages/_doctor.scss";
 export default function DoctorMenu() {
 
     const [headerButtons, setHeaderButtons] = useState(false);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([{ room_id: 0 }]);
     const [showPatients, setShowPatients] = useState(false);
     const [filterInput, setFilterInput] = useState("");
     const [viewP, setViewP] = useState(false);
     const [viewPData, setViewPData] = useState({});
     const [showMenu, setShowMenu] = useState(false);
+    const [wardInfo, setWardInfo] = useState({ totalpatients: '' });
+    const [showDashboard, setShowDashboard] = useState(false);
+    const [count, setCount] = useState({});
 
-
+    // Data received from Login Page...
     const location = useLocation();
     const { empData1 } = location.state || {};
+
+    const counts = {
+        ICU: 0,
+        ICCU: 0,
+        Ward: 0,
+        OPD: 0
+    };
     // console.log( "Received Data: ", empData1);
 
     useEffect(() => {
@@ -40,10 +50,42 @@ export default function DoctorMenu() {
                 .catch((error) => {
                     console.log(error);
                 })
+
+            await axios.get('http://localhost:3001/wardInfo')
+                .then((response) => {
+                    console.log(response.data);
+                    setWardInfo(response.data);
+                    console.log(wardInfo);
+
+                    setShowDashboard(true);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
         }
         fetchData();
     }, []);
-
+    
+    useEffect(() => {
+        // Iterate over patientData to count patients for each range
+        data.forEach(patient => {
+            if (patient.room_id >= 0 && patient.room_id <= 200) {
+                counts.ICU++;
+            } else if (patient.room_id >= 201 && patient.room_id <= 500) {
+                counts.ICCU++;
+            } else if (patient.room_id >= 501 && patient.room_id <= 800) {
+                counts.Ward++;
+            } else if (patient.room_id >= 801 && patient.room_id <= 999) {
+                counts.OPD++;
+            }
+        });
+        console.log(counts);
+        // Update roomCounts state variable
+        setCount(counts);
+    }, [data]);
+        
+    // calculateRoomCounts();
+    
     function closePatientMenu() {
         setShowPatients(false);
         setFilterInput("");
@@ -56,13 +98,45 @@ export default function DoctorMenu() {
 
                 {/* Side Menu Code Here ..... Left side of page */}
                 <SideMenu showMenu={showMenu} setShowMenu={setShowMenu} setShowPatients={setShowPatients} />
-                
+
                 {/* Right Side of page */}
                 <div className="cont">
                     {/* Top Header of page */}
                     <div className="header">
                         <h1 className="il-blk">Doctor Menu</h1>
+                        <button className="menu-button logout">Logout</button>
                     </div>
+                    {showDashboard &&
+                    <div className="dashboard">
+                        <div className="column">
+                        <div className="total">
+                            <h2 className="blk">{empData1.name}</h2>
+                            <span className="emp blk"> <div className="head il-blk">Doctor ID</div>: {empData1.d_id}</span>
+                            <span className="emp blk"> <div className="head il-blk">Qualification</div>: {empData1.dtype}</span>
+                            <span className="emp blk"> <div className="head il-blk">Department</div>: {empData1.department}</span>
+                        </div>
+                        <div className="total il-blk mini-info">
+                            <h2 className="blk">Total Patients</h2>
+                            <span className="ans blk">{wardInfo.totalpatients}</span>
+                        </div>  
+                        <div className="total il-blk mini-info">
+                            <h2 className="blk">Ortho Patients</h2>
+                            <span className="ans blk">{wardInfo.totalpatients}</span>
+                        </div>
+                        </div>
+
+                        <div className="column">
+                        <div className="total">
+                            {Object.entries(count).map(([name, value]) => (
+                                <div className="blocks il-blk" key={name}>
+                                    <h2 className="blk">{name}</h2>
+                                    <span className="ans blk">{String(value)} <span className="pat-holder">patients</span></span>
+                                </div>
+                            ))}
+                        </div>
+                        </div>
+                    </div>
+                    }
 
                     {/* Displaying Patient Information using State */}
                     {

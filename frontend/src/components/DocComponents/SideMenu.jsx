@@ -1,7 +1,7 @@
 import React from "react";
 import { FaBars, FaR, FaX } from "react-icons/fa6";
 import { FaArrowLeft, FaXmark } from "react-icons/fa6";
-import { LuClipboardSignature, LuUsers, LuSettings } from "react-icons/lu";
+import { LuClipboardSignature, LuUsers, LuSettings, LuLayout } from "react-icons/lu";
 
 
 export default function SideMenu(props) {
@@ -22,6 +22,10 @@ export default function SideMenu(props) {
                         {/* <h1 className="il-blk side-menu-head">Side-menu</h1> */}
                     </div>
                     <div className={showMenu ? "navigation-buttons wide-buttons" : "navigation-buttons "}>
+                        <button className="blk">
+                            <LuLayout className="button-icons" />
+                            {showMenu ? "Dashboard" : null}
+                        </button>
                         <button className="blk">
                             <LuClipboardSignature className="button-icons" />
                             {showMenu ? "Assign Medicines" : null}

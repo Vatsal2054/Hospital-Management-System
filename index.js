@@ -214,6 +214,19 @@ app.get('/patients', (req, res) => {
     })
 })
 
+app.get('/wardInfo', (req, res) => {
+    db.query("SELECT COUNT(patient_id) as totalPatients FROM patient", (err,result) => {
+        if(err){
+            console.log(err.message);
+        }
+        else{
+            const data = result.rows[0];
+            console.log(data);
+            res.send(data);
+        }
+    })
+})
+
 app.listen(port, () => {
     console.log(`Server running on: http://localhost:${port}`);
 })

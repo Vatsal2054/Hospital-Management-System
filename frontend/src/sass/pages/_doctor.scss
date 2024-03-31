@@ -109,14 +109,17 @@
         button {
             color: $admin-t;
             margin: 2rem 0rem;
-            padding: 1rem 1rem;
+            padding: 1.2rem 1rem;
+            height: 4.8rem;
             background: transparent;
             border: none;
             outline: none;
             border-radius: 1rem;
+            overflow: hidden;
+            vertical-align: middle;
 
             .button-icons {
-                font-size: 2rem;
+                font-size: 2.2rem;
                 margin: 0rem 0rem -0.4rem 0rem;
             }
 
@@ -133,7 +136,28 @@
 
 .cont {
     width: 100%;
-    background-color: $admin-q;
+    background-color: $admin-t;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar{
+        width: 1rem;
+        background-color: $admin-q;
+    }
+    
+    &::-webkit-scrollbar-thumb{
+        background-color: $admin-p;
+        border-radius: 1rem;
+    }
+
+    .header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .logout{
+            margin: 1rem 3rem;
+        }
+    }
     
     &-info{
         margin: 4rem;
@@ -167,4 +191,69 @@
             }
         }
     }
+}
+
+.dashboard{
+    width: auto;
+    // background-color: $admin-q;
+    // border: 2px solid red;
+    // padding: 2rem;
+    margin: 2rem;
+    display: flex;
+
+    .column{
+        flex: 1;
+
+        .mini-info{
+            width: 44.6%;
+        }
+    }
+    .total{
+        background-color: $admin-q;
+        // width: 25rem;
+        padding: 2rem;
+        margin: 2.7%;
+        border-radius: 2rem;
+        box-shadow: 0px 10px 36px 9px rgba(0,0,0,0.1),0px 0px 78px -34px #336b8e;
+        .emp{
+            font-size: 1.6rem;
+            width: 45%;
+            margin: 1rem 1rem;
+
+            .head{
+                font-family: "Heavy", sans-serif;
+                width: 12rem;
+            }
+        }
+
+        h1{
+            margin: 0rem 1rem;
+        }
+
+        h2{
+            font-family: "Heavy", sans-serif;
+            font-size: 2.4rem;
+            margin: 0rem 0rem 0rem 1rem;
+        }
+
+        .ans{
+            font-size: 4rem;
+            // padding: 0;
+            margin: 1rem 0rem 0rem 1rem;
+
+            .pat-holder{
+                font-size: 2rem;
+            }
+        }
+
+        .blocks {
+            background-color: $admin-s;
+            color: $color-text-light;
+            width: 45%;
+            border-radius: 2rem;
+            padding: 2rem;
+            margin: 2.4%;
+        }
+    }
+
 }
