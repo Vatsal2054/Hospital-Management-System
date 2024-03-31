@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import PageHeader from "./PageHeader";
-import HeaderButtons from "./DocComponents/HeaderButtons";
 import axios from "axios";
 import DataCont from "./DataCont";
 import ViewEmp from "./ViewEmp";
-import { FaBars, FaR } from "react-icons/fa6";
-import { FaArrowLeft, FaClipboardCheck, FaRegUser } from "react-icons/fa6";
+import SideMenu from "./DocComponents/SideMenu";
+import { FaXmark } from "react-icons/fa6";
 import "animate.css";
-import { LuClipboardSignature, LuUsers, LuSettings } from "react-icons/lu";
 import "../sass/pages/_doctor.scss";
 
 // import '../sass/pages/_doctor.scss';
 
-function DoctorMenu() {
+export default function DoctorMenu() {
 
     const [headerButtons, setHeaderButtons] = useState(false);
     const [data, setData] = useState([]);
@@ -47,48 +44,53 @@ function DoctorMenu() {
         fetchData();
     }, []);
 
+    function closePatientMenu() {
+        setShowPatients(false);
+        setFilterInput("");
+    }
+
     return (
         <div className="emp-menu">
-            {viewP ? <ViewEmp Data={viewPData} setView={setViewP} caller="Doctor" header="Patient"/> : null}
-            {/* <PageHeader heading = {empData1.job_type}/> */}
+            {viewP ? <ViewEmp Data={viewPData} setView={setViewP} caller="Doctor" header="Patient" /> : null}
             <div className="info-container-body">
-                <div className="side-menu">
-                    <div className="head">
-                        {showMenu ?
-                            <button className="side-menu-show il-blk" onClick={() => { setShowMenu(false) }}><FaArrowLeft className="mbtn-svg" /></button>
-                            :
-                            <button className="side-menu-show il-blk" onClick={() => { setShowMenu(true) }}><FaBars className="mbtn-svg" /></button>
-                        }
-                        {/* <h1 className="il-blk side-menu-head">Side-menu</h1> */}
-                    </div>
-                    <div className={showMenu ? "navigation-buttons wide-buttons" : "navigation-buttons "}>
-                        <button className="blk"><LuClipboardSignature className="button-icons" />{showMenu ? "Assign Medicines" : null}</button>
-                        <button className="blk" onClick={() => { setShowPatients(true) }}><LuUsers className="button-icons" />{showMenu ? "Show Patients" : null}</button>
-                        <button className="blk"><LuSettings className="button-icons" />{showMenu ? "Settings" : null}</button>
-                    </div>
-                </div>
+
+                {/* Side Menu Code Here ..... Left side of page */}
+                <SideMenu showMenu={showMenu} setShowMenu={setShowMenu} setShowPatients={setShowPatients} />
+                
+                {/* Right Side of page */}
                 <div className="cont">
+                    {/* Top Header of page */}
                     <div className="header">
                         <h1 className="il-blk">Doctor Menu</h1>
                     </div>
-                <div className="cont-info">
+
+                    {/* Displaying Patient Information using State */}
                     {
                         showPatients &&
-                        <DataCont
-                            type={"patient"}
-                            setViewData={setViewPData}
-                            setView={setViewP}
-                            Data={data}
-                            filterInput={filterInput}
-                            setFilterInput={setFilterInput}
-                            caller="Doctor"
-                        />
+                        <div className="cont-info">
+                            {/* Component Header */}
+                            <div className="cont-info-head">
+                                <h1>Patient Information</h1>
+                                <div className="right">
+                                    <input type="text" className="table-input menu-button" value={filterInput} placeholder="Search" onChange={(e) => { setFilterInput(e.target.value) }} />
+                                    <button className="menu-button" onClick={closePatientMenu}><FaXmark className="cross" /></button>
+                                </div>
+                            </div>
+
+                            {/* Component which builds and displays Table */}
+                            <DataCont
+                                type={"patient"}
+                                setViewData={setViewPData}
+                                setView={setViewP}
+                                Data={data}
+                                filterInput={filterInput}
+                                setFilterInput={setFilterInput}
+                                caller="Doctor"
+                            />
+                        </div>
                     }
                 </div>
-            </div>
             </div>
         </div>
     )
 }
-
-export default DoctorMenu;

@@ -5,8 +5,8 @@
     border: none;
     border-radius: 1rem;
     // background-color: $color-button-light;
-    background-color: $admin-s;
-    color: $color-text-dark;
+    background-color: $buttons;
+    color: $color-text-light;
     font-size: 1.8rem;
     margin-left: 1rem;
     vertical-align: middle;
@@ -31,7 +31,7 @@
     // text-align: center;
     vertical-align: middle;
     font-size: 1.8rem;
-    margin: 0rem 0.8rem 0.3rem 0rem;
+    margin: 0rem .8rem 0.3rem 0rem;
     padding: 0;
 
     &-close {
@@ -58,13 +58,14 @@
         width: 24rem;
         font-size: 1.6rem;
         background-color: $admin-q;
-        color: $color-text-dark !important;
-        border: none;
+        color: $color-text-dark;
+        border: 2px solid $admin-p;
         outline: none;
     }
 
     &-buttons {
         padding: 1.5rem 2rem;
+        // background-color: $admin-p;
 
         button {
             // width: 10rem;

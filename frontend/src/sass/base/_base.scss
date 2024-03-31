@@ -26,3 +26,7 @@ body {
   // background: linear-gradient(to right,$color-button-light 0%, $color-button-dark 100%);
   // background-image: url("./Resources/patternpad-2 rotated.svg"); 
 }
+
+::placeholder{
+  color: $color-text-dark;
+}
