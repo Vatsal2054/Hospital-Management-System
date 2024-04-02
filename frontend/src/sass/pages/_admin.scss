@@ -60,6 +60,7 @@
         &:hover {
             background: $admin-q;
             color: $color-text-dark;
+            cursor: pointer;
         }
 
         td {
@@ -83,6 +84,7 @@
     height: 100vh;
     background-color: #53535348;
     z-index: 100;
+    animation: fade-in .5s ease;
 }
 
 .aeCont {

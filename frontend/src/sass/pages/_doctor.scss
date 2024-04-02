@@ -126,12 +126,32 @@
             &:hover {
                 background-color: #333;
             }
+
+            .label {
+                display: none;
+                // opacity: 0;
+            }
+            
+            .hide{
+                opacity: 0;
+                animation: fade-out .5s ease;
+            }
         }
     }
 }
 
 .show-menu {
     width: 28rem;
+
+    .navigation-buttons{
+        button {
+            .label{
+                display: inline-block;
+                opacity: 1;
+                animation: fade-in .3s ease;
+            }
+        }
+    }
 }
 
 .cont {
@@ -147,6 +167,8 @@
     &::-webkit-scrollbar-thumb{
         background-color: $admin-p;
         border-radius: 1rem;
+        // border: .1rem solid $sidebar;
+        margin: .2rem;
     }
 
     .header{

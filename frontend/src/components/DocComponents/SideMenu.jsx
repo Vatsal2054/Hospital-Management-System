@@ -24,19 +24,19 @@ export default function SideMenu(props) {
                     <div className={showMenu ? "navigation-buttons wide-buttons" : "navigation-buttons "}>
                         <button className="blk">
                             <LuLayout className="button-icons" />
-                            {showMenu ? "Dashboard" : null}
+                            <span className="label">Dashboard</span>
                         </button>
                         <button className="blk">
                             <LuClipboardSignature className="button-icons" />
-                            {showMenu ? "Assign Medicines" : null}
+                            <span className={showMenu ? "label" : "label hide"}>Assign Medicines</span>
                         </button>
                         <button className="blk" onClick={() => { props.setShowPatients(true) }}>
                             <LuUsers className="button-icons" />
-                            {showMenu ? "Show Patients" : null}
+                            <span className={showMenu ? "label" : "label hide"}>Show Patients</span>
                         </button>
                         <button className="blk">
                             <LuSettings className="button-icons" />
-                            {showMenu ? "Settings" : null}
+                            <span className={showMenu ? "label" : "label hide"}>Settings</span>
                         </button>
                     </div>
                 </div>
