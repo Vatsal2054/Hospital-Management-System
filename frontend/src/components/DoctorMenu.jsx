@@ -7,6 +7,7 @@ import SideMenu from "./DocComponents/SideMenu";
 import { FaXmark } from "react-icons/fa6";
 import "animate.css";
 import "../sass/pages/_doctor.scss";
+import AssignMedicine from "./DocComponents/AssignMedicine";
 
 // import '../sass/pages/_doctor.scss';
 
@@ -14,7 +15,7 @@ export default function DoctorMenu() {
 
     const [headerButtons, setHeaderButtons] = useState(false);
     const [data, setData] = useState([{ room_id: 0 }]);
-    const [showPatients, setShowPatients] = useState(false);
+    // const [showPatients, setShowPatients] = useState(false);
     const [filterInput, setFilterInput] = useState("");
     const [viewP, setViewP] = useState(false);
     const [viewPData, setViewPData] = useState({});
@@ -22,6 +23,12 @@ export default function DoctorMenu() {
     const [wardInfo, setWardInfo] = useState({ totalpatients: '' });
     const [showDashboard, setShowDashboard] = useState(false);
     const [count, setCount] = useState({});
+    const [menuCont, setMenuCont] = useState({
+        'Dashboard': true,
+        'Medicine': false,
+        'showPatients': false,
+        'Settings': false
+    });
 
     // Data received from Login Page...
     const location = useLocation();
@@ -65,7 +72,7 @@ export default function DoctorMenu() {
         }
         fetchData();
     }, []);
-    
+
     useEffect(() => {
         // Iterate over patientData to count patients for each range
         data.forEach(patient => {
@@ -83,11 +90,17 @@ export default function DoctorMenu() {
         // Update roomCounts state variable
         setCount(counts);
     }, [data]);
-        
+
     // calculateRoomCounts();
-    
-    function closePatientMenu() {
-        setShowPatients(false);
+
+    function closeMenu(name) {
+        setMenuCont((preValues) => {
+            return {
+                ...preValues,
+                [name]: false,
+                'Dashboard' : true,
+            }
+        });
         setFilterInput("");
     }
 
@@ -97,7 +110,7 @@ export default function DoctorMenu() {
             <div className="info-container-body">
 
                 {/* Side Menu Code Here ..... Left side of page */}
-                <SideMenu showMenu={showMenu} setShowMenu={setShowMenu} setShowPatients={setShowPatients} />
+                <SideMenu showMenu={showMenu} setShowMenu={setShowMenu} setMenuCont={setMenuCont}/>
 
                 {/* Right Side of page */}
                 <div className="cont">
@@ -106,48 +119,54 @@ export default function DoctorMenu() {
                         <h1 className="il-blk">Doctor Menu</h1>
                         <button className="menu-button logout">Logout</button>
                     </div>
-                    {showDashboard &&
-                    <div className="dashboard">
-                        <div className="column">
-                        <div className="total">
-                            <h2 className="blk">{empData1.name}</h2>
-                            <span className="emp blk"> <div className="head il-blk">Doctor ID</div>: {empData1.d_id}</span>
-                            <span className="emp blk"> <div className="head il-blk">Qualification</div>: {empData1.dtype}</span>
-                            <span className="emp blk"> <div className="head il-blk">Department</div>: {empData1.department}</span>
-                        </div>
-                        <div className="total il-blk mini-info">
-                            <h2 className="blk">Total Patients</h2>
-                            <span className="ans blk">{wardInfo.totalpatients}</span>
-                        </div>  
-                        <div className="total il-blk mini-info">
-                            <h2 className="blk">Ortho Patients</h2>
-                            <span className="ans blk">{wardInfo.totalpatients}</span>
-                        </div>
-                        </div>
-
-                        <div className="column">
-                        <div className="total">
-                            {Object.entries(count).map(([name, value]) => (
-                                <div className="blocks il-blk" key={name}>
-                                    <h2 className="blk">{name}</h2>
-                                    <span className="ans blk">{String(value)} <span className="pat-holder">patients</span></span>
+                    {menuCont.Dashboard &&
+                        <div className="dashboard">
+                            <div className="column">
+                                <div className="total">
+                                    <h2 className="blk">{empData1.name}</h2>
+                                    <span className="emp blk"> <div className="head il-blk">Doctor ID</div>: {empData1.d_id}</span>
+                                    <span className="emp blk"> <div className="head il-blk">Qualification</div>: {empData1.dtype}</span>
+                                    <span className="emp blk"> <div className="head il-blk">Department</div>: {empData1.department}</span>
                                 </div>
-                            ))}
+                                <div className="total il-blk mini-info">
+                                    <h2 className="blk">Total Patients</h2>
+                                    <span className="ans blk">{wardInfo.totalpatients}</span>
+                                </div>
+                                <div className="total il-blk mini-info">
+                                    <h2 className="blk">Ortho Patients</h2>
+                                    <span className="ans blk">{wardInfo.totalpatients}</span>
+                                </div>
+                            </div>
+
+                            <div className="column">
+                                <div className="total">
+                                    {Object.entries(count).map(([name, value]) => (
+                                        <div className="blocks il-blk" key={name}>
+                                            <h2 className="blk">{name}</h2>
+                                            <span className="ans blk">{String(value)} <span className="pat-holder">patients</span></span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                    </div>
+                    }
+
+                    {/* Assign Medicine Menu */}
+                    {
+                        menuCont.Medicine &&
+                        <AssignMedicine closeMenu = {closeMenu} Data = {data}/>
                     }
 
                     {/* Displaying Patient Information using State */}
                     {
-                        showPatients &&
+                        menuCont.showPatients &&
                         <div className="cont-info">
                             {/* Component Header */}
                             <div className="cont-info-head">
                                 <h1>Patient Information</h1>
                                 <div className="right">
                                     <input type="text" className="table-input menu-button" value={filterInput} placeholder="Search" onChange={(e) => { setFilterInput(e.target.value) }} />
-                                    <button className="menu-button" onClick={closePatientMenu}><FaXmark className="cross" /></button>
+                                    <button className="menu-button" onClick={() => {closeMenu("showPatients")}}><FaXmark className="cross" /></button>
                                 </div>
                             </div>
 

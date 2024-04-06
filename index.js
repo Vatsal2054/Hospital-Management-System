@@ -227,6 +227,18 @@ app.get('/wardInfo', (req, res) => {
     })
 })
 
+app.get('/medInfo',async (req, res) => {
+    await db.query("SELECT medicine_id, name from medicines where stock > 0", (err,result) => {
+        if(err){
+            console.log(err.message);
+        }
+        else {
+            console.log(result.rows);
+            res.send(result.rows);
+        }
+    })
+})
+
 app.listen(port, () => {
     console.log(`Server running on: http://localhost:${port}`);
 })

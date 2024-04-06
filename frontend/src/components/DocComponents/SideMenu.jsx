@@ -6,6 +6,19 @@ import { LuClipboardSignature, LuUsers, LuSettings, LuLayout } from "react-icons
 
 export default function SideMenu(props) {
     const showMenu = props.showMenu;
+    const menu = {
+        'Dashboard' : false,
+        'Medicine': false,
+        'showPatients' : false,
+        'Settings' : false,
+    }
+
+    function handleCont(key){
+        props.setMenuCont({
+            ...menu,
+            [key] : true,
+        })
+    }
 
     return (
         <div className={`side-menu ${showMenu ? "show-menu" : ""}`}>
@@ -22,15 +35,15 @@ export default function SideMenu(props) {
                         {/* <h1 className="il-blk side-menu-head">Side-menu</h1> */}
                     </div>
                     <div className={showMenu ? "navigation-buttons wide-buttons" : "navigation-buttons "}>
-                        <button className="blk">
+                        <button className="blk" onClick={() => { handleCont("Dashboard") }}>
                             <LuLayout className="button-icons" />
                             <span className="label">Dashboard</span>
                         </button>
-                        <button className="blk">
+                        <button className="blk" onClick={() => { handleCont("Medicine") }}>
                             <LuClipboardSignature className="button-icons" />
                             <span className={showMenu ? "label" : "label hide"}>Assign Medicines</span>
                         </button>
-                        <button className="blk" onClick={() => { props.setShowPatients(true) }}>
+                        <button className="blk" onClick={() => { handleCont("showPatients") }}>
                             <LuUsers className="button-icons" />
                             <span className={showMenu ? "label" : "label hide"}>Show Patients</span>
                         </button>
