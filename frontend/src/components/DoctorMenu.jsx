@@ -13,7 +13,7 @@ import AssignMedicine from "./DocComponents/AssignMedicine";
 
 export default function DoctorMenu() {
 
-    const [headerButtons, setHeaderButtons] = useState(false);
+    // const [headerButtons, setHeaderButtons] = useState(false);
     const [data, setData] = useState([{ room_id: 0 }]);
     // const [showPatients, setShowPatients] = useState(false);
     const [filterInput, setFilterInput] = useState("");
@@ -21,7 +21,7 @@ export default function DoctorMenu() {
     const [viewPData, setViewPData] = useState({});
     const [showMenu, setShowMenu] = useState(false);
     const [wardInfo, setWardInfo] = useState({ totalpatients: '' });
-    const [showDashboard, setShowDashboard] = useState(false);
+    // const [showDashboard, setShowDashboard] = useState(false);
     const [count, setCount] = useState({});
     const [menuCont, setMenuCont] = useState({
         'Dashboard': true,
@@ -64,7 +64,7 @@ export default function DoctorMenu() {
                     setWardInfo(response.data);
                     console.log(wardInfo);
 
-                    setShowDashboard(true);
+                    // setShowDashboard(true);
                 })
                 .catch((error) => {
                     console.log(error);

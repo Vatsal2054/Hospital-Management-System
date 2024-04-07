@@ -1,4 +1,5 @@
 @import "../abstracts/variables";
+@import "./assignMeds";
 
 .emp-menu{
     height: 100vh !important;
@@ -219,122 +220,29 @@
         }
     }
 
-    &-body {
-        // padding: 0rem 2rem;
-        height: 40vh;
+    // &-body {
+    //     // padding: 0rem 2rem;
+    //     height: 40vh;
+    //     display: flex;
+    //     align-items: flex-start;
 
-        &-head{
-            display: flex;
-            align-items: center;
-            background-color: $admin-s;
-        }
+    //     &-head{
+    //         flex: 1;
+    //         // display: flex;
+    //         align-items: center;
+    //         background-color: $admin-s;
+    //         // height: auto;
+    //         // height: 20rem;
+    //     }
 
-        .inp-field{
-            flex: 2;
-            width: auto;
-            padding: 2rem;
-            position: relative;
+    //     .inp-field{
+    //         flex: 2;
+    //         width: auto;
+    //         
 
-            input {
-                border: 2px solid #b6d0f9;
-                // background-color: $color-text-light;
-                font-size: 1.4rem;
-            }
+    //     }
 
-            .list-cont{
-                border-radius: 1rem;
-            }
-
-            .wrapper{
-                margin: .5rem 0rem;
-                padding: .5rem;
-                position: absolute;
-                // top: 8rem;
-                left: 3rem;
-                background-color: $admin-q;
-                border-radius: .8rem;
-            }
-
-            &-list{
-                // margin: 1rem 0rem;
-                font-size: 1.6rem;
-                height: 16vh;
-                border-radius: 1rem 1rem 1rem 1rem;
-                overflow-y: auto;
-                width: 29.8rem;
-                background-color: $admin-q;
-                // padding: 1rem;
-
-                &::-webkit-scrollbar{
-                    width: 1rem;
-                    background-color: #b6d0f9;
-                    border-radius: 1rem;
-                }
-
-                &::-webkit-scrollbar-thumb{
-                    background-color: $sidebar;
-                    border-radius: 1rem;
-                }
-            }
-
-            &-options{
-                padding: .5rem 1rem;
-
-                &:hover{
-                    background-color: $sidebar;
-                    color: $color-text-light;
-                    cursor: pointer;
-                }
-
-                div {
-                    width: auto;
-                    padding: 0rem 1rem 0rem 0rem;
-                }
-            }
-
-        }
-        .patient-list {
-            flex: 6;
-            padding: 1rem;
-            width: auto;
-            margin: 1rem;
-            border-radius: 2rem;
-            background-color: $admin-q;
-            // margin: 0rem 2rem;
-            // border: .2rem solid $sidebar;
-            
-            &-cells{
-                padding: 1rem;
-                border: .2rem solid $sidebar;
-                margin: 1rem;
-                border-radius: .5rem;
-                // width: 15rem;
-                // display: flex;
-                // align-items: flex-start;
-
-                button{
-                    float: right;
-                    padding: .5rem;
-                    margin-left: .5rem;
-                    border: none;
-                    outline: none;
-                    background-color: transparent;
-                    transition: .3s ease;
-                    border-radius: .5rem;
-
-                    .cell-close{
-                        font-size: 1.6rem;
-                        margin: 0rem -.05rem -.3rem 0rem;
-                    }
-
-                    &:hover{
-                        background-color: #336b8e;
-                        transition: .3s ease;
-                    }
-                }
-            }
-        }
-    }
+    //     }
 }
 
 .dashboard{

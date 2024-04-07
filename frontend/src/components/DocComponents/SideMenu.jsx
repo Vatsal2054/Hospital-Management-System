@@ -1,6 +1,6 @@
 import React from "react";
-import { FaBars, FaR, FaX } from "react-icons/fa6";
-import { FaArrowLeft, FaXmark } from "react-icons/fa6";
+import { FaBars} from "react-icons/fa6";
+import { FaArrowLeft} from "react-icons/fa6";
 import { LuClipboardSignature, LuUsers, LuSettings, LuLayout } from "react-icons/lu";
 
 

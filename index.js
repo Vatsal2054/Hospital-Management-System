@@ -239,6 +239,39 @@ app.get('/medInfo',async (req, res) => {
     })
 })
 
+app.post('/saveMedInfo', async (req, res) => {
+    const recData = req.body;
+    console.log(recData);
+
+    await recData.patients.forEach(id => {
+        db.query("select medicine from pinfo where patient_id = $1;",[id], (err,result) => {
+            if(err){
+                console.log(err.message);
+                res.send({status: 201});
+            }
+            else {
+                const data = result.rows[0];
+                console.log(data + "\n");
+                // const prevMeds = data.medicine;
+                const newMeds = data.medicine !== null ? [...data.medicine, recData.medicines] : [recData.medicines];
+                console.log(newMeds + "\n");
+                
+                db.query("UPDATE pinfo SET medicine= $1 WHERE patient_id = $2;", [newMeds, id], (err,result) => {
+                    if(err){
+                        res.send({status: 201});
+                        console.log(err.message);
+                    }
+                    else{
+                        console.log("Array successfully inserted");
+                        console.log(result.data);
+                    }
+                })
+            }
+        })
+    });
+    res.send({status: 200});
+})
+
 app.listen(port, () => {
     console.log(`Server running on: http://localhost:${port}`);
 })
