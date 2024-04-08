@@ -36,6 +36,24 @@
         font-size: 1.4rem;
     }
 
+    button{
+        font-size: 2.4rem;
+        padding: .5rem 1rem;
+        background: $admin-q;
+        color: $color-text-dark;
+        transition: all .3s;
+
+        .cross{
+            margin: .2rem .2rem -.3rem .1rem;
+        }
+
+        &:hover{
+            background-color: $buttons;
+            color: $color-text-light;
+            transition: all .3s;
+        }
+    }
+
     .list-cont {
         border-radius: 1rem;
     }
@@ -125,6 +143,7 @@
         border: 0.2rem solid $sidebar;
         margin: 1rem;
         border-radius: 0.5rem;
+        // font-size: 2rem;
         // width: 15rem;
         // display: flex;
         // align-items: flex-start;
@@ -156,6 +175,6 @@
 .cont-bottom{
     padding-bottom: 2rem;
     .buttons{
-        padding: 0rem 1rem;
+        padding: 1rem 2rem;
     }
 }
