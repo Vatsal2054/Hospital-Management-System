@@ -8,13 +8,17 @@ import { FaXmark } from "react-icons/fa6";
 import "animate.css";
 import "../sass/pages/_doctor.scss";
 import AssignMedicine from "./DocComponents/AssignMedicine";
+import Dashboard from "./DocComponents/Dashboard";
 
 // import '../sass/pages/_doctor.scss';
 
 export default function DoctorMenu() {
 
     // const [headerButtons, setHeaderButtons] = useState(false);
+
+    // Patient data
     const [data, setData] = useState([{ room_id: 0 }]);
+    
     // const [showPatients, setShowPatients] = useState(false);
     const [filterInput, setFilterInput] = useState("");
     const [viewP, setViewP] = useState(false);
@@ -22,7 +26,6 @@ export default function DoctorMenu() {
     const [showMenu, setShowMenu] = useState(false);
     const [wardInfo, setWardInfo] = useState({ totalpatients: '' });
     // const [showDashboard, setShowDashboard] = useState(false);
-    const [count, setCount] = useState({});
     const [menuCont, setMenuCont] = useState({
         'Dashboard': true,
         'Medicine': false,
@@ -34,12 +37,7 @@ export default function DoctorMenu() {
     const location = useLocation();
     const { empData1 } = location.state || {};
 
-    const counts = {
-        ICU: 0,
-        ICCU: 0,
-        Ward: 0,
-        OPD: 0
-    };
+    
     // console.log( "Received Data: ", empData1);
 
     useEffect(() => {
@@ -73,23 +71,23 @@ export default function DoctorMenu() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        // Iterate over patientData to count patients for each range
-        data.forEach(patient => {
-            if (patient.room_id >= 0 && patient.room_id <= 200) {
-                counts.ICU++;
-            } else if (patient.room_id >= 201 && patient.room_id <= 500) {
-                counts.ICCU++;
-            } else if (patient.room_id >= 501 && patient.room_id <= 800) {
-                counts.Ward++;
-            } else if (patient.room_id >= 801 && patient.room_id <= 999) {
-                counts.OPD++;
-            }
-        });
-        console.log(counts);
-        // Update roomCounts state variable
-        setCount(counts);
-    }, [data]);
+    // useEffect(() => {
+    //     // Iterate over patientData to count patients for each range
+    //     data.forEach(patient => {
+    //         if (patient.room_id >= 0 && patient.room_id <= 200) {
+    //             counts.ICU++;
+    //         } else if (patient.room_id >= 201 && patient.room_id <= 500) {
+    //             counts.ICCU++;
+    //         } else if (patient.room_id >= 501 && patient.room_id <= 800) {
+    //             counts.Ward++;
+    //         } else if (patient.room_id >= 801 && patient.room_id <= 999) {
+    //             counts.OPD++;
+    //         }
+    //     });
+    //     console.log(counts);
+    //     // Update roomCounts state variable
+    //     setCount(counts);
+    // }, [data]);
 
     // calculateRoomCounts();
 
@@ -110,7 +108,7 @@ export default function DoctorMenu() {
             <div className="info-container-body">
 
                 {/* Side Menu Code Here ..... Left side of page */}
-                <SideMenu showMenu={showMenu} setShowMenu={setShowMenu} setMenuCont={setMenuCont}/>
+                <SideMenu menuCont={menuCont} showMenu={showMenu} setShowMenu={setShowMenu} setMenuCont={setMenuCont} menuPage={"Doctor"} />
 
                 {/* Right Side of page */}
                 <div className="cont">
@@ -119,7 +117,7 @@ export default function DoctorMenu() {
                         <h1 className="il-blk">Doctor Menu</h1>
                         <button className="menu-button logout">Logout</button>
                     </div>
-                    {menuCont.Dashboard &&
+                    {/* {menuCont.Dashboard &&
                         <div className="dashboard">
                             <div className="column">
                                 <div className="total">
@@ -149,7 +147,8 @@ export default function DoctorMenu() {
                                 </div>
                             </div>
                         </div>
-                    }
+                    } */}
+                    {menuCont.Dashboard && <Dashboard data={data} empData1 = {empData1} wardInfo = {wardInfo} />}
 
                     {/* Assign Medicine Menu */}
                     {

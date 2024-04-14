@@ -21,10 +21,11 @@
         background-color: $admin-t;
         // backdrop-filter: blur(1rem);
         box-shadow: 0px 10px 36px 9px rgba(0,0,0,0.1),0px -3px 53px 13px rgba(0,0,0,0.1);
+        border-radius: 2rem;
 
 
         &-header {
-            border-radius: 2rem 2rem 0rem 0rem;
+            border-radius: 2rem;
             height: 8rem;
             display: flex;
             justify-content: space-between;
@@ -85,6 +86,7 @@
     width: 100vw;
     height: 100vh;
     background-color: #53535348;
+    backdrop-filter: blur(1rem);
     z-index: 100;
     animation: fade-in .5s ease;
 }

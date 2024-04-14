@@ -17,8 +17,8 @@ export default function AssignMedicine(props) {
         setPatientList([]);
         setMedInfo([]);
         setMedList([]);
-        async function fetchMedData() {
-            await axios.get("http://localhost:3001/medInfo")
+        // async function fetchMedData() {
+            axios.get("http://localhost:3001/medInfo")
                 .then(response => {
                     // console.log(response.data);
                     setMedInfo(response.data);
@@ -27,9 +27,9 @@ export default function AssignMedicine(props) {
                 .catch(err => {
                     console.log(err);
                 })
-        }
+        // }
 
-        fetchMedData();
+        // fetchMedData();
     }, []);
 
     function updatePatientList(patient) {
@@ -111,7 +111,7 @@ export default function AssignMedicine(props) {
             <div className="cont-body">
                 <div className="patient-part part">
                     <div className="inp-field">
-                        <input type="text" className="table-input menu-button il-blk" placeholder="Patient ID" value={pID} onClick={ () => {setMID("")}} onChange={(e) => { setPID(e.target.value) }} />
+                        <input type="text" className="table-input menu-button il-blk" placeholder="Search Patient" value={pID} onClick={ () => {setMID("")}} onChange={(e) => { setPID(e.target.value) }} />
                         <button className="menu-button" onClick={() => { setPID("") }}><IoClose className="cross" /></button>
                         {pID !== '' &&
                             <div className="wrapper">
@@ -155,7 +155,7 @@ export default function AssignMedicine(props) {
                 <div className="med-part part">
                     {/* <h2>Assign Medicines</h2> */}
                     <div className="inp-field">
-                        <input type="text" className="table-input menu-button il-blk" placeholder="Patient ID" value={mID} onClick={ () => {setPID("")}} onChange={(e) => { setMID(e.target.value) }} />
+                        <input type="text" className="table-input menu-button il-blk" placeholder="Search Medicine" value={mID} onClick={ () => {setPID("")}} onChange={(e) => { setMID(e.target.value) }} />
                         <button className="menu-button" onClick={() => { setMID("") }}><IoClose className="cross" /></button>
                         {mID !== '' &&
                             <div className="wrapper">

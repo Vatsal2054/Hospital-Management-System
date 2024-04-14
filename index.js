@@ -68,6 +68,24 @@ app.post('/login', (req, res) => {
                     }
                 })
             }
+            else if(user.job_type === "Nurse"){
+                db.query("SELECT * from nurse where employee_id = $1", [user.employee_id], (err, result) => {
+                    if(err){
+                        console.log(err);
+                    }
+                    if(result.rows.length > 0){
+                        user = {...user, ...result.rows[0]};
+                        console.log("Logging Nurse Info", user);
+                        Login_status.auth_status = 200;
+                        Login_status.destination = user.job_type;
+                        console.log({ ...user, ...Login_status });
+                        res.send({ ...user, ...Login_status });
+                    }
+                    else{
+                        console.log("No data found!!");
+                    }
+                })
+            }
             else {
                 console.log("User authenticated");
                 Login_status.auth_status = 200;
@@ -244,28 +262,15 @@ app.post('/saveMedInfo', async (req, res) => {
     console.log(recData);
 
     await recData.patients.forEach(id => {
-        db.query("select medicine from pinfo where patient_id = $1;",[id], (err,result) => {
+        const date = new Date();
+        console.log(recData.medicines);
+        db.query("INSERT into medication_history(patient_id, medicines, prescription_date) values ($1, $2, $3)", [id, recData.medicines, date.toLocaleDateString()], (err,result) => {
             if(err){
                 console.log(err.message);
                 res.send({status: 201});
             }
-            else {
-                const data = result.rows[0];
-                console.log(data + "\n");
-                // const prevMeds = data.medicine;
-                const newMeds = data.medicine !== null ? [...data.medicine, recData.medicines] : [recData.medicines];
-                console.log(newMeds + "\n");
-                
-                db.query("UPDATE pinfo SET medicine= $1 WHERE patient_id = $2;", [newMeds, id], (err,result) => {
-                    if(err){
-                        res.send({status: 201});
-                        console.log(err.message);
-                    }
-                    else{
-                        console.log("Array successfully inserted");
-                        console.log(result.data);
-                    }
-                })
+            else{
+                console.log("Medications successfully uploaded");
             }
         })
     });
