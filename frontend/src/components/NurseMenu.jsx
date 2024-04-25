@@ -6,15 +6,16 @@ import Dashboard from "./DocComponents/Dashboard";
 import DataCont from "./DataCont";
 import { FaXmark } from "react-icons/fa6";
 import AssignRooms from "./NurseComponents/AssignRooms";
+import ViewEmp from "./ViewEmp";
+// import { IoClose } from "react-icons/io5";
 
 function NurseMenu(props) {
     const [showMenu, setShowMenu] = useState(false);
     const [data, setData] = useState([{ room_id: 0 }]);
     const [wardInfo, setWardInfo] = useState({ totalpatients: '' });
     const [filterInput, setFilterInput] = useState("");
-    const [viewP, setViewP] = useState(false);
     const [viewPData, setViewPData] = useState({});
-
+    const [viewP, setViewP] = useState(false);
 
     const [menuCont, setMenuCont] = useState({
         'Dashboard': true,
@@ -63,7 +64,7 @@ function NurseMenu(props) {
             return {
                 ...preValues,
                 [name]: false,
-                'Dashboard' : true,
+                'Dashboard': true,
             }
         });
         setFilterInput("");
@@ -71,18 +72,24 @@ function NurseMenu(props) {
 
     return (
         <div className="emp-menu">
+            {viewP ? <ViewEmp Data={viewPData} setView={setViewP} caller="Nurse" header="Patient" /> : null}
+
             <div className="info-container-body">
-            <SideMenu menuCont={menuCont} showMenu={showMenu} setShowMenu={setShowMenu} setMenuCont={setMenuCont} menuPage={"Nurse"} />
+                <SideMenu menuCont={menuCont} showMenu={showMenu} setShowMenu={setShowMenu} setMenuCont={setMenuCont} menuPage={"Nurse"} />
 
                 <div className="cont">
                     <div className="header">
                         <h1 className="il-blk">Nurse Menu</h1>
                         <button className="menu-button logout">Logout</button>
                     </div>
-                    {menuCont.Dashboard && <Dashboard data={data} empData1 = {empData1} wardInfo = {wardInfo} />}
 
-                    {menuCont.Rooms && <AssignRooms data = {data} closeMenu={closeMenu} />}
+                    {/* Dashboard Component */}
+                    {menuCont.Dashboard && <Dashboard data={data} empData1={empData1} wardInfo={wardInfo} />}
 
+                    {/* Room Assign Menu Component */}
+                    {menuCont.Rooms && <AssignRooms Data={data} closeMenu={closeMenu} empData1={empData1} />}
+
+                    {/* Patient Table Component */}
                     {
                         menuCont.showPatients &&
                         <div className="cont-info">
@@ -91,7 +98,7 @@ function NurseMenu(props) {
                                 <h1>Patient Information</h1>
                                 <div className="right">
                                     <input type="text" className="table-input menu-button" value={filterInput} placeholder="Search" onChange={(e) => { setFilterInput(e.target.value) }} />
-                                    <button className="menu-button" onClick={() => {closeMenu("showPatients")}}><FaXmark className="cross" /></button>
+                                    <button className="menu-button" onClick={() => { closeMenu("showPatients") }}><FaXmark className="cross" /></button>
                                 </div>
                             </div>
 
@@ -103,7 +110,7 @@ function NurseMenu(props) {
                                 Data={data}
                                 filterInput={filterInput}
                                 setFilterInput={setFilterInput}
-                                caller="Doctor"
+                                caller="Nurse"
                             />
                         </div>
                     }

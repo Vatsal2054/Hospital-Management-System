@@ -6,7 +6,7 @@ import axios from "axios";
 export default function ViewEmp(props) {
 
     const Data = props.Data;
-    console.log("Data received: " + Data);
+    console.log("Data received: " + Object(Data));
     
 
     const docInfo = {
@@ -95,6 +95,7 @@ export default function ViewEmp(props) {
     ArrInfo = Data.job_type === "Nurse" && Object.entries(nurseInfo);
     ArrInfo = Data.job_type === "Receptionist" && Object.entries(recInfo);
     ArrInfo = props.caller === "Doctor" && Object.entries(pInfo);
+    ArrInfo = props.caller === "Nurse" && Object.entries(pInfo);
     console.log(ArrInfo);
 
     return (
@@ -110,6 +111,7 @@ export default function ViewEmp(props) {
                         {Data.job_type === 'Nurse' && <ViewEmpInfo Data={Data} Info={nurseInfo} ArrInfo = {ArrInfo} />}
                         {Data.job_type === 'Receptionist' && <ViewEmpInfo Data={Data} Info={recInfo} ArrInfo = {ArrInfo} />}
                         {props.caller === 'Doctor' && <ViewEmpInfo Data={Data} Info={pInfo} ArrInfo = {ArrInfo} />}
+                        {props.caller === 'Nurse' && <ViewEmpInfo Data={Data} Info={pInfo} ArrInfo = {ArrInfo} />}
                     </div>
                 </div>
             </div>

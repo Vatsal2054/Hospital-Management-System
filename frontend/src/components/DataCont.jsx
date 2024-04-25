@@ -10,7 +10,6 @@ function DataCont(props) {
 	receivedData.forEach((cell, index) => { cell.serial = index + 1; });
 
 	const data = receivedData;
-	console.log(data);
 
 	const columns = props.type === "employee" ? empColumns : patientColumns;
 
@@ -27,7 +26,8 @@ function DataCont(props) {
 
 	function showDetails(id) {
 		console.log("Row ", id," clicked");
-		// console.log(id);
+		console.log(receivedData[id]);
+		
 		props.setViewData(receivedData[id]);
 		props.setView(true);
 	}

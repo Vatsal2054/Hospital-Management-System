@@ -24,7 +24,7 @@
     
     .room-part{
         flex: 1;
-        margin: 2rem;
+        margin: 2rem 2rem 2rem 0rem;
     }
 }
 
@@ -39,6 +39,12 @@
         border: 2px solid #b6d0f9;
         font-size: 1.4rem;
     }
+
+    // select {
+    //     option{
+    //         height: 4rem;
+    //     }
+    // }
 
     button{
         font-size: 2.4rem;
@@ -180,5 +186,38 @@
     padding-bottom: 2rem;
     .buttons{
         padding: 1rem 2rem;
+    }
+}
+
+.patient-list-inner{
+    overflow: hidden;
+
+    .patient-list-body{
+        // padding: 1rem 0rem;
+
+        .list-item{
+            padding: 1rem 1rem;
+            margin-right: 1rem;
+            font-size: 1.4rem;
+            border-radius: 1rem;
+
+            &:hover{
+                background-color: $admin-f;
+            }
+
+            span{
+                width: 45%;
+
+                .heading{
+                    // width: 10rem;
+                    padding-right: 2rem;
+                    font-family: "Heavy", sans-serif;
+                }
+
+                .value{
+                    padding: 0rem 2rem;
+                }
+            }
+        }
     }
 }
