@@ -278,7 +278,7 @@ app.post('/saveMedInfo', async (req, res) => {
 
 app.get("/patUR", async (req, res) => {
     const department = req.query.department;
-    await db.query("SELECT a.patient_id, a.name, a.gender, a.age, a.height, a.weight, a.blood_group, a.admit_date, a.discharge_date, a.contact, b.room_id, b.department, b.unit FROM patient a INNER JOIN pinfo b ON a.patient_id = b.patient_id where a.patient_id in (select patient_id from pinfo where department = $1 and room_id is null)",
+    await db.query("SELECT a.patient_id, a.name, a.gender, a.age, a.height, a.weight, a.blood_group, a.admit_date, a.discharge_date, a.contact, b.room_id, b.department, b.unit FROM patient a INNER JOIN pinfo b ON a.patient_id = b.patient_id where a.patient_id in (select patient_id from pinfo where department = $1 and room_id is null) order by patient_id",
     [department],
     (err, result) => {
         if(err){
@@ -286,8 +286,42 @@ app.get("/patUR", async (req, res) => {
             return;
         }
         if(result.rows.length > 0){
+            // console.log(result.rows);
+            res.send(result.rows);
+        }
+    })
+})
+
+app.get("/avlRooms", async (req,res) => {
+    const roomType = req.query.roomType;
+    await db.query("SELECT room_number, room_id from rooms where room_type = $1 and occupied = false", [roomType], (err, result) => {
+        if (err){
+            console.log(err);
+        }
+        else {
             console.log(result.rows);
             res.send(result.rows);
+        }
+    })
+})
+
+app.post("/assignRoom", async (req,res) => {
+    // const {patient_id, room} = req.query;
+    // console.log(room.room_number);
+    // console.log(req.query);
+    // res.send(200); 
+
+    const patient_id = req.body.patient_id;
+    const room_number = req.body.room_number;
+    const room_id = req.body.room_id;
+    console.log(patient_id, room_number, room_id);
+
+    await db.query("UPDATE rooms SET patient_id = $1, occupied = true WHERE room_number = $2 and room_id = $3", [patient_id, room_number, room_id], (err, result) => {
+        if(err){
+            console.log(err.message);
+        }
+        else{
+            res.send({status: 200});
         }
     })
 })

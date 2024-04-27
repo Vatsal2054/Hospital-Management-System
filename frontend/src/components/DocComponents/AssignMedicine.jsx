@@ -100,7 +100,7 @@ export default function AssignMedicine(props) {
 
     return (
         <div className="cont-info">
-            <ToastContainer autoClose={3000} />
+            <ToastContainer autoClose={5000} />
             {/* Component Header */}
             <div className="cont-info-head">
                 <h1>Patient Medication</h1>

@@ -15,6 +15,8 @@
     .patient-part {
         flex: 1;
         margin: 2rem;
+        height: auto;
+        transition: height .3s ease;
     }
     
     .med-part {
@@ -116,7 +118,7 @@
     }
 }
 
-.patient-list, .medicine-list {
+.patient-list, .medicine-list, .room-list {
     // flex: 6;
     padding: 1rem;
     width: auto;
@@ -129,7 +131,8 @@
         // margin: 1rem;
         height: auto;
         transition: all .5s ease;
-        max-height: 16rem;
+        max-height: 25rem;
+        transition: height .5s ease;
         overflow-y: auto;
 
         &::-webkit-scrollbar {
@@ -157,6 +160,9 @@
         // width: 15rem;
         // display: flex;
         // align-items: flex-start;
+        h2{
+            margin: .4rem;
+        }
 
         button {
             float: right;
@@ -179,45 +185,88 @@
                 transition: 0.3s ease;
             }
         }
+
+        .wide-cell{
+            font-size: 1.4rem;
+            // width: 0%;
+        }
     }
 }
 
 .cont-bottom{
     padding-bottom: 2rem;
     .buttons{
-        padding: 1rem 2rem;
+        padding: 0rem 1rem;
+
+        button{
+            background-color: $admin-s;
+            color: $color-text-dark;
+            transition: all .3s ease;
+            
+            &:hover{
+                background-color: $admin-f;
+                transition: all .3s ease;
+            }
+        }
     }
 }
 
 .patient-list-inner{
     overflow: hidden;
+}
 
-    .patient-list-body{
-        // padding: 1rem 0rem;
+.list-item{
+    padding: 1rem 1rem;
+    margin-right: 1rem;
+    font-size: 1.4rem;
+    border-radius: 1rem;
+    // border-bottom: 2px solid $sidebar;
 
-        .list-item{
-            padding: 1rem 1rem;
-            margin-right: 1rem;
-            font-size: 1.4rem;
-            border-radius: 1rem;
+    &:hover{
+        background-color: $admin-f;
+    }
 
-            &:hover{
-                background-color: $admin-f;
-            }
+    span{
+        width: 70%;
 
-            span{
-                width: 45%;
+        &:nth-child(1){
+            width: 50%;
+        }
 
-                .heading{
-                    // width: 10rem;
-                    padding-right: 2rem;
-                    font-family: "Heavy", sans-serif;
-                }
+        .heading{
+            width: 10rem;
+            padding-right: 2rem;
+            font-family: "Heavy", sans-serif;
+        }
 
-                .value{
-                    padding: 0rem 2rem;
-                }
-            }
+        .value{
+            padding: 0rem 2rem;
         }
     }
+}
+
+.room-cells{
+    width: 4rem;
+    font-size: 1.3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    transition: all .3s ease;
+
+    &:hover{
+        background-color: $admin-f;
+    }
+
+    &:focus{
+        background-color: $sidebar;
+        color: $color-text-light;
+        transition: all .3s ease;
+    }
+}
+
+.selected{
+    background-color: $sidebar;
+    color: $color-text-light;
+    transition: all .3s ease;
 }
