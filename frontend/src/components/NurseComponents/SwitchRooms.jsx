@@ -1,12 +1,12 @@
+import React, { useEffect, useState } from "react";
+import { patientInfo } from "../Extra";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { FaXmark } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
-import { patientInfo } from "../Extra";
 import { IoMdSave } from "react-icons/io";
-import { toast, ToastContainer } from "react-toastify";
 
-export default function AssignRooms(props) {
+export default function SwitchRooms(props) {
     // const [pID, setPID] = useState("");
     const [patient, setPatient] = useState({ id: "", name: "" });
     const [roomType, setRoomType] = useState("");
@@ -16,11 +16,11 @@ export default function AssignRooms(props) {
     const [selectedRoom, setSelectedRoom] = useState({ room_number: null, room_id: null })
 
     async function fetchData() {
-        await axios.get('http://localhost:3001/patUR', {
+        await axios.get('http://localhost:3001/patAR', {
             params: { department: props.empData1.department },
         })
             .then((response) => {
-                console.log(response.data);
+                console.table(response.data);
                 setPatientWithoutRooms(response.data);
             })
             .catch((error) => {
@@ -30,6 +30,8 @@ export default function AssignRooms(props) {
 
     useEffect(() => {
         fetchData();
+        // console.log(props.Data);        
+        // setPatientWithoutRooms(props.Data);
     }, []);
 
     function updatePatientList(patient) {

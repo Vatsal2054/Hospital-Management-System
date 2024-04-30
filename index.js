@@ -291,10 +291,25 @@ app.get("/patUR", async (req, res) => {
         }
     })
 })
+app.get("/patAR", async (req, res) => {
+    const department = req.query.department;
+    await db.query("SELECT a.patient_id, a.name, a.gender, a.age, a.height, a.weight, a.blood_group, a.admit_date, a.discharge_date, a.contact, b.room_id, b.department, b.unit FROM patient a INNER JOIN pinfo b ON a.patient_id = b.patient_id where a.patient_id in (select patient_id from pinfo where department = $1 and room_id is not null) order by patient_id",
+    [department],
+    (err, result) => {
+        if(err){
+            console.log(err);
+            return;
+        }
+        if(result.rows.length > 0){
+            // console.log(result.rows);
+            res.send(result.rows);
+        }
+    })
+})
 
 app.get("/avlRooms", async (req,res) => {
     const roomType = req.query.roomType;
-    await db.query("SELECT room_number, room_id from rooms where room_type = $1 and occupied = false", [roomType], (err, result) => {
+    await db.query("SELECT room_number, room_id from rooms where room_type = $1 and occupied = false ORDER BY room_number", [roomType], (err, result) => {
         if (err){
             console.log(err);
         }
@@ -321,7 +336,14 @@ app.post("/assignRoom", async (req,res) => {
             console.log(err.message);
         }
         else{
-            res.send({status: 200});
+            db.query("UPDATE pinfo SET room_id = $1 WHERE patient_id = $2", [room_id, patient_id], (err, result) => {
+                if(err){
+                    console.log(err.message);
+                }
+                else{
+                    res.send({status: 200});
+                }
+            })
         }
     })
 })

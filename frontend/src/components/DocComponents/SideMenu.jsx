@@ -3,6 +3,8 @@ import { FaBars } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa6";
 import { LuClipboardSignature, LuUsers, LuSettings, LuLayout } from "react-icons/lu";
 import { MdOutlineBedroomChild } from "react-icons/md";
+import { TiArrowShuffle } from "react-icons/ti";
+
 
 
 export default function SideMenu(props) {
@@ -63,6 +65,10 @@ export default function SideMenu(props) {
                     <button className={`blk ${props.menuCont.Rooms && "active"}`} onClick={() => { handleCont("Rooms") }}>
                         <MdOutlineBedroomChild className="button-icons" />
                         <span className={showMenu ? "label" : "label-hide"}>Assign Rooms</span>
+                    </button>
+                    <button className={`blk ${props.menuCont.switchRooms && "active"}`} onClick={() => { handleCont("switchRooms") }}>
+                        <TiArrowShuffle className="button-icons" />
+                        <span className={showMenu ? "label" : "label-hide"}>Switch Rooms</span>
                     </button>
                     <button className={`blk ${props.menuCont.showPatients && "active"}`} onClick={() => { handleCont("showPatients") }}>
                         <LuUsers className="button-icons" />

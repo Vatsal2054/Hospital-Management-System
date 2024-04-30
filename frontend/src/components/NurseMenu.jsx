@@ -7,6 +7,7 @@ import DataCont from "./DataCont";
 import { FaXmark } from "react-icons/fa6";
 import AssignRooms from "./NurseComponents/AssignRooms";
 import ViewEmp from "./ViewEmp";
+import SwitchRooms from "./NurseComponents/SwitchRooms";
 // import { IoClose } from "react-icons/io5";
 
 function NurseMenu(props) {
@@ -20,6 +21,7 @@ function NurseMenu(props) {
     const [menuCont, setMenuCont] = useState({
         'Dashboard': true,
         'Rooms': false,
+        'switchRooms': false,
         'showPatients': false,
         'Settings': false
     });
@@ -88,6 +90,9 @@ function NurseMenu(props) {
 
                     {/* Room Assign Menu Component */}
                     {menuCont.Rooms && <AssignRooms Data={data} closeMenu={closeMenu} empData1={empData1} />}
+
+                    {/* Switch Room Menu Component */}
+                    {menuCont.switchRooms && <SwitchRooms Data={data} closeMenu={closeMenu} empData1={empData1} />}
 
                     {/* Patient Table Component */}
                     {
