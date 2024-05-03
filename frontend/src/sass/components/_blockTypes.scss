@@ -1,7 +1,23 @@
 .il-blk{
-    display: inline-block;
+    display: inline-block !important;
 }
 
 .blk{
-    display: block;
+    display: block !important;
+}
+
+.fl-l{
+    float: left;
+}
+
+.fl-r{
+    float: right;
+}
+
+.fl-1{
+    flex: 1;
+}
+
+.large-font{
+    font-size: 1.2rem;
 }

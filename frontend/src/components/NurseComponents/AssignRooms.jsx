@@ -58,38 +58,38 @@ export default function AssignRooms(props) {
     async function saveRoomInfo() {
         console.log(patient, selectedRoom);
 
-        if(patient.id === "") {
+        if (patient.id === "") {
             toast.error("Please select a patient!");
             return;
         }
 
-        if(roomType === "") {
+        if (roomType === "") {
             toast.error("Please select a room type!");
             return;
         }
 
-        if(selectedRoom.room_number === null) {
+        if (selectedRoom.room_number === null) {
             toast.error("Please select a room!");
             return;
         }
 
         await axios.post('http://localhost:3001/assignRoom', {
-                patient_id: patient.id,
-                room_number: selectedRoom.room_number,
-                room_id: selectedRoom.room_id,
+            patient_id: patient.id,
+            room_number: selectedRoom.room_number,
+            room_id: selectedRoom.room_id,
         })
-        .then(response => {
-            console.log(response);
+            .then(response => {
+                console.log(response);
 
-            if(response.status === 200){
-                toast.success(`${roomType} category room with room number: ${selectedRoom.room_number}, assigned to ${patient.name}`);
-                setPatient({ id: "", name: "" });
-                setRoomType("");
-                fetchData();
-                setAvailableRooms([{ room_number: null, room_id: null }]);
-                setSelectedRoom({ room_number: null, room_id: null });
-            }
-        })
+                if (response.status === 200) {
+                    toast.success(`${roomType} category room with room number: ${selectedRoom.room_number}, assigned to ${patient.name}`);
+                    setPatient({ id: "", name: "" });
+                    setRoomType("");
+                    fetchData();
+                    setAvailableRooms([{ room_number: null, room_id: null }]);
+                    setSelectedRoom({ room_number: null, room_id: null });
+                }
+            })
     }
 
     return (
@@ -102,18 +102,17 @@ export default function AssignRooms(props) {
                 </div>
             </div>
             <div className="cont-body">
-                <div className="patient-part part">
+                <div className="patient-part part"> 
                     <div className="inp-field">
                         <h1>Select Patient</h1>
                     </div>
                     <div className='patient-list'>
                         {patient.id !== "" ?
-                            <div className="patient-list-cells il-blk">
-                                <div className="list-item il-blk">
-                                    <span className="il-blk"><div className="heading il-blk">ID</div>: <div className="value il-blk"> {patient.id} </div></span>
-                                    <span className="il-blk"><div className="heading il-blk">Name</div>: <div className="value il-blk"> {patient.name} </div></span>
-                                </div>
-                                <button className="il-blk" onClick={() => { setPatient({ id: "", name: "" }) }}><IoClose className="cell-close" /></button>
+                            <div className="patient-list-item il-blk">
+                                <button className="il-blk fl-r" onClick={() => { setPatient({ id: "", name: "" }) }}><IoClose className="cell-close" /></button>
+                                <span className="il-blk"><div className="heading il-blk">ID</div>: <div className="value il-blk"> {patient.id} </div></span>
+                                <span className="il-blk"><div className="heading il-blk">Name</div>: <div className="value il-blk"> {patient.name} </div></span>
+                                {/* <span className="il-blk"><div className="heading il-blk">Current Room</div>: <div className="value il-blk"> {patient.room_id} </div></span> */}
                             </div>
                             :
                             <div className="patient-list-inner message">
@@ -123,6 +122,7 @@ export default function AssignRooms(props) {
                                             <div className="list-item" onClick={() => { updatePatientList(patient) }} key={index}>
                                                 <span className="il-blk"><div className="heading il-blk">ID</div>: <div className="value il-blk"> {patient.patient_id} </div></span>
                                                 <span className="il-blk"><div className="heading il-blk">Name</div>: <div className="value il-blk"> {patient.name} </div></span>
+                                                {/* <span className="il-blk"><div className="heading il-blk">Current Room</div>: <div className="value il-blk"> {patient.room_id} </div></span> */}
                                             </div>
                                         )
                                     })}

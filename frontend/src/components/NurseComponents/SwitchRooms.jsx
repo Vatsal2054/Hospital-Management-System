@@ -8,7 +8,7 @@ import { IoMdSave } from "react-icons/io";
 
 export default function SwitchRooms(props) {
     // const [pID, setPID] = useState("");
-    const [patient, setPatient] = useState({ id: "", name: "" });
+    const [patient, setPatient] = useState({ id: "", name: "", room_id: "" });
     const [roomType, setRoomType] = useState("");
     // let patientWithoutRooms;
     const [patientWithoutRooms, setPatientWithoutRooms] = useState([patientInfo]);
@@ -38,6 +38,7 @@ export default function SwitchRooms(props) {
         setPatient({
             id: patient.patient_id,
             name: patient.name,
+            room_id: patient.room_id,
         });
         console.log(patient);
     }
@@ -60,45 +61,45 @@ export default function SwitchRooms(props) {
     async function saveRoomInfo() {
         console.log(patient, selectedRoom);
 
-        if(patient.id === "") {
+        if (patient.id === "") {
             toast.error("Please select a patient!");
             return;
         }
 
-        if(roomType === "") {
+        if (roomType === "") {
             toast.error("Please select a room type!");
             return;
         }
 
-        if(selectedRoom.room_number === null) {
+        if (selectedRoom.room_number === null) {
             toast.error("Please select a room!");
             return;
         }
 
         await axios.post('http://localhost:3001/assignRoom', {
-                patient_id: patient.id,
-                room_number: selectedRoom.room_number,
-                room_id: selectedRoom.room_id,
+            patient_id: patient.id,
+            room_number: selectedRoom.room_number,
+            room_id: selectedRoom.room_id,
         })
-        .then(response => {
-            console.log(response);
+            .then(response => {
+                console.log(response);
 
-            if(response.status === 200){
-                toast.success(`${roomType} category room with room number: ${selectedRoom.room_number}, assigned to ${patient.name}`);
-                setPatient({ id: "", name: "" });
-                setRoomType("");
-                fetchData();
-                setAvailableRooms([{ room_number: null, room_id: null }]);
-                setSelectedRoom({ room_number: null, room_id: null });
-            }
-        })
+                if (response.status === 200) {
+                    toast.success(`${roomType} category room with room number: ${selectedRoom.room_number}, assigned to ${patient.name}`);
+                    setPatient({ id: "", name: "", room_id: "" });
+                    setRoomType("");
+                    fetchData();
+                    setAvailableRooms([{ room_number: null, room_id: null }]);
+                    setSelectedRoom({ room_number: null, room_id: null });
+                }
+            })
     }
 
     return (
         <div className="cont-info">
             <ToastContainer autoClose={5000} />
             <div className="cont-info-head">
-                <h1>Assign Rooms</h1>
+                <h1>Switch Patient Rooms</h1>
                 <div className="right">
                     <button className="menu-button" onClick={() => { props.closeMenu("Rooms") }}><FaXmark className="cross" /></button>
                 </div>
@@ -110,12 +111,11 @@ export default function SwitchRooms(props) {
                     </div>
                     <div className='patient-list'>
                         {patient.id !== "" ?
-                            <div className="patient-list-cells il-blk">
-                                <div className="list-item il-blk">
-                                    <span className="il-blk"><div className="heading il-blk">ID</div>: <div className="value il-blk"> {patient.id} </div></span>
-                                    <span className="il-blk"><div className="heading il-blk">Name</div>: <div className="value il-blk"> {patient.name} </div></span>
-                                </div>
-                                <button className="il-blk" onClick={() => { setPatient({ id: "", name: "" }) }}><IoClose className="cell-close" /></button>
+                            <div className="patient-list-item il-blk">
+                                <button className="il-blk fl-r" onClick={() => { setPatient({ id: "", name: "", room_id: "" }) }}><IoClose className="cell-close" /></button>
+                                <span className="il-blk"><div className="heading il-blk">ID</div>: <div className="value il-blk"> {patient.id} </div></span>
+                                <span className="il-blk"><div className="heading il-blk">Name</div>: <div className="value il-blk"> {patient.name} </div></span>
+                                <span className="il-blk"><div className="heading il-blk">Current Room</div>: <div className="value il-blk"> {patient.room_id} </div></span>
                             </div>
                             :
                             <div className="patient-list-inner message">
@@ -125,6 +125,7 @@ export default function SwitchRooms(props) {
                                             <div className="list-item" onClick={() => { updatePatientList(patient) }} key={index}>
                                                 <span className="il-blk"><div className="heading il-blk">ID</div>: <div className="value il-blk"> {patient.patient_id} </div></span>
                                                 <span className="il-blk"><div className="heading il-blk">Name</div>: <div className="value il-blk"> {patient.name} </div></span>
+                                                <span className="il-blk"><div className="heading il-blk">Current Room</div>: <div className="value il-blk"> {patient.room_id} </div></span>
                                             </div>
                                         )
                                     })}
@@ -136,8 +137,10 @@ export default function SwitchRooms(props) {
                 <div className="room-part part">
                     {/* <h1>Room</h1> */}
                     <div className="inp-field">
-                        {/* <input type="dropdown" /> */}
-                        <select name="Room type" className="table-input menu-button il-blk" onChange={updateRoomType}>
+                        <h1>Select New Room</h1>
+                    </div>
+                    <div className="room-list">
+                        <select name="Room type" className="table-input menu-button no-marg il-blk" onChange={updateRoomType}>
                             <option selected disabled value="">None Selected</option>
                             <option value="ICU">ICU</option>
                             <option value="ICCU">ICCU</option>
@@ -145,9 +148,7 @@ export default function SwitchRooms(props) {
                             <option value="Premium">Premium</option>
                             <option value="Reserved">Reserved</option>
                         </select>
-                    </div>
-                    <div className="room-list">
-                        {availableRooms[0].room_id !== null ?
+                        {availableRooms[0].room_id !== null &&
                             <div className="patient-list-body wrapper">
                                 <div className="message">
                                     <h2>Available rooms</h2>
@@ -163,10 +164,11 @@ export default function SwitchRooms(props) {
                                     )
                                 })}
                             </div>
-                            :
-                            <div className="message">
-                                <h2>Select Room Type</h2>
-                            </div>
+                            // :
+                            // <div className="message">
+                            //     <h2>Select Room Type</h2>
+                            //     {/* <input type="dropdown" /> */}
+                            // </div>
                         }
                     </div>
                 </div>

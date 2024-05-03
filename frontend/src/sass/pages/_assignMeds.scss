@@ -1,3 +1,5 @@
+@import "../components/mixins";
+
 .cont-body {
     display: flex;
     align-items: flex-start;
@@ -164,27 +166,7 @@
             margin: .4rem;
         }
 
-        button {
-            float: right;
-            padding: 0.5rem;
-            margin-left: 0.5rem;
-            border: none;
-            outline: none;
-            background-color: transparent;
-            transition: 0.3s ease;
-            border-radius: 0.5rem;
-
-            .cell-close {
-                font-size: 1.6rem;
-                margin: 0rem -0.05rem -0.3rem 0rem;
-            }
-
-            &:hover {
-                background-color: #336b8e;
-                color: #b6d0f9;
-                transition: 0.3s ease;
-            }
-        }
+        @include close-button;
 
         .wide-cell{
             font-size: 1.4rem;
@@ -226,23 +208,7 @@
         background-color: $admin-f;
     }
 
-    span{
-        width: 70%;
-
-        &:nth-child(1){
-            width: 50%;
-        }
-
-        .heading{
-            width: 10rem;
-            padding-right: 2rem;
-            font-family: "Heavy", sans-serif;
-        }
-
-        .value{
-            padding: 0rem 2rem;
-        }
-    }
+    @include key-values;
 }
 
 .room-cells{
@@ -269,4 +235,68 @@
     background-color: $sidebar;
     color: $color-text-light;
     transition: all .3s ease;
+}
+
+.patient-list-item{
+    width: 100%;
+    // padding: 1rem;
+    font-size: 1.4rem;
+    @include key-values;
+    @include close-button;
+}
+
+.no-marg{
+    margin: 1rem 1rem;
+}
+
+.med-block{
+    border: 2px solid $sidebar;
+    border-radius: 1rem;        
+    padding: 1rem;
+    margin: 1rem;
+    
+    &-inner{
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cell-info{
+        margin: 1rem 1rem;
+    }
+
+    @include close-button;
+}
+
+.timing{
+    margin: 1rem 0rem 1rem 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+
+    &-cells{
+        margin: 0rem 1rem;
+        border-radius: .5rem;
+        border: 2px solid $sidebar;
+
+        
+        div{
+            display: inline-block;
+            padding: .5rem 1rem;
+            border-right: 2px solid $sidebar;
+            transition: all .3s ease;
+            
+            &:nth-child(3){
+                border: none;
+            }
+
+            &:hover{
+                background-color: $sidebar;
+                color: $color-text-light;
+                transition: all .3s ease;
+            }
+        }
+    }
 }

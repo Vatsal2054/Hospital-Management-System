@@ -18,15 +18,15 @@ export default function AssignMedicine(props) {
         setMedInfo([]);
         setMedList([]);
         // async function fetchMedData() {
-            axios.get("http://localhost:3001/medInfo")
-                .then(response => {
-                    // console.log(response.data);
-                    setMedInfo(response.data);
-                    console.log(medInfo);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+        axios.get("http://localhost:3001/medInfo")
+            .then(response => {
+                // console.log(response.data);
+                setMedInfo(response.data);
+                console.log(medInfo);
+            })
+            .catch(err => {
+                console.log(err);
+            })
         // }
 
         // fetchMedData();
@@ -83,8 +83,8 @@ export default function AssignMedicine(props) {
             patients: PIDs,
             medicines: MIDs,
         })
-        .then(response => {
-            console.log(response.data);
+            .then(response => {
+                console.log(response.data);
                 if (response.data.status === 200) {
                     toast.success("Medicines updated!", {
                         position: "top-center",
@@ -111,7 +111,7 @@ export default function AssignMedicine(props) {
             <div className="cont-body">
                 <div className="patient-part part">
                     <div className="inp-field">
-                        <input type="text" className="table-input menu-button il-blk" placeholder="Search Patient" value={pID} onClick={ () => {setMID("")}} onChange={(e) => { setPID(e.target.value) }} />
+                        <input type="text" className="table-input menu-button il-blk" placeholder="Search Patient" value={pID} onClick={() => { setMID("") }} onChange={(e) => { setPID(e.target.value) }} />
                         <button className="menu-button" onClick={() => { setPID("") }}><IoClose className="cross" /></button>
                         {pID !== '' &&
                             <div className="wrapper">
@@ -155,7 +155,7 @@ export default function AssignMedicine(props) {
                 <div className="med-part part">
                     {/* <h2>Assign Medicines</h2> */}
                     <div className="inp-field">
-                        <input type="text" className="table-input menu-button il-blk" placeholder="Search Medicine" value={mID} onClick={ () => {setPID("")}} onChange={(e) => { setMID(e.target.value) }} />
+                        <input type="text" className="table-input menu-button il-blk" placeholder="Search Medicine" value={mID} onClick={() => { setPID("") }} onChange={(e) => { setMID(e.target.value) }} />
                         <button className="menu-button" onClick={() => { setMID("") }}><IoClose className="cross" /></button>
                         {mID !== '' &&
                             <div className="wrapper">
@@ -178,12 +178,22 @@ export default function AssignMedicine(props) {
                             {medList.length > 0 ?
                                 medList.map((medicine, index) => {
                                     return (
-                                        <div className="patient-list-cells il-blk" key={index}>
-                                            <div className="cell-info il-blk">
-                                                <span className="id blk">{`${medicine.medicine_id}`}</span>
-                                                <span className="name blk">{`${medicine.name}`}</span>
-                                            </div>
+                                        <div className=" med-block il-blk" key={index}>
                                             <button className="il-blk" onClick={() => { removePatient(index) }}><IoClose className="cell-close" /></button>
+                                            <div className="med-block-inner">
+                                                <div className="cell-info">
+                                                    <span className="id blk">{`${medicine.medicine_id}`}</span>
+                                                    <span className="name blk">{`${medicine.name}`}</span>
+                                                </div>
+                                                <div className="timing">
+                                                    <h3 className="il-blk">Timing: </h3>
+                                                    <div className="timing-cells il-blk">
+                                                        <div>Morning</div>
+                                                        <div>Noon</div>
+                                                        <div>Night</div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     )
                                 })

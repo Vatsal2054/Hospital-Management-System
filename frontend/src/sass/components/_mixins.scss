@@ -1,0 +1,44 @@
+@mixin close-button {
+    button {
+        float: right;
+        padding: 0.5rem;
+        margin-left: 0.5rem;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        transition: 0.3s ease;
+        border-radius: 0.5rem;
+
+        .cell-close {
+            font-size: 1.6rem;
+            margin: 0rem -0.05rem -0.3rem 0rem;
+        }
+
+        &:hover {
+            background-color: #336b8e;
+            color: #b6d0f9;
+            transition: 0.3s ease;
+        }
+    }
+}
+
+@mixin key-values{
+    span{
+        width: 70%;
+        padding: .5rem;
+
+        &:nth-child(1){
+            width: 50%;
+        }
+
+        .heading{
+            width: 12rem;
+            padding-right: 2rem;
+            font-family: "Heavy", sans-serif;
+        }
+
+        .value{
+            padding: 0rem 2rem;
+        }
+    }
+}
