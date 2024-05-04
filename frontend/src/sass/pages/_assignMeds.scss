@@ -158,10 +158,17 @@
         border: 0.2rem solid $sidebar;
         margin: 1rem;
         border-radius: 0.5rem;
-        // font-size: 2rem;
+        font-size: 1.4rem;
+        // background-color: $admin-f;
         // width: 15rem;
         // display: flex;
         // align-items: flex-start;
+        .cell-info{
+            .name{
+                font-family: "Heavy", sans-serif;
+            }
+        }
+
         h2{
             margin: .4rem;
         }
@@ -254,6 +261,7 @@
     border-radius: 1rem;        
     padding: 1rem;
     margin: 1rem;
+    // background-color: $admin-f;
     
     &-inner{
         font-size: 1.2rem;
@@ -264,6 +272,11 @@
 
     .cell-info{
         margin: 1rem 1rem;
+
+        .name{
+            font-family: "Heavy", sans-serif;
+            font-size: 1.4rem
+        }
     }
 
     @include close-button;
@@ -280,6 +293,18 @@
         margin: 0rem 1rem;
         border-radius: .5rem;
         border: 2px solid $sidebar;
+        cursor: pointer;
+
+        .selected{
+            background-color: $sidebar;
+            color: $color-text-light;
+
+            &:hover{
+                background-color: $sidebar;
+                // color: $color-text-light;
+                transition: all .3s ease;
+            }
+        }
 
         
         div{
@@ -293,8 +318,8 @@
             }
 
             &:hover{
-                background-color: $sidebar;
-                color: $color-text-light;
+                background-color: $admin-f;
+                // color: $color-text-light;
                 transition: all .3s ease;
             }
         }

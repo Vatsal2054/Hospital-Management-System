@@ -263,7 +263,16 @@ app.post('/saveMedInfo', async (req, res) => {
     await recData.patients.forEach(id => {
         const date = new Date();
         console.log(recData.medicines);
-        db.query("INSERT into medication_history(patient_id, medicines, prescription_date) values ($1, $2, $3)", [id, recData.medicines, date.toLocaleDateString()], (err,result) => {
+        
+        let medicines = [];
+        let timings = [];
+
+        recData.medicines.forEach(medicine => {
+            medicines.push(medicine.medicine_id);
+            timings.push(medicine.timing);
+        });
+
+        db.query("INSERT into medication_history(patient_id, medicines, prescription_date, timing) values ($1, $2, $3, $4)", [id, medicines, date.toLocaleDateString(), timings], (err,result) => {
             if(err){
                 console.log(err.message);
                 res.send({status: 201});

@@ -9,27 +9,32 @@ import { toast, ToastContainer } from "react-toastify";
 export default function AssignMedicine(props) {
     const [pID, setPID] = useState("");
     const [mID, setMID] = useState("");
-    const [medInfo, setMedInfo] = useState([{ medicine_id: "", name: "" }]);
-    const [medList, setMedList] = useState([{ medicine_id: "", name: "" }])
+    const [medInfo, setMedInfo] = useState([{ medicine_id: "", name: "", timing: [0, 0, 0] }]);
+    const [medList, setMedList] = useState([{ medicine_id: "", name: "", timing: [0, 0, 0] }])
     const [patientList, setPatientList] = useState([{ id: String, name: String }]);
 
     useEffect(() => {
         setPatientList([]);
         setMedInfo([]);
         setMedList([]);
+        setMID("");
         // async function fetchMedData() {
         axios.get("http://localhost:3001/medInfo")
             .then(response => {
                 // console.log(response.data);
-                setMedInfo(response.data);
-                console.log(medInfo);
+                let recData = response.data;
+
+                recData.forEach(element => {
+                    element.timing = [0, 0, 0];
+                });
+
+                setMedInfo(recData);
+                console.log(recData);
             })
             .catch(err => {
                 console.log(err);
             })
-        // }
 
-        // fetchMedData();
     }, []);
 
     function updatePatientList(patient) {
@@ -74,10 +79,34 @@ export default function AssignMedicine(props) {
         });
         console.log(patientList);
     }
+    
+    function removeMedicine(id) {
+        console.log(id);
+
+        setMedList((preValues) => {
+            const updatedList = preValues.filter((_, index) => index !== id);
+            return updatedList;
+        });
+        console.log(medList);
+    }
+
+    function saveMedTiming(index, timing){
+        console.log(timing);
+        // let selectedMed = medList.filter((med) => med.medicine_id === id)
+        // selectedMed[0].timing = timing;
+        // console.log(selectedMed);
+        setMedList((preValues) => {
+            preValues[index].timing = timing;
+            console.log("Changing Timings");
+            console.log("New List: ", preValues);
+            
+            return [...preValues];
+        })
+    }
 
     async function saveMedInfo() {
         const PIDs = patientList.map(patient => patient.id);
-        const MIDs = medList.map(meds => meds.medicine_id);
+        const MIDs = medList;
         console.log(PIDs, MIDs);
         await axios.post('http://localhost:3001/saveMedInfo', {
             patients: PIDs,
@@ -162,7 +191,7 @@ export default function AssignMedicine(props) {
                                 <div className="inp-field-list">
                                     {medInfo.filter(meds => meds.medicine_id.includes(mID) || meds.name.toLowerCase().includes(mID.toLowerCase())).map((meds, index) => {
                                         return (
-                                            <div className="inp-field-options" onClick={() => { updateMedicineList({ 'medicine_id': meds.medicine_id, 'name': meds.name }) }} key={index}>
+                                            <div className="inp-field-options" onClick={() => { updateMedicineList({ 'medicine_id': meds.medicine_id, 'name': meds.name, 'timing': meds.timing }) }} key={index}>
                                                 <div className="data-cell-value il-blk">{meds.medicine_id}</div>
                                                 <div className="data-cell-key il-blk">{meds.name}</div>
                                             </div>
@@ -179,7 +208,7 @@ export default function AssignMedicine(props) {
                                 medList.map((medicine, index) => {
                                     return (
                                         <div className=" med-block il-blk" key={index}>
-                                            <button className="il-blk" onClick={() => { removePatient(index) }}><IoClose className="cell-close" /></button>
+                                            <button className="il-blk" onClick={() => { removeMedicine(index) }}><IoClose className="cell-close" /></button>
                                             <div className="med-block-inner">
                                                 <div className="cell-info">
                                                     <span className="id blk">{`${medicine.medicine_id}`}</span>
@@ -188,9 +217,9 @@ export default function AssignMedicine(props) {
                                                 <div className="timing">
                                                     <h3 className="il-blk">Timing: </h3>
                                                     <div className="timing-cells il-blk">
-                                                        <div>Morning</div>
-                                                        <div>Noon</div>
-                                                        <div>Night</div>
+                                                        <div className={medicine.timing[0] === 1 ? "selected" : ""} onClick={() => {saveMedTiming(index, [medicine.timing[0] === 0 ? 1 : 0, medicine.timing[1], medicine.timing[2]])}}>Morning</div>
+                                                        <div className={medicine.timing[1] === 1 ? "selected" : ""} onClick={() => {saveMedTiming(index, [medicine.timing[0], medicine.timing[1] === 0 ? 1 : 0, medicine.timing[2]])}}>Noon</div>
+                                                        <div className={medicine.timing[2] === 1 ? "selected" : ""} onClick={() => {saveMedTiming(index, [medicine.timing[0], medicine.timing[1],  medicine.timing[2] === 0 ? 1 : 0])}}>Night</div>
                                                     </div>
                                                 </div>
                                             </div>
