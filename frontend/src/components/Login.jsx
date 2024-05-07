@@ -88,10 +88,8 @@ function Login() {
     return (
       <div className="Login">
         <ToastContainer autoClose={3000}/>
-        <div className="Heading-head-name">
-        <Heading
-          content="Hospital Management System"
-        />
+        <div className="Heading-head-name login-heading">
+        <h1>Hospital Management System</h1>
         </div>
         <div className="Login-container-outer">
           <div className="Login-container-inner">

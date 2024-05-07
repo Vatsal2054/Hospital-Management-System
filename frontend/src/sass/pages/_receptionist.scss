@@ -1,0 +1,105 @@
+@import "../abstracts/variables";
+
+.admit-form{
+    margin: 0rem 1rem;
+    padding: 0rem 1rem;
+    width: 100%;
+
+    &-cont{
+        font-size: 1.4rem;
+
+        h2{
+            padding: 2rem 2rem;
+        }
+
+        .input-cell{
+            padding: 2rem;
+            margin: 0rem 2rem; 
+            display: inline-block;
+
+            label{
+                display: block;
+                font-family: "Heavy", sans-serif;
+                margin: 0rem .5rem;
+            }
+
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            input, textarea{
+                margin: .5rem 0rem;
+                padding: 1.2rem 1rem 1.2rem 1.5rem;
+                border-radius: 1rem;
+                width: 100%;
+            }
+
+            textarea{
+                font-family: "Regular", sans-serif !important;
+            }
+            
+            select{
+                margin: .5rem 0rem;
+                padding: 1.2rem;
+                border-radius: 1rem;
+                width: 100%;
+            }
+
+            .half{
+                width: 35%;
+            }
+            
+            .two-third{
+                width: 70%;
+                // margin-right: 1rem;
+            }
+
+            .side-label{
+                margin: 0rem 5% 0rem .5rem;
+                font-size: 1.6rem;
+                font-family: "Heavy", sans-serif;
+                
+                &-single{
+                    margin: 0rem 0rem 0rem .5rem;
+                    font-size: 1.6rem;
+                    font-family: "Heavy", sans-serif;
+                }
+            }
+
+        }
+
+        .wide{
+            width: 40%;
+        }
+
+        .medium{
+            width: 22%;
+        }
+
+        .small{
+            width: 15%;
+        }
+
+        .button-cell{
+            padding: 2rem 2rem 4rem 2rem;
+        }
+
+        hr{
+            height: 1px;
+            border: none;
+            background: $admin-f;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.red-button{
+    background-color: #fb6a6a;
+    margin: 0rem !important;
+}
+
+.white-back{
+    background-color: $color-text-light;
+}

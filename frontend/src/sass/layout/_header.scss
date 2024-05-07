@@ -7,7 +7,7 @@ h1 {
 .Heading-head-name {
 	font-size: 2.8rem;
 	/* display: inline-block;    */
-	background-color: $admin-t;
+	background-color: $admin-s;
 	backdrop-filter: blur(30px);
 	font-family: "Heavy", sans-serif;
 	padding: 1.5rem 2rem;
@@ -18,7 +18,7 @@ h1 {
 	top: 0;
 	left: 0;
 	width: 100%;
-	background-color: $admin-t;
+	background-color: $admin-s;
 	backdrop-filter: blur(30px);
 	padding: 2rem 6rem;
 	display: flex;
@@ -36,7 +36,8 @@ h1 {
 	margin-left: 2.2rem;
 	transition: 0.5s ease;
 	&:hover {
-		background: $admin-s;
+		background: $sidebar;
+		color: $color-text-light;
 		transition: 0.3s ease;
 	}
 }

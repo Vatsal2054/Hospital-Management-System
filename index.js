@@ -357,6 +357,104 @@ app.post("/assignRoom", async (req,res) => {
     })
 })
 
+app.post('/newPatient', async (req, res) => {
+    const date = new Date();
+    const currentDate = date.toLocaleDateString();
+    console.log(currentDate);
+    let currentCount = 0;
+    let patient_id;
+    let height = req.body.ft + "\'" + req.body.in + "\"";
+    console.log(height);
+
+    const currentMonth = date.toLocaleString("default", { month: "long" });
+    console.log("Current Month:",currentMonth);
+
+    const department = req.body.department;
+    console.log(department);
+
+    await db.query("select * from patient_count where department = $1", [department], (err, result) => {
+        if(err){
+            console.log(err.message);
+        }
+        else{
+            console.log( "Month in Table: ", result.rows[0].count_month);
+            if(result.rows[0].count_month !== currentMonth){
+                db.query("update patient_count set count_month = $1, patient_count = 0 where department = $2", [currentMonth, department], (err, result) => {
+                    if(err){
+                        console.log(err.message);
+                    }
+                    else{
+                        console.log("Count month updated!!");
+                        currentCount = 0;
+                        // patient_id = req.body.unit + String(currentCount+1);
+                        // console.log(patient_id);
+                    }
+                })
+            }
+            else{
+                currentCount = result.rows[0].patient_count;
+            }
+            patient_id = req.body.unit + String(currentCount+1);
+            console.log(patient_id);
+            console.log(currentCount);
+            db.query("INSERT INTO patient values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)",
+            [patient_id, req.body.name, req.body.gender, req.body.age, height, req.body.weight, req.body.blood_group, currentDate, ,  req.body.contact, req.body.relative_name, req.body.relative_contact, req.body.address, false],
+            (err, result) => {
+                if(err) {
+                    console.log(err);
+                }
+                else{
+                    db.query("INSERT INTO pinfo values ($1, $2, $3, $4, $5, $6)", 
+                    [patient_id, req.body.name, currentDate, ,req.body.department, req.body.unit], 
+                    (err, result) => {
+                        if(err) {
+                            console.log(err);
+                        }
+                        else{
+                            db.query("UPDATE patient_count SET patient_count = $1 where department = $2", [currentCount+1, req.body.department], (err, result) => {
+                                if(err){
+                                    console.log(err);
+                                }
+                                else{
+                                    console.log("Patient Admitted Successfully");
+                                    res.send({status: 200});
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
+    })
+})
+
+app.get('/allPatients', async (req, res) => {
+    console.log("Fetching data of all patients!!\n");
+    await db.query("SELECT a.*, b.room_id, b.department, b.unit FROM patient a inner join pinfo b on a.patient_id = b.patient_id where a.is_discharged = false", (err, result) => {
+        if(err){
+            console.log(err);
+        }
+        else if(result.rows.length > 0){
+            console.log("Patient data successfully fetched!");
+            res.send(result.rows)
+        }
+    })
+})
+
+app.post('/dischargePatient', async (req, res) => {
+    const patient_id = req.body.patient_id;
+    
+    await db.query("UPDATE patient set is_discharged = 'true' WHERE patient_id = $1", [patient_id], (err, result) => {
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log("Patient Discharged Successfully");
+            res.send({status: 200});
+        }
+    })
+})
+
 app.listen(port, () => {
     console.log(`Server running on: http://localhost:${port}`);
 })

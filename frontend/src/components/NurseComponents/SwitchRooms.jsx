@@ -153,16 +153,18 @@ export default function SwitchRooms(props) {
                                 <div className="message">
                                     <h2>Available rooms</h2>
                                 </div>
-                                {availableRooms.map((room, index) => {
-                                    return (
-                                        <button className={`${selectedRoom.room_number === room.room_number ? "patient-list-cells room-cells il-blk selected" : "patient-list-cells room-cells il-blk"}`} key={index} onClick={() => { setSelectedRoom(room) }}>
-                                            <div className="cell-info il-blk">
-                                                <span className="id blk">{room.room_number}</span>
-                                                {/* <span className="name blk">{`${patient.name}`}</span> */}
-                                            </div>
-                                        </button>
-                                    )
-                                })}
+                                <div className="room-cells-cont">
+                                    {availableRooms.map((room, index) => {
+                                        return (
+                                            <button className={`${selectedRoom.room_number === room.room_number ? "patient-list-cells room-cells il-blk selected" : "patient-list-cells room-cells il-blk"}`} key={index} onClick={() => { setSelectedRoom(room) }}>
+                                                <div className="cell-info il-blk">
+                                                    <span className="id blk">{room.room_number}</span>
+                                                    {/* <span className="name blk">{`${patient.name}`}</span> */}
+                                                </div>
+                                            </button>
+                                        )
+                                    })}
+                                </div>
                             </div>
                             // :
                             // <div className="message">

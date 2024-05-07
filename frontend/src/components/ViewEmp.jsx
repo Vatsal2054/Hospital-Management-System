@@ -7,8 +7,6 @@ export default function ViewEmp(props) {
 
     const Data = props.Data;
     console.log("Data received: " + Object(Data));
-    
-
     const docInfo = {
         'General': {
             'Name': Data.name,
@@ -75,7 +73,7 @@ export default function ViewEmp(props) {
             'Gender': Data.gender,
             'Contact': Data.contact,
         },
-        'Body Info': {
+        'Diagnostics': {
             'Patient ID': Data.patient_id,
             'Age': Data.age + ' years',
             'Height': Data.height,
@@ -88,6 +86,8 @@ export default function ViewEmp(props) {
             'Unit': Data.unit,
         }
     }
+    
+
 
 
     var ArrInfo;
@@ -103,7 +103,7 @@ export default function ViewEmp(props) {
             <div className="aeCont">
                 <div className="aeCont-inner">
                     <div className="aeCont-inner-head">
-                        <h1>{props.header} Information</h1>
+                        <h1 className="special-head">{props.header} Information</h1>
                         <button onClick={() => { props.setView(false) }}><IoClose className="react-icons-close"/></button>
                     </div>
                     <div className="data-cont">

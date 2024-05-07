@@ -108,14 +108,18 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1.5rem 2rem;
+            padding: 2rem 2rem;
+
+            .special-head{
+                font-size: 3.2rem;
+            }
 
             button {
                 outline: none;
                 border: none;
                 background: transparent;
                 transition: 0.3s ease;
-                border-radius: 0.2rem;
+                border-radius: 0.6rem;
 
                 &:hover {
                     background-color: #b0b0b0;

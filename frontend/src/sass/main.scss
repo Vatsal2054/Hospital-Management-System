@@ -15,7 +15,7 @@
 .Login {
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient(135deg, #abdcff 10%, #0396ff 100%);
+  // background-image: linear-gradient(135deg, #abdcff 10%, #0396ff 100%);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -43,7 +43,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 45rem;
-    background-color: rgba($color-white, 1);
+    // background-color: #ffffff41;
     border: 0.1rem solid rgba($color-white, 0.542);
     backdrop-filter: blur(30px);
     border-radius: 3rem;
@@ -69,11 +69,16 @@
       padding: 0rem 2rem;
       font-size: 1.4rem;
       color: #000;
-      // border: 2px solid $color-secondary;
-      border: none;
+      border: 2px solid transparent;
       border-radius: 1rem;
       outline: none;
       background-color: $color-input;
+      transition: all .3s ease;
+      
+      &:focus{
+        border: 2px solid $admin-f;
+        transition: all .3s ease;
+      }
     }
 
     &-dropdown {
@@ -88,21 +93,14 @@
       letter-spacing: 0.5px;
       border-radius: 1rem;
       // background-color: $color-secondary;
-      background: linear-gradient(
-        155deg,
-        $color-button-light 0%,
-        $color-button-dark 100%
-      );
+      background: $admin-s;
       color: rgb($color-white, 1);
       font-size: 1.9rem;
+      transition: all 0.2s linear;
 
       &:hover {
-        background: linear-gradient(
-          155deg,
-          $color-button-dark 0%,
-          $color-button-light 100%
-        );
-        transition: all 0.5s linear;
+        background: $sidebar;
+        transition: all 0.2s linear;
       }
     }
   }
@@ -114,4 +112,9 @@
 
 ::placeholder {
   font-family: "Regular", sans-serif;
+}
+
+.login-heading{
+  background-color: $admin-s;
+  // opacity: .8;
 }

@@ -112,9 +112,15 @@
         width: auto;
         margin: 3rem 2rem;
         text-align: left;
+        transition: all .3s ease;
 
         .active{
             background-color: $admin-s;
+            transition: all .3s ease;
+            &:hover{
+                background-color: $admin-s;
+                transition: all .3s ease;
+            }
         }
         
         button {

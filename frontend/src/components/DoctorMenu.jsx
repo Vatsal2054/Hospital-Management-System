@@ -9,14 +9,13 @@ import "animate.css";
 import "../sass/pages/_doctor.scss";
 import AssignMedicine from "./DocComponents/AssignMedicine";
 import Dashboard from "./DocComponents/Dashboard";
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 // import '../sass/pages/_doctor.scss';
 
 export default function DoctorMenu() {
-
-    // const [headerButtons, setHeaderButtons] = useState(false);
-
-    // Patient data
+    const navigate = useNavigate();
     const [data, setData] = useState([{ room_id: 0 }]);
     
     // const [showPatients, setShowPatients] = useState(false);
@@ -102,13 +101,17 @@ export default function DoctorMenu() {
         setFilterInput("");
     }
 
+    function logoutUser(){
+        navigate('/');
+    }
+
     return (
         <div className="emp-menu">
             {viewP ? <ViewEmp Data={viewPData} setView={setViewP} caller="Doctor" header="Patient" /> : null}
             <div className="info-container-body">
 
                 {/* Side Menu Code Here ..... Left side of page */}
-                <SideMenu menuCont={menuCont} showMenu={showMenu} setShowMenu={setShowMenu} setMenuCont={setMenuCont} menuPage={"Doctor"} />
+                <SideMenu menuCont={menuCont} showMenu={showMenu} setShowMenu={setShowMenu} setMenuCont={setMenuCont} menuPage={"Doctor"} logout={logoutUser} />
 
                 {/* Right Side of page */}
                 <div className="cont">

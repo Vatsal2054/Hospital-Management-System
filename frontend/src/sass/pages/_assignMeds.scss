@@ -5,7 +5,7 @@
     align-items: flex-start;
     // height: 60vh;
 
-    .part{
+    .part {
         background-color: $admin-f;
         height: auto;
         // margin: 1rem;
@@ -13,20 +13,20 @@
         // border: 2px solid $sidebar;
         // box-shadow: 0px 10px 36px 9px rgba(0,0,0,0.1),0px -3px 53px 13px rgba(0,0,0,0.1);
     }
-    
+
     .patient-part {
         flex: 1;
         margin: 2rem;
         height: auto;
-        transition: height .3s ease;
+        transition: height 0.3s ease;
     }
-    
+
     .med-part {
         flex: 2;
         margin: 2rem 2rem 2rem 0rem;
     }
-    
-    .room-part{
+
+    .room-part {
         flex: 1;
         margin: 2rem 2rem 2rem 0rem;
     }
@@ -50,21 +50,21 @@
     //     }
     // }
 
-    button{
+    button {
         font-size: 2.4rem;
-        padding: .5rem 1rem;
+        padding: 0.5rem 1rem;
         background: $admin-q;
         color: $color-text-dark;
-        transition: all .3s;
+        transition: all 0.3s;
 
-        .cross{
-            margin: .2rem .2rem -.3rem .1rem;
+        .cross {
+            margin: 0.2rem 0.2rem -0.3rem 0.1rem;
         }
 
-        &:hover{
+        &:hover {
             background-color: $buttons;
             color: $color-text-light;
-            transition: all .3s;
+            transition: all 0.3s;
         }
     }
 
@@ -120,7 +120,9 @@
     }
 }
 
-.patient-list, .medicine-list, .room-list {
+.patient-list,
+.medicine-list,
+.room-list {
     // flex: 6;
     padding: 1rem;
     width: auto;
@@ -132,9 +134,9 @@
     .wrapper {
         // margin: 1rem;
         height: auto;
-        transition: all .5s ease;
+        transition: all 0.5s ease;
         max-height: 25rem;
-        transition: height .5s ease;
+        transition: height 0.5s ease;
         overflow-y: auto;
 
         &::-webkit-scrollbar {
@@ -148,7 +150,7 @@
             border-radius: 1rem;
         }
 
-        .message{
+        .message {
             margin: 1rem 1rem;
         }
     }
@@ -163,88 +165,99 @@
         // width: 15rem;
         // display: flex;
         // align-items: flex-start;
-        .cell-info{
-            .name{
+        .cell-info {
+            .name {
                 font-family: "Heavy", sans-serif;
             }
         }
 
-        h2{
-            margin: .4rem;
+        h2 {
+            margin: 0.4rem;
         }
 
         @include close-button;
 
-        .wide-cell{
+        .wide-cell {
             font-size: 1.4rem;
             // width: 0%;
         }
     }
 }
 
-.cont-bottom{
+.cont-bottom {
     padding-bottom: 2rem;
-    .buttons{
+    .buttons {
         padding: 0rem 1rem;
 
-        button{
+        button {
             background-color: $admin-s;
             color: $color-text-dark;
-            transition: all .3s ease;
-            
-            &:hover{
+            transition: all 0.3s ease;
+
+            &:hover {
                 background-color: $admin-f;
-                transition: all .3s ease;
+                transition: all 0.3s ease;
             }
         }
     }
 }
 
-.patient-list-inner{
+.patient-list-inner {
     overflow: hidden;
 }
 
-.list-item{
+.list-item {
     padding: 1rem 1rem;
     margin-right: 1rem;
     font-size: 1.4rem;
     border-radius: 1rem;
     // border-bottom: 2px solid $sidebar;
 
-    &:hover{
+    &:hover {
         background-color: $admin-f;
     }
 
     @include key-values;
 }
 
-.room-cells{
-    width: 4rem;
-    font-size: 1.3rem;
+.room-cells {
+    width: 4.9rem;
+    height: 4rem;
+    padding: 1rem;
+    font-size: 1.2rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background-color: transparent;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 
-    &:hover{
+    // &-cont {
+    //     display: grid;
+    //     grid-template-columns: repeat(10, 1fr);
+    //     grid-template-rows: repeat(5, 1fr);
+    //     grid-column-gap: .3rem;
+    //     grid-row-gap: .3rem;
+    //     margin-right: 1rem;
+    // }
+
+    &:hover {
         background-color: $admin-f;
     }
 
-    &:focus{
+    &:focus {
         background-color: $sidebar;
         color: $color-text-light;
-        transition: all .3s ease;
+        transition: all 0.3s ease;
     }
 }
 
-.selected{
+.selected {
     background-color: $sidebar;
     color: $color-text-light;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 }
 
-.patient-list-item{
+.patient-list-item {
     width: 100%;
     // padding: 1rem;
     font-size: 1.4rem;
@@ -252,75 +265,74 @@
     @include close-button;
 }
 
-.no-marg{
+.no-marg {
     margin: 1rem 1rem;
 }
 
-.med-block{
+.med-block {
     border: 2px solid $sidebar;
-    border-radius: 1rem;        
+    border-radius: 1rem;
     padding: 1rem;
     margin: 1rem;
     // background-color: $admin-f;
-    
-    &-inner{
+
+    &-inner {
         font-size: 1.2rem;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    .cell-info{
+    .cell-info {
         margin: 1rem 1rem;
 
-        .name{
+        .name {
             font-family: "Heavy", sans-serif;
-            font-size: 1.4rem
+            font-size: 1.4rem;
         }
     }
 
     @include close-button;
 }
 
-.timing{
+.timing {
     margin: 1rem 0rem 1rem 2rem;
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: center;
 
-    &-cells{
+    &-cells {
         margin: 0rem 1rem;
-        border-radius: .5rem;
+        border-radius: 0.5rem;
         border: 2px solid $sidebar;
         cursor: pointer;
 
-        .selected{
+        .selected {
             background-color: $sidebar;
             color: $color-text-light;
 
-            &:hover{
+            &:hover {
                 background-color: $sidebar;
                 // color: $color-text-light;
-                transition: all .3s ease;
+                transition: all 0.3s ease;
             }
         }
 
-        
-        div{
+        div {
             display: inline-block;
-            padding: .5rem 1rem;
+            padding: 0.5rem 1rem;
             border-right: 2px solid $sidebar;
-            transition: all .3s ease;
-            
-            &:nth-child(3){
+            transition: all 0.3s ease;
+
+            &:nth-child(3) {
                 border: none;
             }
 
-            &:hover{
+            &:hover {
                 background-color: $admin-f;
                 // color: $color-text-light;
-                transition: all .3s ease;
+                transition: all 0.3s ease;
             }
         }
     }

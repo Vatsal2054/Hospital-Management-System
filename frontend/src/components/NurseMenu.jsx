@@ -8,9 +8,13 @@ import { FaXmark } from "react-icons/fa6";
 import AssignRooms from "./NurseComponents/AssignRooms";
 import ViewEmp from "./ViewEmp";
 import SwitchRooms from "./NurseComponents/SwitchRooms";
+import { Navigate, useNavigate } from "react-router-dom";
+
 // import { IoClose } from "react-icons/io5";
 
 function NurseMenu(props) {
+    const navigate = useNavigate();
+
     const [showMenu, setShowMenu] = useState(false);
     const [data, setData] = useState([{ room_id: 0 }]);
     const [wardInfo, setWardInfo] = useState({ totalpatients: '' });
@@ -72,12 +76,16 @@ function NurseMenu(props) {
         setFilterInput("");
     }
 
+    function logoutUser(){
+        navigate('/');
+    }
+
     return (
         <div className="emp-menu">
             {viewP ? <ViewEmp Data={viewPData} setView={setViewP} caller="Nurse" header="Patient" /> : null}
 
             <div className="info-container-body">
-                <SideMenu menuCont={menuCont} showMenu={showMenu} setShowMenu={setShowMenu} setMenuCont={setMenuCont} menuPage={"Nurse"} />
+                <SideMenu menuCont={menuCont} showMenu={showMenu} setShowMenu={setShowMenu} setMenuCont={setMenuCont} menuPage={"Nurse"} logout = {logoutUser} />
 
                 <div className="cont">
                     <div className="header">
