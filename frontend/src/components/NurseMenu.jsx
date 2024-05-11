@@ -9,6 +9,7 @@ import AssignRooms from "./NurseComponents/AssignRooms";
 import ViewEmp from "./ViewEmp";
 import SwitchRooms from "./NurseComponents/SwitchRooms";
 import { Navigate, useNavigate } from "react-router-dom";
+import { FaUserNurse } from "react-icons/fa";
 
 // import { IoClose } from "react-icons/io5";
 
@@ -90,7 +91,11 @@ function NurseMenu(props) {
                 <div className="cont">
                     <div className="header">
                         <h1 className="il-blk">Nurse Menu</h1>
-                        <button className="menu-button logout">Logout</button>
+                        {/* <button className="menu-button logout">Logout</button> */}
+                        <div className="account-block">
+                            <FaUserNurse className="react-icons header-icons" />
+                            <h2 className="il-blk">{empData1.name}</h2>
+                        </div>
                     </div>
 
                     {/* Dashboard Component */}

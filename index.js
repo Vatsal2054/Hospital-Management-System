@@ -455,6 +455,34 @@ app.post('/dischargePatient', async (req, res) => {
     })
 })
 
+app.get('/dashPatInfo', async (req, res) => {
+    const department = req.query.department;
+    let dashInfo;
+    console.log(department);
+    await db.query("SELECT (SELECT COUNT(*) FROM pinfo) AS total_patients, (SELECT COUNT(*) FROM pinfo WHERE department = $1) AS department_patients",
+    [department], (err, result) => {
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log(result.rows[0]);
+            dashInfo = result.rows[0];
+            db.query("SELECT room_type, COUNT(CASE WHEN patient_id IS NOT NULL THEN 1 END) AS occupied_patients FROM rooms GROUP BY room_type", 
+            (err, result) =>{
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log(result.rows[0]);
+                    dashInfo.roomStatus = result.rows;
+                    // dashInfo = {dashInfo, ...result.rows};
+                    res.send(dashInfo);
+                }
+            })
+        }
+    })
+})
+
 app.listen(port, () => {
     console.log(`Server running on: http://localhost:${port}`);
 })

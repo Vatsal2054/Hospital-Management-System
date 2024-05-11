@@ -10,6 +10,7 @@ import "../sass/pages/_doctor.scss";
 import AssignMedicine from "./DocComponents/AssignMedicine";
 import Dashboard from "./DocComponents/Dashboard";
 import { Navigate, useNavigate } from "react-router-dom";
+import { FaUserMd } from "react-icons/fa";
 
 
 // import '../sass/pages/_doctor.scss';
@@ -118,7 +119,11 @@ export default function DoctorMenu() {
                     {/* Top Header of page */}
                     <div className="header">
                         <h1 className="il-blk">Doctor Menu</h1>
-                        <button className="menu-button logout">Logout</button>
+                        {/* <button className="menu-button logout">Logout</button> */}
+                        <div className="account-block">
+                            <FaUserMd className="react-icons header-icons" />
+                            <h2 className="il-blk">{empData1.name}</h2>
+                        </div>
                     </div>
                     {/* {menuCont.Dashboard &&
                         <div className="dashboard">

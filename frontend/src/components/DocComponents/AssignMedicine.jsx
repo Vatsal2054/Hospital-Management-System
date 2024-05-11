@@ -145,14 +145,15 @@ export default function AssignMedicine(props) {
                         {pID !== '' &&
                             <div className="wrapper">
                                 <div className="inp-field-list">
-                                    {props.Data.filter(patient => patient.patient_id.includes(pID) || patient.name.toLowerCase().includes(pID.toLowerCase())).map((patient, index) => {
+                                    
+                                    {props.Data ? props.Data.filter(patient => patient.patient_id.includes(pID) || patient.name.toLowerCase().includes(pID.toLowerCase())).map((patient, index) => {
                                         return (
                                             <div className="inp-field-options" onClick={() => { updatePatientList({ 'id': patient.patient_id, 'name': patient.name }) }} key={index}>
                                                 <div className="data-cell-value il-blk">{patient.patient_id}</div>
                                                 <div className="data-cell-key il-blk">{patient.name}</div>
                                             </div>
                                         )
-                                    })}
+                                    }) : null}
                                 </div>
                             </div>
                         }

@@ -84,10 +84,10 @@ export default function SideMenu(props) {
             }
             {props.menuPage === "Receptionist" && 
                 <div className={showMenu ? "navigation-buttons wide-buttons" : "navigation-buttons "}>
-                <button className={`blk ${props.menuCont.Dashboard && "active"}`} onClick={() => { handleCont("Dashboard") }}>
+                {/* <button className={`blk ${props.menuCont.Dashboard && "active"}`} onClick={() => { handleCont("Dashboard") }}>
                     <LuLayout className="button-icons" />
                     <span className={showMenu ? "label" : "label-hide"}>Dashboard</span>
-                </button>
+                </button> */}
                 <button className={`blk ${props.menuCont.Admit && "active"}`} onClick={() => { handleCont("Admit") }}>
                     <FiUserPlus className="button-icons" />
                     <span className={showMenu ? "label" : "label-hide"}>Admit Patient</span>

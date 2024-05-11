@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SideMenu from "./DocComponents/SideMenu";
 import AdmitPatient from "./RecComponents/AdmitPatient";
 
@@ -10,6 +10,8 @@ import DataCont from "./DataCont";
 import axios from "axios";
 import ViewEmp from "./ViewEmp";
 import { Navigate, useNavigate } from "react-router-dom";
+import { FaHospitalUser } from "react-icons/fa6";
+
 
 
 function ReceptionistMenu() {
@@ -20,8 +22,7 @@ function ReceptionistMenu() {
     const [viewPData, setViewPData] = useState({});
     const [viewP, setViewP] = useState(false);
     const [menuCont, setMenuCont] = useState({
-        'Dashboard': true,
-        'Admit': false,
+        'Admit': true,
         'Discharge': false,
         'Bill': false,
         'showPatients': false
@@ -67,7 +68,7 @@ function ReceptionistMenu() {
             return {
                 ...preValues,
                 [name]: false,
-                'Dashboard': true,
+                'Admit': true,
             }
         });
         setFilterInput("");
@@ -76,9 +77,9 @@ function ReceptionistMenu() {
         navigate('/');
     }
 
-    //Data received from login page
-    // const location = useLocation();
-    // const { empData1 } = location.state || {};
+    // Data received from login page
+    const location = useLocation();
+    const { empData1 } = location.state || {};
 
     return (
         // <h1>Welcome to Receptionist Menu</h1>
@@ -91,7 +92,11 @@ function ReceptionistMenu() {
                 <div className="cont">
                     <div className="header">
                         <h1 className="il-blk">Receptionist Menu</h1>
-                        <button className="menu-button logout">Logout</button>
+                        {/* <button className="menu-button logout">Logout</button> */}
+                        <div className="account-block">
+                            <FaHospitalUser className="react-icons header-icons" />
+                            <h2 className="il-blk">{empData1.name}</h2>
+                        </div>
                     </div>
 
                     {/* Admit Patient Menu */}

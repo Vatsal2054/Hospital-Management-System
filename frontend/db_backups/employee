@@ -1,0 +1,8 @@
+employee_id,name,contact,job_type,hiredate,password,salary,Gender,Address
+VAT001,Vatsal Bharkhada,1234567890,Admin,2022-05-20,155959,60000,Male,Ahmedabad
+DOC001,Darshil Chocha,1234567890,Doctor,2022-08-30,123456,80000,Male,Keshod
+NUR001,Kathan Bhavsar,420420420,Nurse,2023-12-12,420420,50000,Male,Nadiad
+REC001,Dev Bhimani,123456789,Receptionist,2023-12-12,098765,50000,Male,Rajkot
+DOC002,Kaushal Bhanderi,1234567890,Doctor,2023-02-14,098765,40000,Male,Surat
+NUR002,Rutu Bhimani,1234567890,Nurse,2023-05-22,098765,20000,Male,Surat
+NUR003,Nurse 2,1234567890,Nurse,2023-12-12,123456,20000,Female,Rajkot

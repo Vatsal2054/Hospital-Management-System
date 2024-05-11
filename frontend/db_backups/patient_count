@@ -1,0 +1,8 @@
+department,patient_count,count_month
+Cardiac,0,January
+Dermatology,0,January
+Neurology,0,January
+Ophthalmology,0,January
+Surgical,0,January
+Orthopaedic,4,May
+Medicine,3,May
